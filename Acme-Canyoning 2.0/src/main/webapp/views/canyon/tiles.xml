@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- * tiles.xml * * Copyright (C) 2013 Universidad de Sevilla * * The use 
+	of this project is hereby constrained to the conditions of the * TDG Licence, 
+	a copy of which you may download from * http://www.tdg-seville.info/License.html -->
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+	<definition name="canyon/list" extends="master.page">
+		<put-attribute name="title" value="Catalogue of canyons" />
+		<put-attribute name="body" value="/views/canyon/list.jsp" />
+	</definition>
+	<definition name="canyon/administrator/mylist" extends="master.page">
+		<put-attribute name="title" value="My Canyons" />
+		<put-attribute name="body" value="/views/canyon/list.jsp" />
+	</definition>
+
+	<definition name="canyon/edit" extends="master.page">
+		<put-attribute name="title" value="Create a new Canyon" />
+		<put-attribute name="body" value="/views/canyon/edit.jsp" />
+	</definition>
+	
+	<definition name="canyon/create" extends="master.page">
+		<put-attribute name="title" value="Create a new Canyon" />
+		<put-attribute name="body" value="/views/canyon/edit.jsp" />
+	</definition>
+	<definition name="canyon/display" extends="master.page">
+		<put-attribute name="title" value="Details of the Canyon" />
+		<put-attribute name="body" value="/views/canyon/display.jsp" />
+	</definition>
+	<definition name="canyon/listAll" extends="master.page">
+		<put-attribute name="title" value="Canyon" />
+		<put-attribute name="body" value="/views/canyon/listAll.jsp" />
+	</definition>
+
+</tiles-definitions>
