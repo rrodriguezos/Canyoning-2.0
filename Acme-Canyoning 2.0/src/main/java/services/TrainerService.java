@@ -1,10 +1,162 @@
 package services;
 
+import java.util.Collection;
+import java.util.LinkedList;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
+
+import repositories.TrainerRepository;
+import repositories.TrainerRepository;
+import security.Authority;
+import security.LoginService;
+import security.UserAccount;
+import domain.Activity;
+import domain.Administrator;
+import domain.Comment;
+import domain.Course;
+import domain.Trainer;
+import forms.TrainerForm;
 
 @Service
 @Transactional
 public class TrainerService {
+	
+	// Managed repository -------------------------
+
+		@Autowired
+		private TrainerRepository trainerRepository;
+
+		// Supporting Services -------------------------
+
+		@Autowired
+		private AdministratorService administratorService;
+
+		@Autowired
+		private UserAccountService userAccountService;
+
+		// Constructors -------------------------------
+		public TrainerService() {
+			super();
+		}
+
+		// Simple CRUD methods -----------------------------
+
+		public Trainer create() {
+			checkPrincipalAdministrator();
+
+			UserAccount useraccount;
+			Trainer result;
+			Collection<Comment> comments;
+			Collection<Course> courses;
+
+			Authority aut = new Authority();
+
+			aut.setAuthority("TRAINER");
+			useraccount = userAccountService.create();
+
+			result = new Trainer();
+
+			useraccount.addAuthority(aut);
+			result.setUserAccount(useraccount);
+
+			courses = new LinkedList<Course>();
+			result.setCourses(courses);
+
+			comments = new LinkedList<Comment>();
+			result.setComments(comments);
+
+			return result;
+		}
+		
+		public Collection<Trainer> findAll() {
+
+			Collection<Trainer> result;
+
+			result = trainerRepository.findAll();
+
+			return result;
+		}
+
+		public Trainer findOne(int trainerId) {
+			Trainer result;
+
+			result = trainerRepository.findOne(trainerId);
+
+			return result;
+		}
+
+		public void save(Trainer trainer) {
+
+			Boolean create;
+			create = false;
+			if (trainer.getId() == 0) {
+				Md5PasswordEncoder encoder;
+
+				create = true;
+				encoder = new Md5PasswordEncoder();
+
+				trainer.getUserAccount().setPassword(
+						encoder.encodePassword(trainer.getUserAccount()
+								.getPassword(), null));
+			}
+			trainer = trainerRepository.saveAndFlush(trainer);
+			Assert.notNull(trainer);
+		}
+
+		private void checkPrincipalAdministrator() {
+			Administrator administrator;
+			Authority authority;
+
+			administrator = administratorService.findByPrincipal();
+			Assert.isTrue(administrator != null);
+			authority = new Authority();
+			authority.setAuthority("ADMINISTRATOR");
+
+			Assert.isTrue(administrator.getUserAccount().getAuthorities()
+					.contains(authority));
+		}
+		
+		// other methods
+			// -------------------------------------------------------------------------
+
+			public Trainer findByPrincipal() {
+				UserAccount userAccount;
+				Trainer result;
+				int id;
+
+				userAccount = LoginService.getPrincipal();
+				Assert.notNull(userAccount);
+				id = userAccount.getId();
+				result = trainerRepository.findByUserAccountId(id);
+				Assert.notNull(result);
+
+				return result;
+
+			}
+
+			public Trainer reconstruct(TrainerForm trainerForm) {
+				Trainer res;
+				res = create();
+				Assert.isTrue(trainerForm.getPassword().equals(
+						trainerForm.getConfirmPassword()));
+
+				res.setPhone(trainerForm.getPhone());
+				res.setEmail(trainerForm.getEmail());
+
+				res.getUserAccount().setUsername(trainerForm.getUsername());
+				res.getUserAccount().setPassword(trainerForm.getPassword());
+
+				return res;
+			}
+			public Trainer findByUserAccount(UserAccount userAccount) {
+				Assert.notNull(userAccount);
+				Trainer result;
+				result = trainerRepository.findByUserAccountId(userAccount.getId());
+				return result;
+			}
 
 }

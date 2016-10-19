@@ -8,8 +8,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
-public class OrganiserForm {
-
+public class TrainerForm {
 	private String password;
 	private String confirmPassword;
 	private String username;
@@ -18,7 +17,7 @@ public class OrganiserForm {
 
 	// Constructors...................
 
-	public OrganiserForm() {
+	public TrainerForm() {
 		super();
 	}
 
