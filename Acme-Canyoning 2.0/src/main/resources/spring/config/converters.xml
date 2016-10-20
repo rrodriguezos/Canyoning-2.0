@@ -17,6 +17,21 @@
 		<bean class="converters.StringToCanyonConverter" />
 		<bean class="converters.CanyonToStringConverter" />
 		
+		<bean class="converters.StringToTrainerConverter" />
+		<bean class="converters.TrainerToStringConverter" />
+		
+		<bean class="converters.StringToCourseConverter" />
+		<bean class="converters.CourseToStringConverter" />
+		
+		<bean class="converters.StringToModuleConverter" />
+		<bean class="converters.ModuleToStringConverter" />
+		
+		<bean class="converters.StringToLearningMaterialConverter" />
+		<bean class="converters.LearningMaterialToStringConverter" />
+		
+		<bean class="converters.StringToTrainerCommentConverter" />
+		<bean class="converters.TrainerCommentToStringConverter" />
+		
 		<bean class="converters.StringToAboutConverter" />
 		<bean class="converters.AboutToStringConverter" />
 		

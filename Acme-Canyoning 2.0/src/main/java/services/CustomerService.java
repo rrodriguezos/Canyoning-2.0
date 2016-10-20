@@ -193,9 +193,9 @@ public class CustomerService {
 	
 	//DashBoard
 	
-	public Double averageCustomersInWaitingList() {
-		
-		 return customerRepository.averageCustomersInWaitingList();
-		 }
+//	public Double averageCustomersInWaitingList() {
+//		
+//		 return customerRepository.averageCustomersInWaitingList();
+//		 }
 
 }

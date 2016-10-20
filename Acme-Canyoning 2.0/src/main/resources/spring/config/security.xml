@@ -115,6 +115,10 @@
 		<security:intercept-url pattern="/comment/actor.do" access="isAuthenticated()" />
 		<security:intercept-url pattern="/customer/list.do" access="isAuthenticated()" />
 		<security:intercept-url pattern="/organiser/list.do" access="isAuthenticated()" />
+		<security:intercept-url pattern="/trainer/list.do" access="isAuthenticated()" />
+		
+		<security:intercept-url pattern="/trainer/list.do" access="isAuthenticated()" />
+		<security:intercept-url pattern="/course/list.do" access="isAuthenticated()" />
 
 		<security:intercept-url pattern="/folder/actor/**" access="isAuthenticated()" />
 		<security:intercept-url pattern="/folder/**" access="isAuthenticated()" />

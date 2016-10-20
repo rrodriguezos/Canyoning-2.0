@@ -29,6 +29,10 @@
 
 		<li><a href="canyon/list.do"><spring:message
 					code="master.page.public.catalogueCanyon" /></a>
+					
+					<li><a href="course/list.do"><spring:message
+					code="master.page.public.catalogueCourses" /></a>
+					
 					<li><a href="activity/list.do"><spring:message
 					code="master.page.public.catalogueActivity" /></a>
 		<li><a class="fNiv" href="search/buscar.do"><spring:message
@@ -59,6 +63,9 @@
 					code="master.page.auth.customersList" /></a>
 					<li><a href="organiser/list.do"><spring:message
 					code="master.page.auth.organisersList" /></a>
+					
+					<li><a href="trainer/list.do"><spring:message
+					code="master.page.auth.trainersList" /></a>
 
 						<security:authorize access="hasRole('CUSTOMER')">
 							<li><a href="activity/customer/mylist.do"><spring:message

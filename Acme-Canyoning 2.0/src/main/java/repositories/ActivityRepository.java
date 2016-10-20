@@ -25,7 +25,7 @@ public interface ActivityRepository extends JpaRepository<Activity, Integer> {
 	Double averageNumberOfActivitiesByOrganisers();
 	
 	
-	@Query("select avg(o.activities.numberSeats.size) from Organiser o where o.activity.moment>CURRENT_DATE and o.activity.moment<=?1")
+	@Query("select avg(a.numberSeats) from Activity a where a.moment>CURRENT_DATE and a.moment<=?1")
 	Double seatsAvaliablesNextThreeMonths(Date upToDateCriteria);
 	
 	

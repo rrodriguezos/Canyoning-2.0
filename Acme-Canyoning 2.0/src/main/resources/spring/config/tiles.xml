@@ -17,17 +17,19 @@
 		<value>/views/misc/tiles.xml</value>
 		<value>/views/security/tiles.xml</value>
 		<value>/views/welcome/tiles.xml</value>
-	<value>/views/about/tiles.xml</value>
+		<value>/views/about/tiles.xml</value>
+		<value>/views/trainer/tiles.xml</value>
+		<value>/views/course/tiles.xml</value>
+		<value>/views/module/tiles.xml</value>
+		<value>/views/learningMaterial/tiles.xml</value>
 		<value>/views/administrator/tiles.xml</value>
 		<value>/views/profile/tiles.xml</value>
 		<value>/views/request/tiles.xml</value>
 		<value>/views/activity/tiles.xml</value>
 		<value>/views/customer/tiles.xml</value>
 		<value>/views/organiser/tiles.xml</value>
-
 		<value>/views/search/tiles.xml</value>
 		<value>/views/canyon/tiles.xml</value>
-
 		<value>/views/comment/tiles.xml</value>
 
 	</util:list>

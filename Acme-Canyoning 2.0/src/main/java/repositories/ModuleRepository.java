@@ -11,7 +11,7 @@ import domain.Module;
 @Repository
 public interface ModuleRepository extends JpaRepository<Module, Integer> {
 
-	@Query("select m from Module m where m.Course.id = ?1")
+	@Query("select m from Module m where m.course.id = ?1")
 	Collection<Module> findModulesByCourse(int courseId);
 
 }
