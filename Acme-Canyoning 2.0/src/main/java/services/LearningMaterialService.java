@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.LearningMaterialRepository;
+import domain.Administrator;
+import domain.Course;
 import domain.LearningMaterial;
 import domain.Trainer;
 
@@ -21,6 +23,11 @@ public class LearningMaterialService {
 	// Supporting Services ------------------
 	@Autowired
 	private TrainerService trainerService;
+	
+	@Autowired
+	private AdministratorService administratorService;
+	@Autowired
+	private CourseService courseService;
 
 	// COnstructors -------------------------
 	public LearningMaterialService() {
@@ -79,6 +86,21 @@ public class LearningMaterialService {
 	public Collection<LearningMaterial> learningMaterialsByModule(int moduleId) {
 		Collection<LearningMaterial> result;
 		result = learningMaterialRepository.learningMaterialsByModule(moduleId);
+		return result;
+	}
+
+	public Double averageOfLearningMaterialByCourse() {
+		Administrator admin;
+		admin = administratorService.findByPrincipal();
+		Assert.notNull(admin); 
+		int allCourses = courseService.findAll().size();
+		int allMaterial = findAll().size();
+		
+		Double result;
+		
+		result= (double) (allCourses/ allMaterial);
+		
+
 		return result;
 	}
 

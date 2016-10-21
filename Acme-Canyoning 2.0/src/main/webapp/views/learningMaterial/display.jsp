@@ -17,16 +17,9 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<acme:jstlOut code="slot.title" value="${slot.title }"/>
-<acme:jstlOut code="slot.description" value="${slot.description }"/>
-<acme:jstlOut code="slot.startTime" value="${slot.startTime }"/>
-<acme:jstlOut code="slot.endTime" value="${slot.endTime }"/>
-
-<b><spring:message code="slot.photos" />: </b>
-<br>
-<jstl:forEach var="photo" items="${slot.getPhotos() }">
-	<img width="200px" height="200x" src="${photo}" alt="${ slot.title } photo"/>
-</jstl:forEach>
-<br>
+<acme:jstlOut code="learningMaterial.title" value="${learningMaterial.title }"/>
+<acme:jstlOut code="learningMaterial.description" value="${learningMaterial.description }"/>
+<acme:jstlOut code="learningMaterial.materialLink" value="${learningMaterial.materialLink }"/>
+<a href="${learningMaterial.materialLink }">${learningMaterial.materialLink }</a>
 
 

@@ -15,4 +15,7 @@ public interface LearningMaterialRepository extends
 	@Query("select l from LearningMaterial l where l.module.id = ?1")
 	Collection<LearningMaterial> learningMaterialsByModule(int moduleId);
 
+	@Query("select avg(c.modules.learningMaterials.size) from Course c")
+	Double averageOfLearningMaterialByCourse();
+
 }

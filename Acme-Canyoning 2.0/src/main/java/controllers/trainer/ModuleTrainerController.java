@@ -87,8 +87,8 @@ public class ModuleTrainerController extends AbstractController {
 
 		moduleService.delete(module);
 
-		result = new ModelAndView("redirect:/course/trip/mylist.do");
-		result.addObject("requestUri", "/course/trip/mylist.do");
+		result = new ModelAndView("redirect:/course/trainer/mylist.do");
+		result.addObject("requestUri", "/course/trainer/mylist.do");
 
 		return result;
 	}

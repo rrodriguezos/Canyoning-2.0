@@ -19,13 +19,6 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<fieldset>
-	<legend>
-		<spring:message code="course.banner" />
-	</legend>
-	<img width="500px" height="100x" src="${course.getBanner()}" />
-</fieldset>
-<br>
 
 <display:table name="courses" id="row" pagesize="5"
 	requestURI="${requestUri}" class="displaytag">
@@ -36,6 +29,7 @@
 
 	<spring:message code="course.description" var="descriptionHeader" />
 	<display:column property="description" title="${descriptionHeader}" />
+	
 
 
 	<spring:message code="course.display" var="display" />
@@ -47,8 +41,15 @@
 	<spring:message code="course.modules" var="modulesHeader" />
 	<display:column title="${modulesHeader}">
 		<input type="button" value="<spring:message code="course.modules" />"
-			onclick="javascript: window.location.assign('module/listByCourse.do?courseId=${row.id}')" />
+			onclick="javascript: window.location.assign('module/list.do?courseId=${row.id}')" />
 	</display:column>
+	
+	<spring:message code="course.trainers" var="trainersHeader" />
+	<display:column title="${trainersHeader}">
+		<input type="button" value="<spring:message code="course.trainers" />"
+			onclick="javascript: window.location.assign('trainer/listByCourse.do?courseId=${row.id}')" />
+	</display:column>
+	
 	<security:authorize access="isAuthenticated()">
 		<spring:message code="course.comment" var="commentHeader" />
 		<display:column title="${commentHeader}">

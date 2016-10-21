@@ -11,6 +11,7 @@ import org.springframework.util.Assert;
 import repositories.CourseRepository;
 import repositories.CourseRepository;
 import domain.Activity;
+import domain.Administrator;
 import domain.Trainer;
 import domain.Course;
 import domain.Comment;
@@ -31,6 +32,8 @@ public class CourseService {
 
 	@Autowired
 	private ModuleService moduleService;
+	@Autowired
+	private AdministratorService administratorService;
 
 	// COnstructors -------------------------------------------------------
 	public CourseService() {
@@ -125,5 +128,13 @@ public class CourseService {
 		result = courseRepository.findCourseByTrainer(trainer.getId());
 
 		return result;
+	}
+
+	public Double averageOfCoursesByTrainer() {
+		Administrator admin;
+		admin = administratorService.findByPrincipal();
+		Assert.notNull(admin); 
+		Double res =  courseRepository.averageOfCoursesByTrainer();
+		return res;
 	}
 }

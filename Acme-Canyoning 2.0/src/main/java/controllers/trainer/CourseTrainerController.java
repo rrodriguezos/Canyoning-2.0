@@ -88,7 +88,7 @@ public class CourseTrainerController extends AbstractController {
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(course);
 
-			result.addObject("message2", "course.solape.error");
+			result.addObject("message2", "course.commit.error");
 
 		} else {
 			try {

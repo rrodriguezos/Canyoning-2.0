@@ -31,10 +31,10 @@
 
 
 <security:authorize access="hasRole('TRAINER')">
-	
+	<jstl:if test="${mycourse == true}">
 	<input type="button" value="<spring:message code="course.edit" />" 
 			onclick="javascript: window.location.assign('course/trainer/edit.do?courseId=${course.id}')" />
-
+</jstl:if>
 </security:authorize>
 
 <br>

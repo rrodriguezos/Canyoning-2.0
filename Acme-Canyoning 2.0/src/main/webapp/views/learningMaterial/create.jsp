@@ -19,32 +19,24 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<security:authorize access="hasRole('USER')">
+<security:authorize access="hasRole('TRAINER')">
 
-	<form:form action="slot/user/create.do" modelAttribute="slot">
+	<form:form action="learningMaterial/trainer/create.do" modelAttribute="learningMaterial">
 		<form:hidden path="id" />
 		<form:hidden path="version" />
-		<form:hidden path="dailyPlan"/>
+		<form:hidden path="module"/>
 
 
-		<acme:textbox code="slot.title" path="title" />
+		<acme:textbox code="learningMaterial.title" path="title" />
 
-		<acme:date code="slot.startTime" path="startTime" readonly="false" />
+		<acme:textbox code="learningMaterial.description" path="description" />
 
-		<acme:date code="slot.endTime" path="endTime" readonly="false" />
+		<acme:textbox code="learningMaterial.materialLink" path="materialLink" />
 
-		<acme:textbox code="slot.description" path="description" />
-
-		<acme:textbox code="slot.photos" path="photos" />
-
-		<td>
-				<acme:select items="${activities}" itemLabel="title"
-					code="slot.activity" path="activity" /> 
-		</td>
 
 		<input type="submit" name="save"
-			value="<spring:message code="slot.save" />" />
-		<acme:cancel url="trip/user/mylist.do" code="slot.cancel" />
+			value="<spring:message code="learningMaterial.save" />" />
+		<acme:cancel url="trip/trainer/mylist.do" code="learningMaterial.cancel" />
 
 	</form:form>
 

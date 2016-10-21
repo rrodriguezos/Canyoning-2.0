@@ -24,7 +24,7 @@
 
 
 <h2><spring:message code="trainer.courses"/></h2>
-<display:table name="activities" id="row" pagesize="5" requestURI="trainer/display.do" class="displaytag">
+<display:table name="courses" id="row" pagesize="5" requestURI="trainer/display.do" class="displaytag">
 	
 	<spring:message code="course.title" var="title" />
 	<display:column title="${title}" property="title" />

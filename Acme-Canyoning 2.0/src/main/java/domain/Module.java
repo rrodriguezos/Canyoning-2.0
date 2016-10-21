@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Index;
 import javax.persistence.ManyToOne;
@@ -17,7 +18,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Access(AccessType.PROPERTY)
-@Table(indexes = { @Index(columnList = "title")})
+@Table(indexes = { @Index(columnList = "title") })
 public class Module extends DomainEntity {
 
 	// Constructor ----------------------------------------------
@@ -42,6 +43,7 @@ public class Module extends DomainEntity {
 	public int getOrderModule() {
 		return orderModule;
 	}
+
 	public void setOrderModule(int orderModule) {
 		this.orderModule = orderModule;
 	}
@@ -64,7 +66,8 @@ public class Module extends DomainEntity {
 
 	@Valid
 	@NotNull
-	@OneToMany(mappedBy = "module")
+	@OneToMany(cascade = { CascadeType.REMOVE, CascadeType.DETACH,
+			CascadeType.MERGE, CascadeType.REFRESH }, mappedBy = "module")
 	public Collection<LearningMaterial> getLearningMaterials() {
 		return learningMaterials;
 	}

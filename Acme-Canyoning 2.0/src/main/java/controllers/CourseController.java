@@ -17,6 +17,7 @@ import services.TrainerService;
 import domain.Canyon;
 import domain.Comment;
 import domain.Course;
+import domain.Trainer;
 
 @Controller
 @RequestMapping("/course")
@@ -59,6 +60,21 @@ public class CourseController extends AbstractController {
 			ModelAndView result;
 			Course course;
 			Collection<Comment> comments;
+			course = courseService.findOne(courseId);
+			Trainer trainer;
+			Boolean mycourse;
+			mycourse = false;
+			
+			try {
+				trainer = trainerService.findByPrincipal();
+				if (trainer.equals(course.getTrainer())) {
+					mycourse = true;
+				}
+			} catch (Throwable oops) {
+				mycourse = false;
+
+			}
+			
 
 			comments = commentService.findCommentsByCommentableId(courseId);
 
@@ -67,7 +83,7 @@ public class CourseController extends AbstractController {
 
 			result = new ModelAndView("course/display");
 			result.addObject("course", course);
-
+			result.addObject("mycourse", mycourse);
 			result.addObject("comments", comments);
 			return result;
 
@@ -85,5 +101,6 @@ public class CourseController extends AbstractController {
 			result.addObject("requestURI", "course/listByTrainer.do");
 			return result;
 		}
+		
 
 }

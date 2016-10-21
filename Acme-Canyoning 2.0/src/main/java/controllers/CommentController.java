@@ -87,6 +87,20 @@ public class CommentController extends AbstractController {
 		}
 		return result;
 	}
+	
+	//Display----------------------------------------------------------------
+		@RequestMapping(value="/display", method=RequestMethod.GET)
+		public ModelAndView display(@RequestParam int commentId){
+			ModelAndView result;
+			Comment comment;
+			
+			comment = commentService.findOne(commentId);
+			
+			result = new ModelAndView("comment/display");
+			result.addObject("comment", comment);
+			
+			return result;
+		}
 
 	// Ancillary methods
 	// ----------------------------------------------------------

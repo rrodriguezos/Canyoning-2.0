@@ -18,15 +18,11 @@
 		<put-attribute name="body" value="/views/course/list.jsp" />
 	</definition>
 
-	<definition name="course/edit" extends="master.page">
+	<definition name="course/trainer/edit" extends="master.page">
 		<put-attribute name="title" value="Create a new Course" />
 		<put-attribute name="body" value="/views/course/edit.jsp" />
 	</definition>
 	
-	<definition name="course/create" extends="master.page">
-		<put-attribute name="title" value="Create a new Course" />
-		<put-attribute name="body" value="/views/course/edit.jsp" />
-	</definition>
 	<definition name="course/display" extends="master.page">
 		<put-attribute name="title" value="Details of the Course" />
 		<put-attribute name="body" value="/views/course/display.jsp" />

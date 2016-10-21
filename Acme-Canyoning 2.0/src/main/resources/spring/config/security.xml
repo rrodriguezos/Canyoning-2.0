@@ -66,9 +66,9 @@
 		<security:intercept-url pattern="/organiser/administrator/list.do" access="hasRole('ADMINISTRATOR')" /> 
 		<security:intercept-url pattern="/organiser/administrator/display.do" access="hasRole('ADMINISTRATOR')" /> 
 		
-		<security:intercept-url pattern="/activitytype/administrator/create.do" access="hasRole('ADMINISTRATOR')" /> 
-		<security:intercept-url pattern="/activitytype/administrator/edit.do" access="hasRole('ADMINISTRATOR')" /> 
-		<security:intercept-url pattern="/activitytype/administrator/list.do" access="hasRole('ADMINISTRATOR')" /> 
+<security:intercept-url pattern="/trainer/administrator/create.do" access="hasRole('ADMINISTRATOR')" /> 
+		<security:intercept-url pattern="/trainer/administrator/list.do" access="hasRole('ADMINISTRATOR')" /> 
+		<security:intercept-url pattern="/trainer/administrator/display.do" access="hasRole('ADMINISTRATOR')" /> 
 		
 		<security:intercept-url pattern="/dashboard/administrator/list.do" access="hasRole('ADMINISTRATOR')" /> 
 		
@@ -103,7 +103,16 @@
 				<security:intercept-url pattern="/request/organiser/accept.do" access="hasRole('ORGANISER')" />
 				<security:intercept-url pattern="/request/organiser/reject.do" access="hasRole('ORGANISER')" />
 				<security:intercept-url pattern="/activity/listByRequest.do" access="isAuthenticated()" />
+						<security:intercept-url pattern="/learningMaterial/list.do" access="isAuthenticated()" />
+				<security:intercept-url pattern="/learningMaterial/display.do" access="isAuthenticated()" />
 				
+		<security:intercept-url pattern="/course/trainer/create.do" access="hasRole('TRAINER')" />
+		<security:intercept-url pattern="/course/trainer/mylist.do" access="hasRole('TRAINER')" />
+				<security:intercept-url pattern="/course/trainer/edit.do" access="hasRole('TRAINER')" />
+				<security:intercept-url pattern="/module/trainer/**" access="hasRole('TRAINER')" />		
+		<security:intercept-url pattern="/learningMaterial/trainer/**" access="hasRole('TRAINER')" />
+
+		
 		
 		<security:intercept-url pattern="/customer/register.do" access="isAnonymous()" />
 		<security:intercept-url pattern="/organiser/display.do" access="isAuthenticated()" />  
@@ -116,9 +125,17 @@
 		<security:intercept-url pattern="/customer/list.do" access="isAuthenticated()" />
 		<security:intercept-url pattern="/organiser/list.do" access="isAuthenticated()" />
 		<security:intercept-url pattern="/trainer/list.do" access="isAuthenticated()" />
+		<security:intercept-url pattern="/trainer/display.do" access="isAuthenticated()" />
+		
 		
 		<security:intercept-url pattern="/trainer/list.do" access="isAuthenticated()" />
+		<security:intercept-url pattern="/trainer/listByCourse.do" access="isAuthenticated()" />
 		<security:intercept-url pattern="/course/list.do" access="isAuthenticated()" />
+		<security:intercept-url pattern="/course/display.do" access="isAuthenticated()" />
+		<security:intercept-url pattern="/module/display.do" access="isAuthenticated()" />
+		<security:intercept-url pattern="/module/list.do" access="isAuthenticated()" />
+			<security:intercept-url pattern="/module/listByCourse.do" access="isAuthenticated()" />
+
 
 		<security:intercept-url pattern="/folder/actor/**" access="isAuthenticated()" />
 		<security:intercept-url pattern="/folder/**" access="isAuthenticated()" />

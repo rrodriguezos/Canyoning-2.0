@@ -64,6 +64,6 @@
 
 		<input type="button" name="create"
 			value="<spring:message code="module.create" />"
-			onclick="javascript: window.location.assign('module/trainer/create.do?tripId=${tripId}')" />
+			onclick="javascript: window.location.assign('module/trainer/create.do?courseId=${courseId}')" />
 	</jstl:if>
 </security:authorize>

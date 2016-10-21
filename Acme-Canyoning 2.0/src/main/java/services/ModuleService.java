@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.ModuleRepository;
+import domain.Administrator;
 import domain.LearningMaterial;
 import domain.Module;
 import domain.Trainer;
@@ -26,6 +27,9 @@ public class ModuleService {
 	private LearningMaterialService learningMaterialService;
 	@Autowired
 	private TrainerService trainerService;
+	
+	@Autowired
+	private AdministratorService administratorService;
 
 	// Constructor --------------------------
 	public ModuleService() {
@@ -81,6 +85,14 @@ public class ModuleService {
 		result = moduleRepository.findModulesByCourse(courseId);
 
 		return result;
+	}
+
+	public Double averageOfModulesByCourse() {
+		Administrator admin;
+		admin = administratorService.findByPrincipal();
+		Assert.notNull(admin); 
+		Double res =  moduleRepository.averageOfModulesByCourse();
+		return res;
 	}
 
 }

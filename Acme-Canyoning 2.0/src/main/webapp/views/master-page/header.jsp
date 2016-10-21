@@ -30,9 +30,6 @@
 		<li><a href="canyon/list.do"><spring:message
 					code="master.page.public.catalogueCanyon" /></a>
 					
-					<li><a href="course/list.do"><spring:message
-					code="master.page.public.catalogueCourses" /></a>
-					
 					<li><a href="activity/list.do"><spring:message
 					code="master.page.public.catalogueActivity" /></a>
 		<li><a class="fNiv" href="search/buscar.do"><spring:message
@@ -53,6 +50,8 @@
 			</security:authorize> 
 			
 			<security:authorize access="isAuthenticated()">
+			<li><a href="course/list.do"><spring:message
+					code="master.page.public.catalogueCourses" /></a>
 				<li><a class="fNiv"> <spring:message
 							code="master.page.profile" /> (<security:authentication
 							property="principal.username" />)
@@ -97,10 +96,21 @@
 										code="master.page.organiser.about" /></a></li>
 
 						</security:authorize>
+						
+						<security:authorize access="hasRole('TRAINER')">
+							<li><a href="course/trainer/mylist.do"><spring:message
+										code="master.page.organiser.courses" /></a></li>
+
+							<li><a href="course/trainer/create.do"><spring:message
+										code="master.page.organiser.createCourse" /></a></li>
+
+						</security:authorize>
 
 						<security:authorize access="hasRole('ADMINISTRATOR')">
 							<li><a href="organiser/administrator/list.do"><spring:message
 										code="master.page.administrator.register.organiser" /></a></li>
+										<li><a href="trainer/administrator/list.do"><spring:message
+										code="master.page.administrator.register.trainer" /></a></li>
 							
 							<li><a href="canyon/administrator/mylist.do"><spring:message
 										code="master.page.manager.canyon" /></a></li>
