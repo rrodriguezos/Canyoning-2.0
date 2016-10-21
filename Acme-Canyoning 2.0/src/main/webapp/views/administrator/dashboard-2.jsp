@@ -9,31 +9,31 @@
 
 <div class=center-text>
 
-<!--The average number of courses per trainer.. -->
-<p><spring:message code="administrator.dashboard.17"/></p>
+<!--The average number of courses per trainer. -->
+<p><spring:message code="administrator.dashboard.7"/></p>
 <jstl:out value="${averageOfCoursesByTrainer}"></jstl:out>
-
-
+<br>
+<br>
 <!--  The trainers who teach at least 10% courses above or below the average. -->
-<spring:message code="administrator.dashboard.7" />
+<spring:message code="administrator.dashboard.8" />
 <br>
 <display:table name="findTrainersLeastTenAverage" id="row1"
-	requestURI="dashboard/administrator/list.do" pagesize="5"
+	requestURI="dashboard/administrator/list2.do" pagesize="5"
 	class="displaytag" keepStatus="true">
 	<spring:message code="trainer.email" var="email" />
 	<display:column property="email" title="${email}" sortable="true" />
 	<spring:message code="trainer.phone" var="phone" />
 	<display:column property="phone" title="${phone}" sortable="true" />
 </display:table>
-
+<br>
 
 <!--  The average number of modules per course.  -->
-  <p><spring:message code="administrator.dashboard.25"/></p>
+  <p><spring:message code="administrator.dashboard.9"/></p>
   <jstl:out value="${averageOfModulesByCourse}"></jstl:out>
-
+<br>
 
 <!-- The average number of learning materials per course. -->
-<p><spring:message code="administrator.dashboard.27"/></p>
+<p><spring:message code="administrator.dashboard.10"/></p>
 <jstl:out value="${averageOfLearningMaterialByCourse}"></jstl:out>
 
 </div>

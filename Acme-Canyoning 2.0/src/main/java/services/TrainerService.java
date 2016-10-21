@@ -39,8 +39,6 @@ public class TrainerService {
 	@Autowired
 	private UserAccountService userAccountService;
 
-	@Autowired
-	private TrainerService trainerService;
 
 	// Constructors -------------------------------
 	public TrainerService() {
@@ -174,7 +172,7 @@ public class TrainerService {
 
 	public Collection<Trainer> findTrainersLeastTenAverage() {
 		Double media = courseService.averageOfCoursesByTrainer();
-		Collection<Trainer> trainers = trainerService.findAll();
+		Collection<Trainer> trainers = findAll();
 		Collection<Trainer> result = new LinkedList<Trainer>();
 
 		Double tenPercent = media * 0.10;

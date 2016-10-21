@@ -46,6 +46,9 @@
 				<li><a class="fNiv" href="dashboard/administrator/list.do">
 						<spring:message code="master.page.administrator.dashboard" />
 				</a></li>
+				<li>
+				    <a href="dashboard/administrator/list2.do"><spring:message code="master.page.administrator.dashboard2" /></a>
+				  </li>
 
 			</security:authorize> 
 			

@@ -23,7 +23,7 @@ public class LearningMaterialService {
 	// Supporting Services ------------------
 	@Autowired
 	private TrainerService trainerService;
-	
+
 	@Autowired
 	private AdministratorService administratorService;
 	@Autowired
@@ -91,15 +91,21 @@ public class LearningMaterialService {
 
 	public Double averageOfLearningMaterialByCourse() {
 		Administrator admin;
+		Double result;
+		Double courses;
+		Double materials;
 		admin = administratorService.findByPrincipal();
-		Assert.notNull(admin); 
+		Assert.notNull(admin);
 		int allCourses = courseService.findAll().size();
 		int allMaterial = findAll().size();
-		
-		Double result;
-		
-		result= (double) (allCourses/ allMaterial);
-		
+		courses = (double) allCourses;
+		materials = (double) allMaterial;
+
+		if (allCourses > allMaterial) {
+			result = courses / materials;
+		} else {
+			result = materials / courses;
+		}
 
 		return result;
 	}

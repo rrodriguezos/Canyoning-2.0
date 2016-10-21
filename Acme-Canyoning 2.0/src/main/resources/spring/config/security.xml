@@ -65,7 +65,7 @@
 		<security:intercept-url pattern="/organiser/administrator/create.do" access="hasRole('ADMINISTRATOR')" /> 
 		<security:intercept-url pattern="/organiser/administrator/list.do" access="hasRole('ADMINISTRATOR')" /> 
 		<security:intercept-url pattern="/organiser/administrator/display.do" access="hasRole('ADMINISTRATOR')" /> 
-		
+		<security:intercept-url pattern="/dashboard/administrator/list2.do" access="hasRole('ADMINISTRATOR')" />
 <security:intercept-url pattern="/trainer/administrator/create.do" access="hasRole('ADMINISTRATOR')" /> 
 		<security:intercept-url pattern="/trainer/administrator/list.do" access="hasRole('ADMINISTRATOR')" /> 
 		<security:intercept-url pattern="/trainer/administrator/display.do" access="hasRole('ADMINISTRATOR')" /> 

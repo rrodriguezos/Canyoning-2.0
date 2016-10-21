@@ -35,7 +35,7 @@
 	function myFunction(str) {
      var patt = new RegExp("^([+][0-9]{1,2})?([0-9]{3})?(?:[0-9]{4,})");
      if(patt.test(str)==false){
-    	 window.alert("<spring:message code="customer.phone.confirm"/>");
+    	 window.confirm("<spring:message code="customer.phone.confirm"/>");
      }	  
  	}
 </script>

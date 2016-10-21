@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.TrainerService;
-import services.TrainerService;
-
 import controllers.AbstractController;
 import domain.Trainer;
 import forms.TrainerForm;
@@ -22,115 +20,115 @@ import forms.TrainerForm;
 @Controller
 @RequestMapping("/trainer/administrator")
 public class AdministratorTrainerController extends AbstractController {
-	
+
 	// Services ---------------------------------------------------------------
-		@Autowired
-		private TrainerService trainerService;
+	@Autowired
+	private TrainerService trainerService;
 
-		// Constructors -----------------------------------------------------------
+	// Constructors -----------------------------------------------------------
 
-		public AdministratorTrainerController() {
-			super();
-		}
+	public AdministratorTrainerController() {
+		super();
+	}
 
-		//Create---------------------------------------------------------------
+	// Create---------------------------------------------------------------
 
-		@RequestMapping(value = "/create", method = RequestMethod.GET)
-		public ModelAndView create() {
-			ModelAndView result;
-			TrainerForm trainerForm;
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create() {
+		ModelAndView result;
+		TrainerForm trainerForm;
 
-			trainerForm = new TrainerForm();
+		trainerForm = new TrainerForm();
 
-			result = new ModelAndView("trainer/create");
-			result.addObject("trainerForm", trainerForm);
-			return result;
-		}
+		result = new ModelAndView("trainer/create");
+		result.addObject("trainerForm", trainerForm);
+		return result;
+	}
 
-		// Save ----------------------------------------------------------------
+	// Save ----------------------------------------------------------------
 
-		@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
-		public ModelAndView save(@Valid TrainerForm trainerForm,
-				BindingResult binding) {
-			ModelAndView result;
-			Trainer trainer;
-			Boolean verificarPass;
+	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid TrainerForm trainerForm,
+			BindingResult binding) {
+		ModelAndView result;
+		Trainer trainer;
+		Boolean verificarPass;
 
-			verificarPass = trainerForm.getPassword().equals(
-					trainerForm.getConfirmPassword());
+		verificarPass = trainerForm.getPassword().equals(
+				trainerForm.getConfirmPassword());
 
-			if (binding.hasErrors() || !verificarPass) {
+		if (binding.hasErrors() || !verificarPass) {
+			result = createEditModelAndView(trainerForm);
+			if (!verificarPass) {
+				result.addObject("message2", "trainer.commit.password");
+			}
+		} else {
+			try {
+				trainer = trainerService.reconstruct(trainerForm);
+				trainerService.save(trainer);
+				result = new ModelAndView("redirect:/");
+			} catch (Throwable oops) {
 				result = createEditModelAndView(trainerForm);
-				if (!verificarPass) {
-					result.addObject("message2", "trainer.commit.password");
-				}
-			} else {
-				try {
-					trainer = trainerService.reconstruct(trainerForm);
-					trainerService.save(trainer);
-					result = new ModelAndView("redirect:/");
-				} catch (Throwable oops) {
-					result = createEditModelAndView(trainerForm);
-					if (oops instanceof DataIntegrityViolationException) {
-						result.addObject("message2",
-								"trainer.commit.duplicatedUsername");
-					} else {
-						result.addObject("message2", "trainer.commit.error");
-					}
+				if (oops instanceof DataIntegrityViolationException) {
+					result.addObject("message2",
+							"trainer.commit.duplicatedUsername");
+				} else {
+					result.addObject("message2", "trainer.commit.error");
 				}
 			}
-
-			return result;
 		}
 
-		// List ------------------------------------------------------------------
-		@RequestMapping(value = "/list", method = RequestMethod.GET)
-		public ModelAndView list() {
-			ModelAndView result;
-			Collection<Trainer> trainers;
+		return result;
+	}
 
-			trainers = trainerService.findAll();
+	// List ------------------------------------------------------------------
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list() {
+		ModelAndView result;
+		Collection<Trainer> trainers;
 
-			result = new ModelAndView("trainer/list");
-			result.addObject("trainers", trainers);
-			result.addObject("requestUri", "trainer/administrator/list.do");
+		trainers = trainerService.findAll();
 
-			return result;
-		}
+		result = new ModelAndView("trainer/list");
+		result.addObject("trainers", trainers);
+		result.addObject("requestUri", "trainer/administrator/list.do");
 
-		// Display -----------------------------------------------------------------
-		@RequestMapping(value = "/display", method = RequestMethod.GET)
-		public ModelAndView display(int trainerId) {
-			ModelAndView result;
-			Trainer trainer;
+		return result;
+	}
 
-			trainer = trainerService.findOne(trainerId);
+	// Display -----------------------------------------------------------------
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display(int trainerId) {
+		ModelAndView result;
+		Trainer trainer;
 
-			result = new ModelAndView("trainer/display");
-			result.addObject("trainer", trainer);
+		trainer = trainerService.findOne(trainerId);
 
-			return result;
-		}
+		result = new ModelAndView("trainer/display");
+		result.addObject("trainer", trainer);
 
-		// Ancillary methods--------------------------------------------------------
+		return result;
+	}
 
-		protected ModelAndView createEditModelAndView(TrainerForm trainerForm) {
-			ModelAndView result;
+	// Ancillary methods--------------------------------------------------------
 
-			result = createEditModelAndView(trainerForm, null);
+	protected ModelAndView createEditModelAndView(TrainerForm trainerForm) {
+		ModelAndView result;
 
-			return result;
-		}
+		result = createEditModelAndView(trainerForm, null);
 
-		protected ModelAndView createEditModelAndView(TrainerForm trainerForm,
-				String message) {
-			ModelAndView result;
+		return result;
+	}
 
-			result = new ModelAndView("trainer/create");
+	protected ModelAndView createEditModelAndView(TrainerForm trainerForm,
+			String message) {
+		ModelAndView result;
 
-			result.addObject("trainerForm", trainerForm);
-			result.addObject("message2", message);
-			return result;
-		}
+		result = new ModelAndView("trainer/create");
+
+		result.addObject("trainerForm", trainerForm);
+		result.addObject("message2", message);
+		return result;
+	}
 
 }
