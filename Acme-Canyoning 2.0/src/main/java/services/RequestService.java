@@ -169,5 +169,13 @@ public class RequestService {
 		save(request);
 		return accept;
 	}
+	
+	public Collection<Request> allRequestAccepted() {
+		Collection<Request> result;
+
+		result = requestRepository.allRequestAccepted();
+
+		return result;
+	}
 
 }

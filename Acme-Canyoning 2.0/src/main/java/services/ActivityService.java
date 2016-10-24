@@ -292,18 +292,30 @@ public class ActivityService {
 
 	// The average number of seats offered in the activities that are going to
 	// be organised in the forthcoming three months.
-	 public Double averageSeatsOrganisedThreeMonths(){
-	 UserAccount loginNow = LoginService.getPrincipal();
-	 administratorService.isAdmin(loginNow);
-	 Calendar calendar = Calendar.getInstance();
-	 calendar.setTimeInMillis(System.currentTimeMillis());
-	 calendar.add(Calendar.DAY_OF_MONTH, +90);
-	 Date upToDateCriteria = calendar.getTime();
-	 Double seatsAvaliables =
-	 activityRepository.seatsAvaliablesNextThreeMonths(upToDateCriteria);
-	
-	 return seatsAvaliables;
-	 }
+	 public Double averageSeatsOrganisedThreeMonths() {
+		UserAccount loginNow = LoginService.getPrincipal();
+		administratorService.isAdmin(loginNow);
+		// Double seatsAvaliables;
+		// int allSeats = activityRepository.allSeatsOffered();
+		// int allSeatsOfferedThreeMonths = 0;
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTimeInMillis(System.currentTimeMillis());
+		calendar.add(Calendar.DAY_OF_MONTH, +90);
+
+		Date upToDateCriteria = calendar.getTime();
+		Double activitiesOrganizedThreeMonths = activityRepository
+				.activitiesOrganizedThreeMonths(upToDateCriteria);
+
+		// for(Activity a: activitiesOrganizedThreeMonths){
+		// allSeatsOfferedThreeMonths = a.getNumberSeats()
+		// +allSeatsOfferedThreeMonths;
+		// }
+		//
+		// seatsAvaliables =
+		// ((double)allSeats)/((double)allSeatsOfferedThreeMonths);
+
+		return activitiesOrganizedThreeMonths;
+	}
 	// The activities that offer at least 10% more seats than the average.
 	public Collection<Activity> findWithMoreTenPercentOfSeatsAvg() {
 		UserAccount loginNow = LoginService.getPrincipal();

@@ -15,7 +15,7 @@ public interface RequestRepository extends JpaRepository<Request, Integer> {
 
 	
 	
-	@Query("select r from Request r where r.customer.id=?1 and r.requestState = 'PENDING' ")
+		@Query("select r from Request r where r.customer.id=?1 and r.requestState = 'PENDING' ")
 	Collection<Request> requestPendingByCustomer(int customerId);
 	
 	@Query("select r from Request r where r.customer.id=?1 and r.requestState = 'REJECTED' ")
@@ -33,6 +33,9 @@ public interface RequestRepository extends JpaRepository<Request, Integer> {
 
 	@Query("select r from Request r where r.activity.id=?1 and r.requestState = 'PENDING' ")
 	Collection<Request> requestsPendingByActivity(int activityId);
+
+	@Query("select r from Request r where r.requestState = 'ACCEPTED'")
+	Collection<Request> allRequestAccepted();
 	
 
 

@@ -12,7 +12,11 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 	@Query("select c from Customer c where c.userAccount.id=?1")
 	Customer findByUserAccountId(int id);
 
-//	@Query("select avg(c.requests.size) where request.requestState = 'PENDING'")
-//	Double averageCustomersInWaitingList();
+	@Query("select count(r.customer) from Request r where r.requestState = 'PENDING'")
+	int customersInWaitingList();
+	
+	@Query("select count(r.customer) from Request r")
+	int numberCustomersRequest();
+// select count(r.customer) / (select count(r.customer) from Request r) from Request r where r.requestState = 'PENDING';
 
 }

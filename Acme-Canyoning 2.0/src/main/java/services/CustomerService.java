@@ -2,6 +2,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.LinkedList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ public class CustomerService {
 	// Supporting Services -------------------------
 	@Autowired
 	private UserAccountService userAccountService;
+	
+	@Autowired
+	private RequestService requestService;
 
 	// Constructors -------------------------------
 	public CustomerService() {
@@ -193,9 +197,80 @@ public class CustomerService {
 	
 	//DashBoard
 	
-//	public Double averageCustomersInWaitingList() {
-//		
-//		 return customerRepository.averageCustomersInWaitingList();
-//		 }
+public Double averageCustomersInWaitingList() {
+		Double result;
+		int customersWaitingList;
+		int customersRequest;
+
+		customersRequest = customerRepository.numberCustomersRequest();
+		customersWaitingList = customerRepository.customersInWaitingList();
+
+		result = (double) customersRequest / (double) customersWaitingList;
+
+		return result;
+	}
+
+	public Double averageTimeRemainWaitingList() {
+		Double result;
+		Double sumDays = 0.0;
+		int numberRequest;
+		Collection<Request> allRequestsAccepted;
+		
+		allRequestsAccepted = requestService.allRequestAccepted();
+		numberRequest = allRequestsAccepted.size();
+		for(Request r : allRequestsAccepted){
+			Date accepted;
+			Date pending;
+			long substract;
+			pending	= r.getMomentPending();
+			accepted = r.getMomentAccepted();
+			substract = accepted.getTime()- pending.getTime();
+			long difd=substract / (24 * 60 * 60 * 1000);
+			sumDays = (double)difd + sumDays;		
+			
+		}
+		result = (double) (sumDays / numberRequest);
+		result = Math.round( result * 10.0 ) / 10.0;
+		return result;
+	}
+
+	public Double stdTimeRemainWaitingList() {
+		Double result;
+		Double media;
+		Double sumMedia;
+		Double numerador = 0.0;
+		Double alCuadrado;
+		Double dentroSqrt;
+		Collection<Double> points = new LinkedList<Double>();
+		Collection<Request> allRequestsAccepted;
+		
+		allRequestsAccepted = requestService.allRequestAccepted();
+		for(Request r : allRequestsAccepted){
+			Date accepted;
+			Date pending;
+			long substract;
+			pending	= r.getMomentPending();
+			accepted = r.getMomentAccepted();
+			substract = accepted.getTime()- pending.getTime();
+			long difd=substract / (24 * 60 * 60 * 1000);
+			points.add((double)difd);
+			
+		}
+		
+		media =averageTimeRemainWaitingList();
+
+
+		for(Double pos : points){
+			sumMedia = (pos-media);
+			Math.abs(sumMedia);
+			alCuadrado = Math.pow(sumMedia, 2);
+			numerador = alCuadrado + numerador;
+		}
+		dentroSqrt=numerador / points.size();
+		result = Math.sqrt(dentroSqrt);
+	
+		
+		return result;
+	}	 
 
 }

@@ -37,9 +37,9 @@
 
 
 <!-- The activities that offer at least 10% more seats or 10% less seats than the average. -->
-<spring:message code="administrator.dashboard.4" />
+<spring:message code="administrator.dashboard.4.1" />
 <br>
-<display:table name="seatsMoreTen" id="row4"
+<display:table name="activity10MoreAverage" id="row4"
 	requestURI="dashboard/administrator/list.do" pagesize="5"
 	class="displaytag" keepStatus="true">
 	<spring:message code="activity.title" var="title" />
@@ -47,26 +47,41 @@
 		
 	<spring:message code="activity.description" var="description" />
 	<display:column property="description" title="${description}" />
+	
+	<spring:message code="activity.numberSeats" var="numberSeats" />
+	<display:column property="numberSeats" title="${numberSeats}" />
 </display:table>
-
+<spring:message code="administrator.dashboard.4.2" />
 <br>
-
+<display:table name="activity10LessAverage" id="row5"
+	requestURI="dashboard/administrator/list.do" pagesize="5"
+	class="displaytag" keepStatus="true">
+	<spring:message code="activity.title" var="title" />
+	<display:column property="title" title="${title}" />
+		
+	<spring:message code="activity.description" var="description" />
+	<display:column property="description" title="${description}" />
+	
+	<spring:message code="activity.numberSeats" var="numberSeats" />
+	<display:column property="numberSeats" title="${numberSeats}" />
+</display:table>
+<br>
 
 <!-- Standard deviation of the time that a customer remains in a waiting list. -->
 <spring:message code="administrator.dashboard.5" />
 <p>
-	<jstl:out value="${desviationTimeCustomerWaitingList}"></jstl:out>
+	<jstl:out value="${stdTimeRemainWaitingList}"></jstl:out>
 </p>
 
 <br>
-
+<br>
 <!-- Average of the time that a customer remains in a waiting list. -->
 <spring:message code="administrator.dashboard.6" />
 <p>
-	<jstl:out value="${averageTimeCustomerWaitingList}"></jstl:out>
+	<jstl:out value="${averageTimeRemainWaitingList}"></jstl:out> <spring:message code="administrator.dashboard.days" />
 </p>
 
-<br>
+
 
 
 

@@ -60,25 +60,28 @@ public class DashboardAdministratorController extends AbstractController {
 			// The average number of activities per organiser.
 			Double averageActivitiesPerOrganiser = activityService.averageNumberOfActivitiesByOrganisers();
 			// The average number of customers in the waiting lists.
-//			Double averageCustomersInWaitingList = customerService.averageCustomersInWaitingList();
-
-		
-
-
+			Double averageCustomersInWaitingList = customerService.averageCustomersInWaitingList();
+			//The average number of seats offered in the activities that are going to be organised in the forthcoming three months.
+			Double averageSeatsOrganisedThreeMonths = activityService.averageSeatsOrganisedThreeMonths();
 			// 10% more than the average.
 			Collection<Activity> activity10MoreAverage = activityService.findWithMoreTenPercentOfSeatsAvg();
-
- 
-			// 10% less than the average.
+ 			// 10% less than the average.
 			Collection<Activity> activity10LessAverage = activityService.findWithLessTenPercentOfSeatsAvg();
-
+			//The average of the time that a customer remains in a waiting list.
+			Double averageTimeRemainWaitingList = customerService.averageTimeRemainWaitingList();
+			//The standard deviation of the time that a customer remains in a waiting list.
+			Double stdTimeRemainWaitingList = customerService.stdTimeRemainWaitingList();
+			
+			
 			result = new ModelAndView("administrator/dashboard");
 			result.addObject("averageActivitiesPerOrganiser", averageActivitiesPerOrganiser);
-//			result.addObject("averageCustomersInWaitingList", averageCustomersInWaitingList);
-
+			result.addObject("averageCustomersInWaitingList", averageCustomersInWaitingList);
+			result.addObject("averageSeatsOrganisedThreeMonths", averageSeatsOrganisedThreeMonths);
 
 			result.addObject("activity10MoreAverage", activity10MoreAverage);
 			result.addObject("activity10LessAverage", activity10LessAverage);
+			result.addObject("averageTimeRemainWaitingList", averageTimeRemainWaitingList);
+			result.addObject("stdTimeRemainWaitingList", stdTimeRemainWaitingList);
 
 			return result;
 		}

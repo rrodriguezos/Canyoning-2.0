@@ -11,7 +11,6 @@ import domain.Activity;
 
 @Repository
 public interface ActivityRepository extends JpaRepository<Activity, Integer> {
-
 	@Query("select a from Activity a where a.canyon.id = ?1")
 	Collection<Activity> activityByCanyon(int canyonId);
 
@@ -24,19 +23,25 @@ public interface ActivityRepository extends JpaRepository<Activity, Integer> {
 	@Query("select avg(o.activities.size) from Organiser o")
 	Double averageNumberOfActivitiesByOrganisers();
 	
-	
-	@Query("select avg(a.numberSeats) from Activity a where a.moment>CURRENT_DATE and a.moment<=?1")
-	Double seatsAvaliablesNextThreeMonths(Date upToDateCriteria);
+
 	
 	
-	@Query("select a from Activity a where a.numberSeats > 0.2*(select avg(a.numberSeats) from Activity a)")
+	@Query("select a from Activity a where a.numberSeats > (0.1*(select avg(a.numberSeats) from Activity a)+(select avg(a.numberSeats) from Activity a))")
 	Collection<Activity> findWithMoreTenPercentOfSeatsAvg();
 	
-	@Query("select a from Activity a where a.numberSeats < 0.2*(select avg(a.numberSeats) from Activity a)")
+	@Query("select a from Activity a where a.numberSeats < (0.1*(select avg(a.numberSeats) from Activity a)+(select avg(a.numberSeats) from Activity a))")
 	Collection<Activity> findWithLessTenPercentOfSeatsAvg();
 
 	@Query("select a from Activity a where a.organiser.id = ?1")
 	Collection<Activity> findActivitiesByOrganiser(int organiserId);
+
+	@Query("select SUM(a.numberSeats) from Activity a")
+	int allSeatsOffered();
+	
+	@Query("select avg(a.numberSeats) from Activity a where a.moment>CURRENT_DATE and a.moment<=?1")
+	Double activitiesOrganizedThreeMonths(Date upToDateCriteria);
+//	@Query("select a from Activity a where a.moment>CURRENT_DATE and a.moment<=?1")
+//	Collection<Activity> activitiesOrganizedThreeMonths(Date upToDateCriteria);
 
 
 }

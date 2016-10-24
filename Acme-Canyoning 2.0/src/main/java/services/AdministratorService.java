@@ -99,7 +99,7 @@ public class AdministratorService {
 			Collection<Authority> authorities= account.getAuthorities();
 			Boolean res=false;
 			for(Authority a:authorities){
-				if(a.getAuthority().equals("ADMIN")) res=true;
+				if(a.getAuthority().equals("ADMINISTRATOR")) res=true;
 			}
 			Assert.isTrue(res);
 		}

@@ -236,6 +236,8 @@
 		<property name="requests">
 			<list>
 				<ref bean="request1" />
+				<ref bean="request6" />
+				<ref bean="request4" />
 			</list>
 		</property>
 		<property name="customerComment" ref="customerComment1" />
@@ -260,6 +262,7 @@
 		<property name="requests">
 			<list>
 				<ref bean="request2" />
+				<ref bean="request5" />
 			</list>
 		</property>
 		<property name="customerComment" ref="customerComment2" />
@@ -355,6 +358,21 @@
 		<property name="latitude" value="-48.00" />
 		<property name="longitude" value="15.020" />
 		<property name="altitude" value="30.005" />
+	</bean>
+	<bean id="gps4" class="domain.GPSCoordinates">
+		<property name="latitude" value="-2.32" />
+		<property name="longitude" value="37.39" />
+		<property name="altitude" value="997" />
+	</bean>
+	<bean id="gps5" class="domain.GPSCoordinates">
+		<property name="latitude" value="-3.44" />
+		<property name="longitude" value="41.950" />
+		<property name="altitude" value="650" />
+	</bean>
+	<bean id="gps6" class="domain.GPSCoordinates">
+		<property name="latitude" value="-6.93" />
+		<property name="longitude" value="43.065" />
+		<property name="altitude" value="350" />
 	</bean>
 
 	<!-- Abouts -->
@@ -767,7 +785,81 @@
 	</bean>
 
 
+<bean class="domain.Canyon" id="canyon4">
+		<property name="name" value="Baza Saliente Alto" />
+		<property name="difficultyLevel" value="8" />
+		<property name="route"
+			value="https://www.google.es/maps/place/Urr%C3%A1cal,+04879,+Almer%C3%ADa/@37.3949469,-2.3270171,19z/data=!3m1!1e3!4m2!3m1!1s0xd655105b9ba29ff:0x403d278a575e380" />
+		<property name="description" value="Ruta en Almeria" />
+		<property name="gpsCoordinates" ref="gps4" />
+		<property name="administrator" ref="administrator" />
+		<property name="activities">
+			<list>
+			</list>
+		</property>
+		<property name="pictures">
+			<list>
+				<value>http://s1.wklcdn.com/image_23/705733/10631026/6413449.jpg
+				</value>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
 
+
+	<bean class="domain.Canyon" id="canyon5">
+		<property name="name" value="Yecla" />
+		<property name="difficultyLevel" value="9" />
+		<property name="route"
+			value="https://www.google.es/maps/place/Desfiladero+de+La+Yecla,+BU-910,+09610+Santo+Domingo+de+Silos,+Burgos/@41.950824,-3.442638,20z/data=!3m1!1e3!4m2!3m1!1s0xd45c98ba4d75369:0xe1f6f2becd597abc" />
+		<property name="description" value="Desfiladero del Yecla" />
+		<property name="gpsCoordinates" ref="gps5" />
+		<property name="administrator" ref="administrator" />
+		<property name="activities">
+			<list>
+			</list>
+		</property>
+		<property name="pictures">
+			<list>
+				<value>http://s2.wklcdn.com/image_23/718614/7509511/4284653.jpg
+				</value>
+				<value>http://s1.wklcdn.com/image_23/718614/7509511/4284655.jpg
+				</value>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	<bean class="domain.Canyon" id="canyon6">
+		<property name="name" value="Bustelin" />
+		<property name="difficultyLevel" value="4" />
+		<property name="route"
+			value="https://www.google.es/maps/place/33810+Bustel%C3%ADn,+Asturias/@43.0655603,-6.9361315,19z/data=!3m1!1e3!4m2!3m1!1s0xd3104c6b080822b:0x9e3a051e5fcec1db" />
+		<property name="description" value="Desfiladero del Bustelin" />
+		<property name="gpsCoordinates" ref="gps6" />
+		<property name="administrator" ref="administrator" />
+		<property name="activities">
+			<list>
+			</list>
+		</property>
+		<property name="pictures">
+			<list>
+				<value>http://s0.wklcdn.com/image_4/147635/871154/267066.jpg
+				</value>
+				<value>http://s1.wklcdn.com/image_4/147635/871154/267067.jpg
+				</value>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
 
 
 	<!-- Activities -->
@@ -777,7 +869,7 @@
 		<property name="numberSeats" value="4" />
 		<property name="seatsAvailable" value="0" />
 		<property name="organiser" ref="organiser1" />
-		<property name="moment" value="09/11/2017 16:00" />
+		<property name="moment" value="01/01/2017 16:00" />
 		<property name="canyon" ref="canyon1" />
 		<property name="comments">
 			<list>
@@ -798,7 +890,7 @@
 		<property name="numberSeats" value="4" />
 		<property name="seatsAvailable" value="3" />
 		<property name="organiser" ref="organiser2" />
-		<property name="moment" value="09/11/2018 16:00" />
+		<property name="moment" value="01/01/2017 16:00" />
 		<property name="canyon" ref="canyon2" />
 		<property name="comments">
 			<list>
@@ -809,6 +901,8 @@
 		<property name="requests">
 			<list>
 				<ref bean="request2" />
+				<ref bean="request5" />
+				<ref bean="request6" />
 			</list>
 		</property>
 	</bean>
@@ -819,7 +913,7 @@
 		<property name="numberSeats" value="2" />
 		<property name="organiser" ref="organiser3" />
 		<property name="seatsAvailable" value="2" />
-		<property name="moment" value="09/05/2017 14:00" />
+		<property name="moment" value="01/01/2017 14:00" />
 		<property name="canyon" ref="canyon3" />
 		<property name="comments">
 			<list>
@@ -830,6 +924,7 @@
 		<property name="requests">
 			<list>
 				<ref bean="request3" />
+				<ref bean="request4" />
 			</list>
 		</property>
 	</bean>
@@ -912,6 +1007,29 @@
 		<property name="requestState" value="PENDING" />
 		<property name="customer" ref="customer3" />
 		<property name="activity" ref="activity3" />
+	</bean>
+	
+	<bean class="domain.Request" id="request4">
+		<property value="2/2/2016 12:00" name="momentPending" />
+		<property value="2/3/2016 16:00" name="momentAccepted" />
+		<property name="requestState" value="ACCEPTED" />
+		<property name="customer" ref="customer1" />
+		<property name="activity" ref="activity3" />
+	</bean>
+	
+	<bean class="domain.Request" id="request5">
+		<property value="12/7/2015 16:00" name="momentPending" />
+		<property value="1/1/2016 00:00" name="momentAccepted" />
+		<property name="requestState" value="ACCEPTED" />
+		<property name="customer" ref="customer2" />
+		<property name="activity" ref="activity2" />
+	</bean>
+	
+	<bean class="domain.Request" id="request6">
+		<property value="09/11/2014 16:00" name="momentPending" />
+		<property name="requestState" value="REJECTED" />
+		<property name="customer" ref="customer1" />
+		<property name="activity" ref="activity2" />
 	</bean>
 
 

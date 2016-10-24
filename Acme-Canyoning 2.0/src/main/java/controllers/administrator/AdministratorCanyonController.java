@@ -40,6 +40,7 @@ public class AdministratorCanyonController extends AbstractController {
 
 		result = new ModelAndView("canyon/administrator/mylist");
 		result.addObject("canyons", canyons);
+		result.addObject("requestUri", "/canyon/administrator/mylist.do");
 
 		return result;
 	}
