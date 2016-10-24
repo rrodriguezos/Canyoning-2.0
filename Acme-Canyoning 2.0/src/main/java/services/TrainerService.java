@@ -39,7 +39,6 @@ public class TrainerService {
 	@Autowired
 	private UserAccountService userAccountService;
 
-
 	// Constructors -------------------------------
 	public TrainerService() {
 		super();
@@ -171,22 +170,23 @@ public class TrainerService {
 	}
 
 	public Collection<Trainer> findTrainersLeastTenAverage() {
-		Double media = courseService.averageOfCoursesByTrainer();
-		Collection<Trainer> trainers = findAll();
-		Collection<Trainer> result = new LinkedList<Trainer>();
-
-		Double tenPercent = media * 0.10;
-		Double tenPercentAbove = media + tenPercent;
-		Double tenPercentBelow = media - tenPercent;
-
-		for (Trainer t : trainers) {
-			int tam;
-			tam = t.getCourses().size();
-			if (tam > tenPercentBelow && tam < tenPercentAbove) {
-				result.add(t);
-			}
-		}
-
+//		Collection<Trainer> result;
+		 Double media = courseService.averageOfCoursesByTrainer();
+		 Collection<Trainer> trainers = findAll();
+		 Collection<Trainer> result = new LinkedList<Trainer>();
+		
+		 Double tenPercent = media * 0.10;
+		 Double tenPercentAbove = media + tenPercent;
+		 Double tenPercentBelow = media - tenPercent;
+		
+		 for (Trainer t : trainers) {
+		 int tam;
+		 tam = t.getCourses().size();
+		 if (tam > tenPercentBelow && tam < tenPercentAbove) {
+		 result.add(t);
+		 }
+		 }
+//		result = trainerRepository.courses10percAboveBelowAvg();
 		return result;
 	}
 

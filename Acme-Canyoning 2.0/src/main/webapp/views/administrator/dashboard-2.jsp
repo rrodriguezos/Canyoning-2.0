@@ -17,7 +17,7 @@
 <!--  The trainers who teach at least 10% courses above or below the average. -->
 <spring:message code="administrator.dashboard.8" />
 <br>
-<display:table name="findTrainersLeastTenAverage" id="row1"
+<display:table name="findTrainersLeastTenAverage" id="row2"
 	requestURI="dashboard/administrator/list2.do" pagesize="5"
 	class="displaytag" keepStatus="true">
 	<spring:message code="trainer.email" var="email" />

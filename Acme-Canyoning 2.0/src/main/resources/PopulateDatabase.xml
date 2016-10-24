@@ -147,6 +147,9 @@
 				<ref bean="canyon1" />
 				<ref bean="canyon2" />
 				<ref bean="canyon3" />
+				<ref bean="canyon4" />
+				<ref bean="canyon5" />
+				<ref bean="canyon6" />
 			</list>
 		</property>
 	</bean>
@@ -301,6 +304,7 @@
 			<list>
 				<ref bean="course1" />
 				<ref bean="course2" />
+				<ref bean="course6" />
 			</list>
 		</property>
 		<property name="trainerComment" ref="trainerComment1" />
@@ -318,6 +322,7 @@
 			<list>
 				<ref bean="course3" />
 				<ref bean="course4" />
+				<ref bean="course7" />
 			</list>
 		</property>
 		<property name="trainerComment" ref="trainerComment2" />
@@ -334,6 +339,8 @@
 		<property name="courses">
 			<list>
 				<ref bean="course5" />
+				<ref bean="course8" />
+				<ref bean="course9" />
 			</list>
 		</property>
 		<property name="trainerComment" ref="trainerComment3" />
@@ -484,7 +491,69 @@
 		</property>
 	</bean>
 	
+	<bean class="domain.Course" id="course6">
+		<property name="title" value="Descenso" />
+		<property name="description" value="Curso de rapel" />
+		<property name="trainer" ref="trainer1" />
+		<property name="banner"
+			value="http://www.emocionextremSa.com/data1/images/banner_curso_de_rapel_escalada_en_roca_y_tirolesa_2.jpg"/>
+		<property name="modules">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
 	
+	<bean class="domain.Course" id="course7">
+		<property name="title" value="Descenso" />
+		<property name="description" value="Curso de Descenso nadando" />
+		<property name="trainer" ref="trainer2" />
+		<property name="banner"
+			value="http://www.emocionextrema.com/data1/images/banner_matacanes2.jpg" />
+		<property name="modules">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean class="domain.Course" id="course8">
+		<property name="title" value="Descenso" />
+		<property name="description" value="Curso de Descenso del calabozo" />
+		<property name="trainer" ref="trainer3" />
+		<property name="banner"
+			value="http://www.emocionextrema.com/Galeria/calabozo/banner_CALABOZO.jpg" />
+		<property name="modules">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean class="domain.Course" id="course9">
+		<property name="title" value="Paracaidas" />
+		<property name="description" value="Curso de paracaidas" />
+		<property name="trainer" ref="trainer3" />
+		<property name="banner"
+			value="http://www.emocionextrema.com/data1/images/bannerok.jpg" />
+		<property name="modules">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
 	<!-- Modules -->
 	<bean class="domain.Module" id="module1">
 		<property name="title" value="Modulo 1" />

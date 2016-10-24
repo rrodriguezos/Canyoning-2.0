@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import domain.Course;
+import domain.Trainer;
 
 @Repository
 public interface CourseRepository extends JpaRepository<Course, Integer> {
@@ -20,4 +21,6 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
 	@Query("select avg(t.courses.size) from Trainer t")
 	Double averageOfCoursesByTrainer();
 
+	
+	
 }
