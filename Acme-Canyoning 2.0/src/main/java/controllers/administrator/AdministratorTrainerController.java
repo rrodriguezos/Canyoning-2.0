@@ -60,7 +60,7 @@ public class AdministratorTrainerController extends AbstractController {
 		if (binding.hasErrors() || !verificarPass) {
 			result = createEditModelAndView(trainerForm);
 			if (!verificarPass) {
-				result.addObject("message2", "trainer.commit.password");
+				result.addObject("message", "trainer.commit.password");
 			}
 		} else {
 			try {
@@ -70,10 +70,10 @@ public class AdministratorTrainerController extends AbstractController {
 			} catch (Throwable oops) {
 				result = createEditModelAndView(trainerForm);
 				if (oops instanceof DataIntegrityViolationException) {
-					result.addObject("message2",
+					result.addObject("message",
 							"trainer.commit.duplicatedUsername");
 				} else {
-					result.addObject("message2", "trainer.commit.error");
+					result.addObject("message", "trainer.commit.error");
 				}
 			}
 		}
@@ -127,7 +127,7 @@ public class AdministratorTrainerController extends AbstractController {
 		result = new ModelAndView("trainer/create");
 
 		result.addObject("trainerForm", trainerForm);
-		result.addObject("message2", message);
+		result.addObject("message", message);
 		return result;
 	}
 

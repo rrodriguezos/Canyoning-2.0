@@ -90,10 +90,10 @@ public class CustomerController extends AbstractController {
 				|| !customerRegisterForm.getAccept()) {
 			result = createEditModelAndView(customerRegisterForm);
 			if (!verificarContrasenas) {
-				result.addObject("message2", "register.commit.password");
+				result.addObject("message", "register.commit.password");
 			}
 			if (!customerRegisterForm.getAccept()) {
-				result.addObject("message2", "register.commit.condition");
+				result.addObject("message", "register.commit.condition");
 			}
 		} else {
 			try {
@@ -105,10 +105,10 @@ public class CustomerController extends AbstractController {
 				result.addObject("customerRegisterForm", customerRegisterForm);
 
 				if (oops instanceof DataIntegrityViolationException) {
-					result.addObject("message2",
+					result.addObject("message",
 							"register.commit.duplicatedUsername");
 				} else {
-					result.addObject("message2", "register.commit.error");
+					result.addObject("message", "register.commit.error");
 				}
 			}
 		}
@@ -150,10 +150,10 @@ public class CustomerController extends AbstractController {
 	// result = new ModelAndView("customer/edit");
 	// result.addObject("customerRegisterForm", customerRegisterForm);
 	// if (!verificarContrasenas) {
-	// result.addObject("message2", "register.commit.password");
+	// result.addObject("message", "register.commit.password");
 	// }
 	// if (!contrasActual) {
-	// result.addObject("message2", "register.commit.passwordPast");
+	// result.addObject("message", "register.commit.passwordPast");
 	// }
 	// } else {
 	// try {
@@ -162,7 +162,7 @@ public class CustomerController extends AbstractController {
 	// } catch (Throwable oops) {
 	// result = new ModelAndView("customer/edit");
 	// result.addObject("customerRegisterForm", customerRegisterForm);
-	// result.addObject("message2", "register.commit.error");
+	// result.addObject("message", "register.commit.error");
 	// }
 	// }
 	//
@@ -206,7 +206,7 @@ public class CustomerController extends AbstractController {
 		result = new ModelAndView("customer/register");
 
 		result.addObject("customer", customerForm);
-		result.addObject("message2", message);
+		result.addObject("message", message);
 		return result;
 	}
 }

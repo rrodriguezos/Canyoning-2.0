@@ -98,7 +98,7 @@ public class OrganiserAboutController extends AbstractController {
 
 				result = new ModelAndView("about/organiser/edit");
 				result.addObject("about", about);
-				result.addObject("message2", "about.commit.error");
+				result.addObject("message", "about.commit.error");
 			}
 		}
 		return result;

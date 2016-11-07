@@ -42,8 +42,7 @@
 
 		<security:intercept-url pattern="/welcome/index.do" access="permitAll" />
 		<security:intercept-url pattern="/welcome/conditions.do" access="permitAll" /> 
-		<security:intercept-url pattern="/user/list.do" access="permitAll" />
-		<security:intercept-url pattern="/user/display.do" access="permitAll" />
+		
 		
 		<security:intercept-url pattern="/canyon/display.do" access="permitAll" /> 
 		<security:intercept-url pattern="/canyon/list.do" access="permitAll" /> 
@@ -53,7 +52,9 @@
 		<security:intercept-url pattern="/activity/display.do" access="permitAll" />
 		<security:intercept-url pattern="/activity/listByCanyon.do" access="permitAll" />
 			
-		
+		<security:intercept-url pattern="/kayak/display.do" access="permitAll" />
+		<security:intercept-url pattern="/cord/display.do" access="permitAll" />
+		<security:intercept-url pattern="/wetsuit/display.do" access="permitAll" />
 		
 		<security:intercept-url pattern="/activity/navigateByActivitytype.do" access="permitAll" /> 
   		<security:intercept-url pattern="/canyon/listByActivity.do" access="permitAll" /> 
@@ -72,8 +73,6 @@
 		
 		<security:intercept-url pattern="/dashboard/administrator/list.do" access="hasRole('ADMINISTRATOR')" /> 
 		
-		<security:intercept-url pattern="/comment/administrator/appropriated.do" access="hasRole('ADMINISTRATOR')" /> 
-		<security:intercept-url pattern="/activity/administrator/appropriated.do" access="hasRole('ADMINISTRATOR')" /> 
 		
 		
 		
@@ -102,6 +101,10 @@
 				<security:intercept-url pattern="/request/list.do" access="hasRole('ORGANISER')" />
 				<security:intercept-url pattern="/request/organiser/accept.do" access="hasRole('ORGANISER')" />
 				<security:intercept-url pattern="/request/organiser/reject.do" access="hasRole('ORGANISER')" />
+				<security:intercept-url pattern="/pieceEquipment/organiser/list.do" access="hasRole('ORGANISER')" />
+				<security:intercept-url pattern="/kayak/organiser/**" access="hasRole('ORGANISER')" />
+				<security:intercept-url pattern="/wetsuit/organiser/**" access="hasRole('ORGANISER')" />
+				<security:intercept-url pattern="/cord/organiser/**" access="hasRole('ORGANISER')" />
 				<security:intercept-url pattern="/activity/listByRequest.do" access="isAuthenticated()" />
 						<security:intercept-url pattern="/learningMaterial/list.do" access="isAuthenticated()" />
 				<security:intercept-url pattern="/learningMaterial/display.do" access="isAuthenticated()" />

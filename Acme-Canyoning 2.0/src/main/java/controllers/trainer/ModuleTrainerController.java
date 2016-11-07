@@ -66,12 +66,12 @@ public class ModuleTrainerController extends AbstractController {
 				moduleService.save(module);
 				result = new ModelAndView("redirect:/module/list.do?courseId="
 						+ module.getCourse().getId());
-				redir.addFlashAttribute("message2", "module.commit.ok");
+				redir.addFlashAttribute("message", "module.commit.ok");
 
 			} catch (Throwable oops) {
 				result = createEditModelAndView(module);
 
-				result.addObject("message2", "module.commit.error");
+				result.addObject("message", "module.commit.error");
 			}
 		}
 
@@ -109,7 +109,7 @@ public class ModuleTrainerController extends AbstractController {
 		result = new ModelAndView("module/create");
 
 		result.addObject("module", module);
-		result.addObject("message2", message);
+		result.addObject("message", message);
 
 		return result;
 	}

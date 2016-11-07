@@ -88,7 +88,7 @@ public class CourseTrainerController extends AbstractController {
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(course);
 
-			result.addObject("message2", "course.commit.error");
+			result.addObject("message", "course.commit.error");
 
 		} else {
 			try {
@@ -140,7 +140,7 @@ public class CourseTrainerController extends AbstractController {
 
 		result = new ModelAndView("course/trainer/edit");
 		result.addObject("course", course);
-		result.addObject("message2", message);
+		result.addObject("message", message);
 
 		return result;
 	}

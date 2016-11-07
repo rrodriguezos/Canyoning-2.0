@@ -81,6 +81,55 @@
 	<jstl:out value="${averageTimeRemainWaitingList}"></jstl:out> <spring:message code="administrator.dashboard.days" />
 </p>
 
+<!-- B -->
+<!-- The total number of kayaks, cords, and wetsuits that the organisers have registered -->
+<spring:message code="administrator.dashboard.7" />
+<br>
+<spring:message code="administrator.dashboard.kayaksNumber" />
+<p>
+	<jstl:out value="${totalNumberKayaks}"></jstl:out>
+</p>
+<br>
+<spring:message code="administrator.dashboard.cordsNumber" />
+<p>
+	<jstl:out value="${totalNumberCords}"></jstl:out>
+</p>
+<br>
+<spring:message code="administrator.dashboard.wetsuitsNumber" />
+<p>
+	<jstl:out value="${totalNumberWetsuits}"></jstl:out>
+</p>
+<br>
+<br>
+
+<!-- The average number of pieces of equipment required per activity. -->
+<spring:message code="administrator.dashboard.8" />
+<p>
+	<jstl:out value="${averagePiecesPerActivity}"></jstl:out>
+</p>
+<br>
+<br>
+<!-- The average number of kayaks per activity. -->
+<spring:message code="administrator.dashboard.9" />
+<p>
+	<jstl:out value="${averageKayaksByActivity}"></jstl:out>
+</p>
+<br>
+<br>
+<!-- The average number of cords per activity. -->
+<spring:message code="administrator.dashboard.10" />
+<p>
+	<jstl:out value="${averageCordsByActivity}"></jstl:out>
+</p>
+<br>
+<br>
+<!-- The average number of wetsuits per activity.. -->
+<spring:message code="administrator.dashboard.11" />
+<p>
+	<jstl:out value="${averageWetsuitsByActivity}"></jstl:out>
+</p>
+<br>
+<br>
 
 
 

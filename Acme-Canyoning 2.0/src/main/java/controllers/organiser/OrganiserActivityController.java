@@ -15,11 +15,13 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ActivityService;
 import services.CanyonService;
 import services.OrganiserService;
-import services.RequestService;
+import services.PieceEquipmentService;
 import controllers.AbstractController;
 import domain.Activity;
 import domain.Canyon;
 import domain.Organiser;
+import domain.PieceEquipment;
+import forms.ActivityForm;
 
 @Controller
 @RequestMapping("/activity/organiser")
@@ -32,6 +34,8 @@ public class OrganiserActivityController extends AbstractController {
 	private ActivityService activityService;
 	@Autowired
 	private CanyonService canyonService;
+	@Autowired
+	private PieceEquipmentService pieceEquipmentService;
 
 	// Constructors -----------------------------------------------------------
 	public OrganiserActivityController() {
@@ -58,17 +62,77 @@ public class OrganiserActivityController extends AbstractController {
 	// Create---------------------------------------------------------------
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
+
+		ActivityForm af = new ActivityForm();
+		ModelAndView result = createEditModelAndViewForm(af);
+		Activity activity;
+		Collection<Canyon> canyons;
+		Collection<PieceEquipment> pieceEquipments;
+
+		activity = activityService.create();
+
+		canyons = canyonService.findAll();
+		pieceEquipments = pieceEquipmentService.findAll();
+
+		//
+		// result = new ModelAndView("activity/create");
+		// result.addObject("activityForm", result);
+		result.addObject("canyons", canyons);
+		result.addObject("pieceEquipments", pieceEquipments);
+
+		return result;
+	}
+
+	// Edit
+	// -------------------------------------------------------------------------
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam int activityId) {
 		ModelAndView result;
 		Activity activity;
 		Collection<Canyon> canyons;
 
-		activity = activityService.create();
+		activity = activityService.findOne(activityId);
 		canyons = canyonService.findAll();
 
-		result = new ModelAndView("activity/create");
+		result = new ModelAndView("activity/edit");
 		result.addObject("activity", activity);
 		result.addObject("canyons", canyons);
 
+		return result;
+	}
+
+	// Save -------------------------------------------------------------------
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid ActivityForm af, BindingResult binding) {
+		ModelAndView result;
+		Collection<Canyon> canyons;
+		Collection<PieceEquipment> pieceEquipments;
+		Activity activity;
+		canyons = canyonService.findAll();
+		pieceEquipments = pieceEquipmentService.findAll();
+		if (binding.hasErrors()) {
+			System.out.print(binding.getObjectName());
+			System.out.print(binding.getClass());
+			System.out.print(binding.getFieldError());
+			System.out.print(binding.getGlobalError());
+			canyons = canyonService.findAll();
+
+			result = createEditModelAndViewForm(af);
+			result.addObject("canyons", canyons);
+		} else {
+			try {
+				activity = activityService.recontruct(af);
+				activityService.save(activity);
+				result = new ModelAndView(
+						"redirect:/activity/organiser/mylist.do");
+			} catch (Throwable oops) {
+				canyons = canyonService.findAll();
+				result = new ModelAndView("activity/edit");
+				result.addObject("canyons", canyons);
+				result.addObject("pieceEquipments", pieceEquipments);
+				result.addObject("message", "activity.commit.error");
+			}
+		}
 		return result;
 	}
 
@@ -105,15 +169,17 @@ public class OrganiserActivityController extends AbstractController {
 		} else {
 			try {
 				organiser = organiserService.findByPrincipal();
-				activityService.reinstantiateMomentActivity(activity, organiser);
-				result = new ModelAndView("redirect:/activity/organiser/mylist.do");
+				activityService
+						.reinstantiateMomentActivity(activity, organiser);
+				result = new ModelAndView(
+						"redirect:/activity/organiser/mylist.do");
 			} catch (Throwable oops) {
 				canyons = canyonService.findAll();
 
 				result = new ModelAndView("activity/organiser/reinstantiate");
 				result.addObject("activity", activity);
 				result.addObject("canyons", canyons);
-				result.addObject("message2", "activity.commit.error");
+				result.addObject("message", "activity.commit.error");
 			}
 		}
 		return result;
@@ -121,22 +187,22 @@ public class OrganiserActivityController extends AbstractController {
 
 	// reinstantiate
 	// Activity---------------------------------------------------------------------
-//	@RequestMapping(value = "/reinstantiate", method = RequestMethod.GET)
-//	public ModelAndView reinstantiate(@RequestParam int activityId) {
-//		ModelAndView result;
-//		Activity activity;
-//		Organiser organiser;
-//		
-//		activity = activityService.findOne(activityId);
-//		organiser = organiserService.findByPrincipal();
-//
-//		activityService.reinstantiateMomentActivity(activity, organiser);
-//
-//		result = new ModelAndView("redirect:/activity/organiser/mylist.do");
-//		result.addObject("requestUri", "/activity/organiser/mylist.do");
-//
-//		return result;
-//	}
+	// @RequestMapping(value = "/reinstantiate", method = RequestMethod.GET)
+	// public ModelAndView reinstantiate(@RequestParam int activityId) {
+	// ModelAndView result;
+	// Activity activity;
+	// Organiser organiser;
+	//
+	// activity = activityService.findOne(activityId);
+	// organiser = organiserService.findByPrincipal();
+	//
+	// activityService.reinstantiateMomentActivity(activity, organiser);
+	//
+	// result = new ModelAndView("redirect:/activity/organiser/mylist.do");
+	// result.addObject("requestUri", "/activity/organiser/mylist.do");
+	//
+	// return result;
+	// }
 
 	// Ancillary methods
 	// --------------------------------------------------------
@@ -149,13 +215,31 @@ public class OrganiserActivityController extends AbstractController {
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(Activity activity, String message) {
+	protected ModelAndView createEditModelAndView(Activity activity,
+			String message) {
 		ModelAndView result;
 
 		result = new ModelAndView("activity/organiser/reinstantiate");
 		result.addObject("activity", activity);
-		result.addObject("message2", message);
+		result.addObject("message", message);
 
 		return result;
+	}
+
+	protected ModelAndView createEditModelAndViewForm(ActivityForm af) {
+		ModelAndView res = createEditModelAndViewForm(af, null);
+		return res;
+	}
+
+	protected ModelAndView createEditModelAndViewForm(ActivityForm af,
+			String message) {
+		ModelAndView res = new ModelAndView("activity/create");
+		Collection<PieceEquipment> pieceEquipments = pieceEquipmentService
+				.findAll();
+		res.addObject("activityForm", af);
+		res.addObject("pieceEquipments", pieceEquipments);
+
+		res.addObject("message", message);
+		return res;
 	}
 }

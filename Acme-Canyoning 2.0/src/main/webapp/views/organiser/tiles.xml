@@ -24,6 +24,11 @@
 		<put-attribute name="title" value="Organiser Details" />
 		<put-attribute name="body" value="/views/organiser/display.jsp" />
 	</definition>
+	
+	<definition name="pieceEquipment/organiser/list" extends="master.page">
+		<put-attribute name="title" value="My Pieces of Equipment" />
+		<put-attribute name="body" value="/views/organiser/MyPieceEquipments.jsp" />
+	</definition>
 
 
 </tiles-definitions>

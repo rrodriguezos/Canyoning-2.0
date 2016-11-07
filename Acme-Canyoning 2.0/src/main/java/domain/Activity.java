@@ -8,6 +8,7 @@ import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Index;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -117,13 +118,25 @@ public class Activity extends Commentable {
 	private Collection<Request> requests;
 
 	@Valid
-	@OneToMany(cascade=CascadeType.ALL,mappedBy = "activity")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "activity")
 	public Collection<Request> getRequests() {
 		return requests;
 	}
 
 	public void setRequests(Collection<Request> requests) {
 		this.requests = requests;
+	}
+
+	private Collection<PieceEquipment> pieceEquipments;
+
+	@Valid
+	@ManyToMany
+	public Collection<PieceEquipment> getPieceEquipments() {
+		return pieceEquipments;
+	}
+
+	public void setPieceEquipments(Collection<PieceEquipment> pieceEquipments) {
+		this.pieceEquipments = pieceEquipments;
 	}
 
 }

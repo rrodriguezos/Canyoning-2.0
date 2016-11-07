@@ -9,105 +9,164 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActivityService;
+import services.CordService;
 import services.CourseService;
 import services.CustomerService;
+import services.KayakService;
 import services.LearningMaterialService;
 import services.ModuleService;
 import services.OrganiserService;
+import services.PieceEquipmentService;
 import services.RequestService;
 import services.TrainerService;
+import services.WetsuitService;
 import controllers.AbstractController;
 import domain.Activity;
-import domain.Customer;
 import domain.Trainer;
 
 @Controller
 @RequestMapping("/dashboard/administrator")
 public class DashboardAdministratorController extends AbstractController {
-	
+
 	// Services -----------------------
-		@Autowired
-		private CustomerService customerService;
-		@Autowired
-		private OrganiserService organiserService;
-		@Autowired
-		private ActivityService activityService;
-		@Autowired
-		private RequestService requestService;
-		
-		@Autowired
-		private TrainerService trainerService;
-		
-		@Autowired
-		private CourseService courseService;
-		
-		@Autowired
-		private ModuleService moduleService;
-		@Autowired
-		private LearningMaterialService learningMaterialService;
+	@Autowired
+	private CustomerService customerService;
+	@Autowired
+	private OrganiserService organiserService;
+	@Autowired
+	private ActivityService activityService;
+	@Autowired
+	private RequestService requestService;
 
+	@Autowired
+	private TrainerService trainerService;
 
-		// Constructor --------------------
-		public DashboardAdministratorController() {
-			super();
-		}
+	@Autowired
+	private CourseService courseService;
 
-		// Listing ------------------------
-		@RequestMapping(value = "/list", method = RequestMethod.GET)
-		public ModelAndView list() {
-			ModelAndView result;
+	@Autowired
+	private ModuleService moduleService;
+	@Autowired
+	private LearningMaterialService learningMaterialService;
 
-			// The average number of activities per organiser.
-			Double averageActivitiesPerOrganiser = activityService.averageNumberOfActivitiesByOrganisers();
-			// The average number of customers in the waiting lists.
-			Double averageCustomersInWaitingList = customerService.averageCustomersInWaitingList();
-			//The average number of seats offered in the activities that are going to be organised in the forthcoming three months.
-			Double averageSeatsOrganisedThreeMonths = activityService.averageSeatsOrganisedThreeMonths();
-			// 10% more than the average.
-			Collection<Activity> activity10MoreAverage = activityService.findWithMoreTenPercentOfSeatsAvg();
- 			// 10% less than the average.
-			Collection<Activity> activity10LessAverage = activityService.findWithLessTenPercentOfSeatsAvg();
-			//The average of the time that a customer remains in a waiting list.
-			Double averageTimeRemainWaitingList = customerService.averageTimeRemainWaitingList();
-			//The standard deviation of the time that a customer remains in a waiting list.
-			Double stdTimeRemainWaitingList = customerService.stdTimeRemainWaitingList();
-			
-			
-			result = new ModelAndView("administrator/dashboard");
-			result.addObject("averageActivitiesPerOrganiser", averageActivitiesPerOrganiser);
-			result.addObject("averageCustomersInWaitingList", averageCustomersInWaitingList);
-			result.addObject("averageSeatsOrganisedThreeMonths", averageSeatsOrganisedThreeMonths);
+	@Autowired
+	private KayakService kayakService;
 
-			result.addObject("activity10MoreAverage", activity10MoreAverage);
-			result.addObject("activity10LessAverage", activity10LessAverage);
-			result.addObject("averageTimeRemainWaitingList", averageTimeRemainWaitingList);
-			result.addObject("stdTimeRemainWaitingList", stdTimeRemainWaitingList);
+	@Autowired
+	private CordService cordService;
 
-			return result;
-		}
-		
-		@RequestMapping(value = "/list2", method = RequestMethod.GET)
-		public ModelAndView list2() {
-			ModelAndView result;
-			
-			//----------------------ACME CANYONING 2.0--------------------------
-			//The average number of courses per trainer.
-			Double averageOfCoursesByTrainer = courseService.averageOfCoursesByTrainer();
-			//The trainers who teach at least 10% courses above or below the average.
-			Collection<Trainer> findTrainersLeastTenAverage = trainerService.findTrainersLeastTenAverage();
-			//The average number of modules per course.
-			Double averageOfModulesByCourse = moduleService.averageOfModulesByCourse();
-			//The average number of learning materials per course.
-			Double averageOfLearningMaterialByCourse = learningMaterialService.averageOfLearningMaterialByCourse();
-			
-			result = new ModelAndView("administrator/dashboard-2");
-			result.addObject("averageOfCoursesByTrainer", averageOfCoursesByTrainer);
-			result.addObject("findTrainersLeastTenAverage", findTrainersLeastTenAverage);
-			result.addObject("averageOfModulesByCourse", averageOfModulesByCourse);
-			result.addObject("averageOfLearningMaterialByCourse", averageOfLearningMaterialByCourse);
-			
-			
-			return result;
-		}
+	@Autowired
+	private WetsuitService wetsuitService;
+
+	@Autowired
+	private PieceEquipmentService pieceEquipmentService;
+
+	// Constructor --------------------
+	public DashboardAdministratorController() {
+		super();
+	}
+
+	// Listing ------------------------
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list() {
+		ModelAndView result;
+		// --------C-------------
+		// The average number of activities per organiser.
+		Double averageActivitiesPerOrganiser = activityService
+				.averageNumberOfActivitiesByOrganisers();
+		// The average number of customers in the waiting lists.
+		Double averageCustomersInWaitingList = customerService
+				.averageCustomersInWaitingList();
+		// The average number of seats offered in the activities that are going
+		// to be organised in the forthcoming three months.
+		Double averageSeatsOrganisedThreeMonths = activityService
+				.averageSeatsOrganisedThreeMonths();
+		// 10% more than the average.
+		Collection<Activity> activity10MoreAverage = activityService
+				.findWithMoreTenPercentOfSeatsAvg();
+		// 10% less than the average.
+		Collection<Activity> activity10LessAverage = activityService
+				.findWithLessTenPercentOfSeatsAvg();
+		// The average of the time that a customer remains in a waiting list.
+		Double averageTimeRemainWaitingList = customerService
+				.averageTimeRemainWaitingList();
+		// The standard deviation of the time that a customer remains in a
+		// waiting list.
+		Double stdTimeRemainWaitingList = customerService
+				.stdTimeRemainWaitingList();
+		// --------B-------------
+		// The total number of kayaks, cords, and wetsuits that the organisers
+		// have registered.
+		Integer totalNumberKayaks = kayakService.numberTotalKayaks();
+		Integer totalNumberCords = cordService.numberTotalCords();
+		Integer totalNumberWetsuits = wetsuitService.numberTotalWetsuits();
+
+		// The average number of pieces of equipment required per activity.
+		Double averagePiecesPerActivity = pieceEquipmentService
+				.averagePiecesPerActivity();
+
+		// The average number of kayaks per activity.
+		Double averageKayaksByActivity = kayakService.averageKayaksByActivity();
+
+		// The average number of cords per activity.
+		Double averageCordsByActivity = cordService.averageCordsByActivity();
+
+		// The average number of wetsuits per activity.
+		Double averageWetsuitsByActivity = wetsuitService
+				.averageWetsuitsByActivity();
+
+		result = new ModelAndView("administrator/dashboard");
+		result.addObject("averageActivitiesPerOrganiser",
+				averageActivitiesPerOrganiser);
+		result.addObject("averageCustomersInWaitingList",
+				averageCustomersInWaitingList);
+		result.addObject("averageSeatsOrganisedThreeMonths",
+				averageSeatsOrganisedThreeMonths);
+
+		result.addObject("activity10MoreAverage", activity10MoreAverage);
+		result.addObject("activity10LessAverage", activity10LessAverage);
+		result.addObject("averageTimeRemainWaitingList",
+				averageTimeRemainWaitingList);
+		result.addObject("stdTimeRemainWaitingList", stdTimeRemainWaitingList);
+		result.addObject("totalNumberKayaks", totalNumberKayaks);
+		result.addObject("totalNumberCords", totalNumberCords);
+		result.addObject("totalNumberWetsuits", totalNumberWetsuits);
+		result.addObject("averagePiecesPerActivity", averagePiecesPerActivity);
+		result.addObject("averageKayaksByActivity", averageKayaksByActivity);
+		result.addObject("averageCordsByActivity", averageCordsByActivity);
+		result.addObject("averageWetsuitsByActivity", averageWetsuitsByActivity);
+
+		return result;
+	}
+
+	@RequestMapping(value = "/list2", method = RequestMethod.GET)
+	public ModelAndView list2() {
+		ModelAndView result;
+
+		// ----------------------ACME CANYONING 2.0--------------------------
+		// The average number of courses per trainer.
+		Double averageOfCoursesByTrainer = courseService
+				.averageOfCoursesByTrainer();
+		// The trainers who teach at least 10% courses above or below the
+		// average.
+		Collection<Trainer> findTrainersLeastTenAverage = trainerService
+				.findTrainersLeastTenAverage();
+		// The average number of modules per course.
+		Double averageOfModulesByCourse = moduleService
+				.averageOfModulesByCourse();
+		// The average number of learning materials per course.
+		Double averageOfLearningMaterialByCourse = learningMaterialService
+				.averageOfLearningMaterialByCourse();
+
+		result = new ModelAndView("administrator/dashboard-2");
+		result.addObject("averageOfCoursesByTrainer", averageOfCoursesByTrainer);
+		result.addObject("findTrainersLeastTenAverage",
+				findTrainersLeastTenAverage);
+		result.addObject("averageOfModulesByCourse", averageOfModulesByCourse);
+		result.addObject("averageOfLearningMaterialByCourse",
+				averageOfLearningMaterialByCourse);
+
+		return result;
+	}
 
 }

@@ -97,7 +97,14 @@
 										code="master.page.organiser.createActivity" /></a></li>
 										<li><a href="about/organiser/list.do"><spring:message
 										code="master.page.organiser.about" /></a></li>
-
+								<li><a href="pieceEquipment/organiser/list.do"><spring:message
+										code="master.page.organiser.pieceEquipment" /></a></li>
+										<li><a href="kayak/organiser/create.do"><spring:message
+										code="master.page.user.createKayak" /></a></li>
+										<li><a href="wetsuit/organiser/create.do"><spring:message
+										code="master.page.user.createWetsuit" /></a></li>
+										<li><a href="cord/organiser/create.do"><spring:message
+										code="master.page.user.createCord" /></a></li>
 						</security:authorize>
 						
 						<security:authorize access="hasRole('TRAINER')">

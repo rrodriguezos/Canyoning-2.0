@@ -21,11 +21,8 @@
 
 <security:authorize access="hasRole('ORGANISER')">
 
-	<form:form action="activity/organiser/edit.do" modelAttribute="activity">
-		<form:hidden path="id" />
-		<form:hidden path="version" />
-		<form:hidden path="organiser" />
-		<form:hidden path="comments" />
+	<form:form action="activity/organiser/edit.do"
+		modelAttribute="activityForm">
 
 
 		<acme:textbox code="activity.title" path="title" />
@@ -33,21 +30,30 @@
 		<acme:textbox code="activity.description" path="description" />
 
 		<acme:textbox code="activity.numberSeats" path="numberSeats" />
-		
+
 		<acme:date code="activity.moment" path="moment" readonly="false" />
-		
+
 		<spring:message code="activity.canyon" />
 		<form:select path="canyon">
-			<form:options items="${canyons}" itemLabel="name"
-				itemValue="id" />
+			<form:options items="${canyons}" itemLabel="name" itemValue="id" />
 		</form:select>
 		<form:errors cssClass="error" path="canyon" />
 		<br>
 
+		<spring:message code="activity.pieceEquipments" />
+		<fieldset>
+			<acme:multiCheckbox path="pieceEquipments" items="${pieceEquipments}"
+				itemLabel="description" delimiter="</b>" />
+			<form:errors cssClass="error" path="pieceEquipments" />
+			<br>
+		</fieldset>
+
 
 		<input type="submit" name="save"
 			value="<spring:message code="activity.save" />" />
-		<acme:cancel url="activity/mylist.do" code="activity.cancel" />
+		<input type="button" name="cancel"
+			value="<spring:message code="activity.cancel"/>"
+			onclick="javascript: window.history.back()" />
 
 	</form:form>
 

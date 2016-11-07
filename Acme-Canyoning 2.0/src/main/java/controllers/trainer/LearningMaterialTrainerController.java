@@ -66,12 +66,12 @@ public class LearningMaterialTrainerController extends AbstractController {
 				result = new ModelAndView(
 						"redirect:/learningMaterial/list.do?moduleId="
 								+ learningMaterial.getModule().getId());
-				redir.addFlashAttribute("message2",
+				redir.addFlashAttribute("message",
 						"learningMaterial.commit.ok");
 
 			} catch (Throwable oops) {
 				result = createEditModelAndView(learningMaterial);
-				result.addObject("message2", "learningMaterial.commit.error");
+				result.addObject("message", "learningMaterial.commit.error");
 			}
 		}
 
@@ -113,7 +113,7 @@ public class LearningMaterialTrainerController extends AbstractController {
 		result = new ModelAndView("learningMaterial/create");
 
 		result.addObject("learningMaterial", learningMaterial);
-		result.addObject("message2", message);
+		result.addObject("message", message);
 
 		return result;
 	}

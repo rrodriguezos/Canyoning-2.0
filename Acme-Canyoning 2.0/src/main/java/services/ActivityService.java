@@ -19,8 +19,10 @@ import domain.Activity;
 import domain.Actor;
 import domain.Comment;
 import domain.Organiser;
+import domain.PieceEquipment;
 import domain.Request;
 import domain.Request.RequestState;
+import forms.ActivityForm;
 
 @Service
 @Transactional
@@ -53,15 +55,20 @@ public class ActivityService {
 	// Simple CRUD methods--------------------
 
 	public Activity create() {
+		checkPrincipalOrganiser();
 		Activity result;
 		Organiser organiser;
 		Collection<Comment> comments;
 		Collection<Request> requests;
+		Collection<PieceEquipment> piecequipments;
 
 		result = new Activity();
 
 		organiser = organiserService.findByPrincipal();
 		result.setOrganiser(organiser);
+
+		piecequipments = new ArrayList<PieceEquipment>();
+		result.setPieceEquipments(piecequipments);
 
 		comments = new ArrayList<Comment>();
 		result.setComments(comments);
@@ -292,7 +299,7 @@ public class ActivityService {
 
 	// The average number of seats offered in the activities that are going to
 	// be organised in the forthcoming three months.
-	 public Double averageSeatsOrganisedThreeMonths() {
+	public Double averageSeatsOrganisedThreeMonths() {
 		UserAccount loginNow = LoginService.getPrincipal();
 		administratorService.isAdmin(loginNow);
 		// Double seatsAvaliables;
@@ -316,6 +323,7 @@ public class ActivityService {
 
 		return activitiesOrganizedThreeMonths;
 	}
+
 	// The activities that offer at least 10% more seats than the average.
 	public Collection<Activity> findWithMoreTenPercentOfSeatsAvg() {
 		UserAccount loginNow = LoginService.getPrincipal();
@@ -341,4 +349,22 @@ public class ActivityService {
 
 		return result;
 	}
+
+	public Activity recontruct(ActivityForm af) {
+		Activity res = create();
+
+		Organiser organier = organiserService.findByPrincipal();
+		res.setComments(new ArrayList<Comment>());
+		res.setRequests(new ArrayList<Request>());
+		res.setPieceEquipments(new ArrayList<PieceEquipment>());
+		res.setCanyon(af.getCanyon());
+		res.setOrganiser(organier);
+		res.setTitle(af.getTitle());
+		res.setDescription(af.getDescription());
+		res.setPieceEquipments(af.getPieceEquipments());
+		res.setNumberSeats(af.getNumberSeats());
+		res.setMoment(af.getMoment());
+		return res;
+	}
+
 }

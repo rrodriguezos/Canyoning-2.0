@@ -63,6 +63,79 @@
 
 </div>
 
+<fieldset>
+	<legend align="left">
+		<spring:message code="activity.pieceEquipments" />
+	</legend>
+
+	<h2>
+		<spring:message code="activity.kayaks" />
+	</h2>
+	<display:table name="kayaks" id="row" pagesize="5"
+		requestURI="organiser/display.do" class="displaytag">
+
+		<spring:message code="pieceEquipments.name" var="name" />
+		<display:column title="${name}" property="name" />
+
+		<spring:message code="pieceEquipments.model" var="model" />
+		<display:column title="${model}">
+			<img height="150px" src="<jstl:out value="${row.model}" />">
+		</display:column>
+
+		<spring:message code="pieceEquipments.display" var="display" />
+		<display:column title="${display}">
+			<input type="button" value="<spring:message code="kayak.display" />"
+				onclick="javascript: window.location.assign('kayak/display.do?kayakId=${row.id}')" />
+		</display:column>
+
+	</display:table>
+
+	<h2>
+		<spring:message code="activity.wetsuits" />
+	</h2>
+	<display:table name="wetsuits" id="row" pagesize="5"
+		requestURI="organiser/display.do" class="displaytag">
+
+		<spring:message code="pieceEquipments.name" var="name" />
+		<display:column title="${name}" property="name" />
+
+		<spring:message code="pieceEquipments.model" var="model" />
+		<display:column title="${model}">
+			<img height="150px" src="<jstl:out value="${row.model}" />">
+		</display:column>
+
+		<spring:message code="pieceEquipments.display" var="display" />
+		<display:column title="${display}">
+			<input type="button"
+				value="<spring:message code="wetsuit.display" />"
+				onclick="javascript: window.location.assign('wetsuit/display.do?wetsuitId=${row.id}')" />
+		</display:column>
+
+	</display:table>
+
+	<h2>
+		<spring:message code="activity.cords" />
+	</h2>
+	<display:table name="cords" id="row" pagesize="5"
+		requestURI="organiser/display.do" class="displaytag">
+
+		<spring:message code="pieceEquipments.name" var="name" />
+		<display:column title="${name}" property="name" />
+
+		<spring:message code="pieceEquipments.model" var="model" />
+		<display:column title="${model}">
+			<img height="150px" src="<jstl:out value="${row.model}" />">
+		</display:column>
+
+		<spring:message code="pieceEquipments.display" var="display" />
+		<display:column title="${display}">
+			<input type="button" value="<spring:message code="cord.display" />"
+				onclick="javascript: window.location.assign('cord/display.do?cordId=${row.id}')" />
+		</display:column>
+
+	</display:table>
+
+</fieldset>
 
 <h2>
 	<spring:message code="activity.comments" />

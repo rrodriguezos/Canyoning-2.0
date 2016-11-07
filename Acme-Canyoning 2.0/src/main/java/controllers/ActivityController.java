@@ -13,16 +13,22 @@ import services.ActivityService;
 import services.AdministratorService;
 import services.CanyonService;
 import services.CommentService;
+import services.CordService;
 import services.CustomerService;
+import services.KayakService;
 import services.OrganiserService;
 import services.RequestService;
+import services.WetsuitService;
 import domain.Activity;
 import domain.Administrator;
 import domain.Canyon;
 import domain.Comment;
+import domain.Cord;
 import domain.Customer;
+import domain.Kayak;
 import domain.Organiser;
 import domain.Request;
+import domain.Wetsuit;
 
 @Controller
 @RequestMapping("/activity")
@@ -43,6 +49,12 @@ public class ActivityController extends AbstractController {
 	private RequestService requestService;
 	@Autowired
 	private OrganiserService organiserService;
+	@Autowired
+	private KayakService kayakService;
+	@Autowired
+	private WetsuitService wetsuitService;
+	@Autowired
+	private CordService cordService;
 
 	// Constructors -----------------------------------------------------------
 	public ActivityController() {
@@ -75,6 +87,9 @@ public class ActivityController extends AbstractController {
 		Boolean myActivity;
 		Boolean myActivityOrganiser;
 		Boolean logeado;
+		Collection<Kayak> kayaks;
+		Collection<Wetsuit> wetsuits;
+		Collection<Cord> cords;
 		activity = activityService.findOne(activityId);
 		myActivityOrganiser = false;
 		myActivity = false;
@@ -109,6 +124,10 @@ public class ActivityController extends AbstractController {
 			logeado = false;
 		}
 
+		wetsuits = wetsuitService.wetsuitByActivity(activityId);
+		kayaks = kayakService.kayaksByActivity(activityId);
+		cords = cordService.cordsByActivity(activityId);
+
 		comments = commentService.findCommentsByCommentableId(activityId);
 
 		activity = activityService.findOne(activityId);
@@ -120,6 +139,10 @@ public class ActivityController extends AbstractController {
 		result.addObject("myActivityOrganiser", myActivityOrganiser);
 		result.addObject("logeado", logeado);
 		result.addObject("comments", comments);
+		result.addObject("kayaks", kayaks);
+		result.addObject("wetsuits", wetsuits);
+		result.addObject("cords", cords);
+
 		return result;
 	}
 

@@ -94,7 +94,7 @@ public class AdministratorCanyonController extends AbstractController {
 
 				result = new ModelAndView("canyon/edit");
 				result.addObject("canyon", canyon);
-				result.addObject("message2", "canyon.commit.error");
+				result.addObject("message", "canyon.commit.error");
 			}
 		}
 		return result;
@@ -135,7 +135,7 @@ public class AdministratorCanyonController extends AbstractController {
 
 			result = new ModelAndView("canyon/edit");
 			result.addObject("canyon", canyon);
-			result.addObject("message2", message);
+			result.addObject("message", message);
 
 			return result;
 		}

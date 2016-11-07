@@ -25,6 +25,7 @@ public class Organiser extends Actor {
 	// Relationships --------------------------------------------------------
 	private Collection<Activity> activities;
 	private OrganiserComment organiserComment;
+	private Collection<PieceEquipment> pieceEquipments;
 
 	@Valid
 	@NotNull
@@ -58,6 +59,17 @@ public class Organiser extends Actor {
 
 	public void setAbout(About about) {
 		this.about = about;
+	}
+	
+	@Valid
+	@NotNull
+	@OneToMany(mappedBy = "organiser")
+	public Collection<PieceEquipment> getPieceEquipments() {
+		return pieceEquipments;
+	}
+
+	public void setPieceEquipments(Collection<PieceEquipment> pieceEquipments) {
+		this.pieceEquipments = pieceEquipments;
 	}
 
 }

@@ -26,6 +26,18 @@
 		<bean class="converters.StringToModuleConverter" />
 		<bean class="converters.ModuleToStringConverter" />
 		
+		<bean class="converters.StringToKayakConverter" />
+		<bean class="converters.KayakToStringConverter" />
+		
+		<bean class="converters.StringToWetsuitConverter" />
+		<bean class="converters.WetsuitToStringConverter" />
+		
+		<bean class="converters.StringToCordConverter" />
+		<bean class="converters.CordToStringConverter" />
+		
+		<bean class="converters.StringToPieceEquipmentConverter" />
+		<bean class="converters.PieceEquipmentToStringConverter" />
+		
 		<bean class="converters.StringToLearningMaterialConverter" />
 		<bean class="converters.LearningMaterialToStringConverter" />
 		

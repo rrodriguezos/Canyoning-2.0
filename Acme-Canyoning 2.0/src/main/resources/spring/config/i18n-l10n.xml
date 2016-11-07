@@ -20,6 +20,9 @@
 		<value>/views/search/messages</value>
 		<value>/views/administrator/messages</value>
 		<value>/views/customer/messages</value>
+		<value>/views/cord/messages</value>		
+		<value>/views/kayak/messages</value>
+		<value>/views/wetsuit/messages</value>
 		<value>/views/trainer/messages</value>
 		<value>/views/course/messages</value>
 		<value>/views/module/messages</value>

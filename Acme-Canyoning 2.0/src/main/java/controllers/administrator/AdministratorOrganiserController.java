@@ -59,7 +59,7 @@ public class AdministratorOrganiserController extends AbstractController {
 		if (binding.hasErrors() || !verificarPass) {
 			result = createEditModelAndView(organiserForm);
 			if (!verificarPass) {
-				result.addObject("message2", "organiser.commit.password");
+				result.addObject("message", "organiser.commit.password");
 			}
 		} else {
 			try {
@@ -69,10 +69,10 @@ public class AdministratorOrganiserController extends AbstractController {
 			} catch (Throwable oops) {
 				result = createEditModelAndView(organiserForm);
 				if (oops instanceof DataIntegrityViolationException) {
-					result.addObject("message2",
+					result.addObject("message",
 							"organiser.commit.duplicatedUsername");
 				} else {
-					result.addObject("message2", "organiser.commit.error");
+					result.addObject("message", "organiser.commit.error");
 				}
 			}
 		}
@@ -126,7 +126,7 @@ public class AdministratorOrganiserController extends AbstractController {
 		result = new ModelAndView("organiser/create");
 
 		result.addObject("organiserForm", organiserForm);
-		result.addObject("message2", message);
+		result.addObject("message", message);
 		return result;
 	}
 }
