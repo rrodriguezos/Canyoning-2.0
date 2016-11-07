@@ -143,6 +143,8 @@ public class CustomerService {
 
 		result.setId(customer.getId());
 		result.setEmail(customer.getEmail());
+		result.setName(customer.getName());
+		result.setSurname(customer.getSurname());
 		result.setPhone(customer.getPhone());
 		result.setUsername(customer.getUserAccount().getUsername());
 		result.setPassword(customer.getUserAccount().getPassword());
@@ -178,7 +180,8 @@ public class CustomerService {
 
 		Assert.isTrue(customerForm.getPassword().equals(
 				customerForm.getConfirmPassword()));
-
+		result.setName(customerForm.getName());
+		result.setSurname(customerForm.getSurname());
 		result.setPhone(customerForm.getPhone());
 		result.setEmail(customerForm.getEmail());
 		if (customerForm.getPassword() != "") {

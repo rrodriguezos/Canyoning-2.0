@@ -15,6 +15,13 @@
 
 <display:table name="customers" id="row" class="displaytag" requestURI="${requestURI}" pagesize="5" keepStatus="true" >
 	
+	<spring:message code="customer.name" var="name" />
+	<display:column title="${name}" property="name" />
+	
+	<spring:message code="customer.surname" var="surname" />
+	<display:column title="${surname}" property="surname" />
+	
+	
 	<spring:message	code="customer.email"  var="email"/>
 	<display:column property="email" title="${name}" sortable="true" />
 	

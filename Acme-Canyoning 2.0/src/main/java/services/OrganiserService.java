@@ -146,7 +146,8 @@ public class OrganiserService {
 		res = create();
 		Assert.isTrue(organiserForm.getPassword().equals(
 				organiserForm.getConfirmPassword()));
-
+		res.setName(organiserForm.getName());
+		res.setSurname(organiserForm.getSurname());
 		res.setPhone(organiserForm.getPhone());
 		res.setEmail(organiserForm.getEmail());
 

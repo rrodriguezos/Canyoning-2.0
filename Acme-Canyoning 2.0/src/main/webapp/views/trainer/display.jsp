@@ -17,7 +17,8 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<acme:jstlOut code="trainer.username" value="${trainer.userAccount.username }"/>
+<acme:jstlOut code="trainer.name" value="${trainer.name }"/>
+<acme:jstlOut code="trainer.surname" value="${trainer.surname }"/>
 <acme:jstlOut code="trainer.email" value="${trainer.email }"/>
 <acme:jstlOut code="trainer.phone" value="${trainer.phone }"/>
 

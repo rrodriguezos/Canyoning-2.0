@@ -11,6 +11,8 @@ import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 public class TrainerForm {
 	private String password;
 	private String confirmPassword;
+	private String name;
+	private String surname;
 	private String username;
 	private String phone;
 	private String email;
@@ -22,6 +24,25 @@ public class TrainerForm {
 	}
 
 	// Getters and Setters........
+	@SafeHtml(whitelistType = WhiteListType.NONE)
+	@NotBlank
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@SafeHtml(whitelistType = WhiteListType.NONE)
+	@NotBlank
+	public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
 
 	@SafeHtml(whitelistType = WhiteListType.NONE)
 	@NotBlank

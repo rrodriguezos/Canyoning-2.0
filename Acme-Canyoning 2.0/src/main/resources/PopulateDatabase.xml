@@ -95,7 +95,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount8" class="security.UserAccount">
 		<property name="username" value="trainer1" />
 		<property name="password" value="4d9a96c8e1650dc161f1adcf5c5082a0" />
@@ -107,7 +107,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount9" class="security.UserAccount">
 		<property name="username" value="trainer2" />
 		<property name="password" value="6662f54a6c5033357408e6839a5c0a05" />
@@ -119,7 +119,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount10" class="security.UserAccount">
 		<property name="username" value="trainer3" />
 		<property name="password" value="72977b63f9bf5a01f30bfe2ca802a3c1" />
@@ -135,6 +135,8 @@
 	<!-- Administrators -->
 
 	<bean class="domain.Administrator" id="administrator">
+		<property value="Chris" name="name" />
+		<property value="Froome" name="surname" />
 		<property value="chrisf@mail.es" name="email" />
 		<property value="+34(732)7216" name="phone" />
 		<property name="userAccount" ref="userAccount1" />
@@ -157,6 +159,8 @@
 	<!-- Organisers -->
 
 	<bean class="domain.Organiser" id="organiser1">
+		<property value="Joan" name="name" />
+		<property value="Purito" name="surname" />
 		<property value="manolo@mail.es" name="email" />
 		<property name="userAccount" ref="userAccount2" />
 		<property name="about" ref="about1" />
@@ -187,6 +191,8 @@
 	</bean>
 
 	<bean class="domain.Organiser" id="organiser2">
+		<property value="Charles" name="name" />
+		<property value="Rodriguez" name="surname" />
 		<property value="charro@gmail.com" name="email" />
 		<property name="userAccount" ref="userAccount3" />
 		<property name="about" ref="about2" />
@@ -217,6 +223,8 @@
 	</bean>
 
 	<bean class="domain.Organiser" id="organiser3">
+		<property value="Álvaro" name="name" />
+		<property value="Morata" name="surname" />
 		<property value="Doming@gmail.com" name="email" />
 		<property name="userAccount" ref="userAccount4" />
 		<property name="about" ref="about3" />
@@ -249,6 +257,8 @@
 	<!-- Customers -->
 
 	<bean class="domain.Customer" id="customer1">
+		<property value="Lucas" name="name" />
+		<property value="Vázquez" name="surname" />
 		<property value="eijude@gmail.com" name="email" />
 		<property name="userAccount" ref="userAccount5" />
 		<property value="+34(788)1888" name="phone" />
@@ -273,6 +283,8 @@
 
 
 	<bean class="domain.Customer" id="customer2">
+		<property value="Ruben" name="name" />
+		<property value="Castro" name="surname" />
 		<property value="antflores@hotmail.com" name="email" />
 		<property name="userAccount" ref="userAccount6" />
 		<property value="+33(722)1888" name="phone" />
@@ -296,6 +308,8 @@
 	</bean>
 
 	<bean class="domain.Customer" id="customer3">
+		<property value="Mudo" name="name" />
+		<property value="Vazquez" name="surname" />
 		<property value="rafitaNadal@gmail.com" name="email" />
 		<property name="userAccount" ref="userAccount7" />
 		<property value="+33(722)1245" name="phone" />
@@ -314,9 +328,11 @@
 		</property>
 		<property name="customerComment" ref="customerComment3" />
 	</bean>
-	
+
 	<!-- Trainers -->
 	<bean class="domain.Trainer" id="trainer1">
+		<property value="Bruno" name="name" />
+		<property value="Cadeñosa" name="surname" />
 		<property value="trainer1@gmail.com" name="email" />
 		<property name="userAccount" ref="userAccount8" />
 		<property value="+34(788)159" name="phone" />
@@ -331,13 +347,21 @@
 				<ref bean="course6" />
 			</list>
 		</property>
+		<property name="curriculums">
+			<list>
+				<ref bean="curriculum1" />
+				<ref bean="curriculum2" />
+			</list>
+		</property>
 		<property name="trainerComment" ref="trainerComment1" />
 	</bean>
-	
+
 	<bean class="domain.Trainer" id="trainer2">
+		<property value="Juan" name="name" />
+		<property value="del Oro" name="surname" />
 		<property value="trainer2@gmail.com" name="email" />
 		<property name="userAccount" ref="userAccount9" />
-		<property value="" name="phone" />
+		<property value="+34(788)100" name="phone" />
 		<property name="comments">
 			<list>
 			</list>
@@ -349,13 +373,21 @@
 				<ref bean="course7" />
 			</list>
 		</property>
+		<property name="curriculums">
+			<list>
+				<ref bean="curriculum3" />
+				<ref bean="curriculum4" />
+			</list>
+		</property>
 		<property name="trainerComment" ref="trainerComment2" />
 	</bean>
-	
+
 	<bean class="domain.Trainer" id="trainer3">
-		<property value="trainer2@gmail.com" name="email" />
+		<property value="Margarita" name="name" />
+		<property value="Newton" name="surname" />
+		<property value="trainer3@gmail.com" name="email" />
 		<property name="userAccount" ref="userAccount10" />
-		<property value="" name="phone" />
+		<property value="+34(789)159" name="phone" />
 		<property name="comments">
 			<list>
 			</list>
@@ -367,10 +399,16 @@
 				<ref bean="course9" />
 			</list>
 		</property>
+		<property name="curriculums">
+			<list>
+				<ref bean="curriculum5" />
+				<ref bean="curriculum6" />
+			</list>
+		</property>
 		<property name="trainerComment" ref="trainerComment3" />
 	</bean>
-	
-	
+
+
 
 	<!-- GPSCoordinates -->
 	<bean id="gps1" class="domain.GPSCoordinates">
@@ -422,8 +460,225 @@
 		<property value="Este es el acerca de del organiser 3" name="message" />
 		<property name="organiser" ref="organiser3" />
 	</bean>
+	<!-- Curriculums -->
+	<bean class="domain.Curriculum" id="curriculum1">
+		<property name="name" value="Bruno" />
+		<property name="email" value="trainer1@gmail.com" />
+		<property name="phone" value="+34(788)159" />
+		<property name="isActive" value="true" />
+		<property name="trainer" ref="trainer1" />
+		<property name="sections">
+			<list>
+				<ref bean="section1" />
+				<ref bean="section2" />
+			</list>
+		</property>
+	</bean>
+
+
+	<bean class="domain.Curriculum" id="curriculum2">
+		<property name="name" value="Juan" />
+		<property name="email" value="trainer1@gmail.com" />
+		<property name="phone" value="+34(788)159" />
+		<property name="isActive" value="false" />
+		<property name="trainer" ref="trainer1" />
+		<property name="sections">
+			<list>
+				<ref bean="section3" />
+				<ref bean="section4" />
+			</list>
+		</property>
+	</bean>
+
+	<bean class="domain.Curriculum" id="curriculum3">
+		<property name="name" value="Juan" />
+		<property name="email" value="trainer2@gmail.com" />
+		<property name="phone" value="+34(788)100" />
+		<property name="isActive" value="true" />
+		<property name="trainer" ref="trainer2" />
+		<property name="sections">
+			<list>
+				<ref bean="section5" />
+				<ref bean="section6" />
+			</list>
+		</property>
+	</bean>
+
+	<bean class="domain.Curriculum" id="curriculum4">
+		<property name="name" value="Juan Manuel" />
+		<property name="email" value="trainer2@gmail.com" />
+		<property name="phone" value="+34(788)100" />
+		<property name="isActive" value="false" />
+		<property name="trainer" ref="trainer2" />
+		<property name="sections">
+			<list>
+				<ref bean="section7" />
+				<ref bean="section8" />
+			</list>
+		</property>
+	</bean>
+
+
+	<bean class="domain.Curriculum" id="curriculum5">
+		<property name="name" value="Margarita" />
+		<property name="email" value="trainer3@gmail.com" />
+		<property name="phone" value="+34(789)100" />
+		<property name="isActive" value="true" />
+		<property name="trainer" ref="trainer3" />
+		<property name="sections">
+			<list>
+				<ref bean="section9" />
+				<ref bean="section10" />
+			</list>
+		</property>
+	</bean>
+
+	<bean class="domain.Curriculum" id="curriculum6">
+		<property name="name" value="Margarita" />
+		<property name="email" value="trainer3@gmail.com" />
+		<property name="phone" value="+34(789)100" />
+		<property name="isActive" value="false" />
+		<property name="trainer" ref="trainer3" />
+		<property name="sections">
+			<list>
+				<ref bean="section11" />
+				<ref bean="section12" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- Sections -->
+	<bean id="section1" class="domain.Section">
+		<property name="title" value="Section 1" />
+		<property name="content" value="Contents 1" />
+		<property name="curriculum" ref="curriculum1" />
+		<property name="attachments">
+			<list>
+				<value>https://mega.nz/#!EAUF2AoD!BwB-hqIlS4wExV4e1OMfwzyiZZa82j-zorrsy5Tz_QM
+				</value>
+				<value>https://mega.nz/#!EAUF2AoD!BwB-hqIlS4wExV4e1OMfwzyiZZa82j
+				</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="section2" class="domain.Section">
+		<property name="title" value="Section 2" />
+		<property name="content" value="Contents 2" />
+		<property name="curriculum" ref="curriculum1" />
+		<property name="attachments">
+			<list>
+				<value>https://consigna.us.es/395584</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="section3" class="domain.Section">
+		<property name="title" value="Section 3" />
+		<property name="content" value="Contents 3" />
+		<property name="curriculum" ref="curriculum2" />
+		<property name="attachments">
+			<list>
+				<value>https://consigna.us.es/395584</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="section4" class="domain.Section">
+		<property name="title" value="Section 4" />
+		<property name="content" value="Contents 4" />
+		<property name="curriculum" ref="curriculum2" />
+		<property name="attachments">
+			<list>
+				<value>https://consigna.us.es/395887</value>
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="section5" class="domain.Section">
+		<property name="title" value="Section 5" />
+		<property name="content" value="Contents 5" />
+		<property name="curriculum" ref="curriculum3" />
+		<property name="attachments">
+			<list>
+				<value>https://consigna.us.es/774485</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="section6" class="domain.Section">
+		<property name="title" value="Section 6" />
+		<property name="content" value="Contents 6" />
+		<property name="curriculum" ref="curriculum3" />
+		<property name="attachments">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="section7" class="domain.Section">
+		<property name="title" value="Section 7" />
+		<property name="content" value="Contents 7" />
+		<property name="curriculum" ref="curriculum4" />
+		<property name="attachments">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="section8" class="domain.Section">
+		<property name="title" value="Section 8" />
+		<property name="content" value="Contents 8" />
+		<property name="curriculum" ref="curriculum4" />
+		<property name="attachments">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="section9" class="domain.Section">
+		<property name="title" value="Section 9" />
+		<property name="content" value="Contents 9" />
+		<property name="curriculum" ref="curriculum5" />
+		<property name="attachments">
+			<list>
+				<value>https://consigna.us.es/778945</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="section10" class="domain.Section">
+		<property name="title" value="Section 10" />
+		<property name="content" value="Contents 10" />
+		<property name="curriculum" ref="curriculum5" />
+		<property name="attachments">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="section11" class="domain.Section">
+		<property name="title" value="Section 11" />
+		<property name="content" value="Contents 11" />
+		<property name="curriculum" ref="curriculum6" />
+		<property name="attachments">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="section12" class="domain.Section">
+		<property name="title" value="Section 12" />
+		<property name="content" value="Contents 12" />
+		<property name="curriculum" ref="curriculum6" />
+		<property name="attachments">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+
+
+
 	<!-- Courses -->
-	
+
 	<bean class="domain.Course" id="course1">
 		<property name="title" value="Descenso" />
 		<property name="description" value="Curso de Descenso" />
@@ -441,7 +696,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean class="domain.Course" id="course2">
 		<property name="title" value="Escalada" />
 		<property name="description" value="Curso de escalada" />
@@ -459,7 +714,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean class="domain.Course" id="course3">
 		<property name="title" value="Puenting" />
 		<property name="description" value="Curso de puenting" />
@@ -479,7 +734,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean class="domain.Course" id="course4">
 		<property name="title" value="Cayoning" />
 		<property name="description" value="Curso de desfiladeros" />
@@ -496,7 +751,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean class="domain.Course" id="course5">
 		<property name="title" value="Bicicleta Montaña" />
 		<property name="description" value="Curso de descenso en bicicleta" />
@@ -514,13 +769,13 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean class="domain.Course" id="course6">
 		<property name="title" value="Descenso" />
 		<property name="description" value="Curso de rapel" />
 		<property name="trainer" ref="trainer1" />
 		<property name="banner"
-			value="http://www.emocionextremSa.com/data1/images/banner_curso_de_rapel_escalada_en_roca_y_tirolesa_2.jpg"/>
+			value="http://www.emocionextremSa.com/data1/images/banner_curso_de_rapel_escalada_en_roca_y_tirolesa_2.jpg" />
 		<property name="modules">
 			<list>
 			</list>
@@ -530,7 +785,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean class="domain.Course" id="course7">
 		<property name="title" value="Descenso" />
 		<property name="description" value="Curso de Descenso nadando" />
@@ -546,7 +801,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean class="domain.Course" id="course8">
 		<property name="title" value="Descenso" />
 		<property name="description" value="Curso de Descenso del calabozo" />
@@ -562,7 +817,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean class="domain.Course" id="course9">
 		<property name="title" value="Paracaidas" />
 		<property name="description" value="Curso de paracaidas" />
@@ -589,7 +844,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean class="domain.Module" id="module2">
 		<property name="title" value="Modulo 2" />
 		<property name="orderModule" value="2" />
@@ -600,7 +855,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean class="domain.Module" id="module3">
 		<property name="title" value="Modulo 3" />
 		<property name="orderModule" value="1" />
@@ -621,7 +876,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean class="domain.Module" id="module5">
 		<property name="title" value="Modulo 5" />
 		<property name="orderModule" value="1" />
@@ -642,7 +897,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean class="domain.Module" id="module7">
 		<property name="title" value="Modulo 7" />
 		<property name="orderModule" value="3" />
@@ -663,7 +918,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean class="domain.Module" id="module9">
 		<property name="title" value="Modulo 9" />
 		<property name="orderModule" value="1" />
@@ -684,7 +939,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean class="domain.Module" id="module11">
 		<property name="title" value="Modulo 11" />
 		<property name="orderModule" value="2" />
@@ -695,32 +950,29 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<!-- LearningMaterials -->
 	<bean class="domain.LearningMaterial" id="learningMaterial1">
 		<property name="title" value="Learning material 1" />
 		<property name="description" value="description of LM1" />
-		<property name="materialLink"
-			value="https://www.youtube.com/watch?v=eiVS_EsXJJw" />
+		<property name="materialLink" value="https://www.youtube.com/watch?v=eiVS_EsXJJw" />
 		<property name="module" ref="module1" />
 	</bean>
-	
+
 	<bean class="domain.LearningMaterial" id="learningMaterial2">
 		<property name="title" value="Learning material 2" />
 		<property name="description" value="description of LM2" />
-		<property name="materialLink"
-			value="https://www.youtube.com/watch?v=3c5wThHI4t0" />
+		<property name="materialLink" value="https://www.youtube.com/watch?v=3c5wThHI4t0" />
 		<property name="module" ref="module2" />
 	</bean>
-	
+
 	<bean class="domain.LearningMaterial" id="learningMaterial3">
 		<property name="title" value="Learning material 3" />
 		<property name="description" value="description of LM3" />
-		<property name="materialLink"
-			value="http://www.femecv.com/documentos" />
+		<property name="materialLink" value="http://www.femecv.com/documentos" />
 		<property name="module" ref="module3" />
 	</bean>
-	
+
 	<bean class="domain.LearningMaterial" id="learningMaterial4">
 		<property name="title" value="Learning material 4" />
 		<property name="description" value="description of LM4" />
@@ -728,7 +980,7 @@
 			value="http://www.puenting.net/curso-monitor-de-salto.htm" />
 		<property name="module" ref="module4" />
 	</bean>
-	
+
 	<bean class="domain.LearningMaterial" id="learningMaterial5">
 		<property name="title" value="Learning material 5" />
 		<property name="description" value="description of LM5" />
@@ -736,7 +988,7 @@
 			value="https://industrial.omron.es/es/products/safety-modules" />
 		<property name="module" ref="module5" />
 	</bean>
-	
+
 	<bean class="domain.LearningMaterial" id="learningMaterial6">
 		<property name="title" value="Learning material 6" />
 		<property name="description" value="description of LM6" />
@@ -744,7 +996,7 @@
 			value="https://www.ivoox.com/audio-curso-ingles-facil-para-principiantes-1-audios-mp3_rf_268521_1.html" />
 		<property name="module" ref="module6" />
 	</bean>
-	
+
 	<bean class="domain.LearningMaterial" id="learningMaterial7">
 		<property name="title" value="Learning material 7" />
 		<property name="description" value="description of LM7" />
@@ -752,23 +1004,21 @@
 			value="http://www.ivoox.com/podcast-curso-metafisica-aprendiendo-en-el-camino-1_sq_f118419_1.html" />
 		<property name="module" ref="module7" />
 	</bean>
-	
+
 	<bean class="domain.LearningMaterial" id="learningMaterial8">
 		<property name="title" value="Learning material 8" />
 		<property name="description" value="description of LM8" />
-		<property name="materialLink"
-			value="https://www.youtube.com/watch?v=CQMRuPuEEpQ" />
+		<property name="materialLink" value="https://www.youtube.com/watch?v=CQMRuPuEEpQ" />
 		<property name="module" ref="module8" />
 	</bean>
-	
+
 	<bean class="domain.LearningMaterial" id="learningMaterial9">
 		<property name="title" value="Learning material 9" />
 		<property name="description" value="description of LM9" />
-		<property name="materialLink"
-			value="https://www.youtube.com/watch?v=hM7giw3aPyA" />
+		<property name="materialLink" value="https://www.youtube.com/watch?v=hM7giw3aPyA" />
 		<property name="module" ref="module9" />
 	</bean>
-	
+
 	<bean class="domain.LearningMaterial" id="learningMaterial10">
 		<property name="title" value="Learning material 10" />
 		<property name="description" value="description of LM10" />
@@ -776,12 +1026,11 @@
 			value="http://www.ivoox.com/podcast-curso-ventas_sq_f1325_1.html" />
 		<property name="module" ref="module10" />
 	</bean>
-	
+
 	<bean class="domain.LearningMaterial" id="learningMaterial11">
 		<property name="title" value="Learning material 11" />
 		<property name="description" value="description of LM11" />
-		<property name="materialLink"
-			value="https://www.youtube.com/watch?v=Yg7a1c1sN-o" />
+		<property name="materialLink" value="https://www.youtube.com/watch?v=Yg7a1c1sN-o" />
 		<property name="module" ref="module11" />
 	</bean>
 	<!-- Kayaks -->
@@ -929,7 +1178,7 @@
 		<property name="organiser" ref="organiser3" />
 
 	</bean>
-	
+
 	<!-- Canyons -->
 	<bean class="domain.Canyon" id="canyon1">
 		<property name="name" value="name1" />
@@ -1022,7 +1271,7 @@
 	</bean>
 
 
-<bean class="domain.Canyon" id="canyon4">
+	<bean class="domain.Canyon" id="canyon4">
 		<property name="name" value="Baza Saliente Alto" />
 		<property name="difficultyLevel" value="8" />
 		<property name="route"
@@ -1276,7 +1525,7 @@
 		<property name="customer" ref="customer3" />
 		<property name="activity" ref="activity3" />
 	</bean>
-	
+
 	<bean class="domain.Request" id="request4">
 		<property value="2/2/2016 12:00" name="momentPending" />
 		<property value="2/3/2016 16:00" name="momentAccepted" />
@@ -1284,7 +1533,7 @@
 		<property name="customer" ref="customer1" />
 		<property name="activity" ref="activity3" />
 	</bean>
-	
+
 	<bean class="domain.Request" id="request5">
 		<property value="12/7/2015 16:00" name="momentPending" />
 		<property value="1/1/2016 00:00" name="momentAccepted" />
@@ -1292,7 +1541,7 @@
 		<property name="customer" ref="customer2" />
 		<property name="activity" ref="activity2" />
 	</bean>
-	
+
 	<bean class="domain.Request" id="request6">
 		<property value="09/11/2014 16:00" name="momentPending" />
 		<property name="requestState" value="REJECTED" />
@@ -1415,7 +1664,7 @@
 		<property name="actor" ref="organiser3" />
 		<property name="stars" value="5" />
 	</bean>
-	
+
 	<bean id="comment25" class="domain.Comment">
 		<property name="title" value="Comentario 25" />
 		<property name="body" value="Texto 25" />
@@ -1424,7 +1673,7 @@
 		<property name="actor" ref="customer2" />
 		<property name="stars" value="1" />
 	</bean>
-	
+
 	<bean id="comment26" class="domain.Comment">
 		<property name="title" value="Comentario 26" />
 		<property name="body" value="Texto 26" />
@@ -1457,7 +1706,7 @@
 		<property name="actor" ref="organiser3" />
 		<property name="stars" value="2" />
 	</bean>
-	
+
 
 	<!-- Organiser Comments -->
 
@@ -1525,7 +1774,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="trainerComment2" class="domain.TrainerComment">
 		<property name="trainer" ref="trainer2" />
 		<property name="comments">
@@ -1534,7 +1783,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="trainerComment3" class="domain.TrainerComment">
 		<property name="trainer" ref="trainer3" />
 		<property name="comments">
@@ -1543,7 +1792,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<!-- Comments (for organisers) -->
 
 	<bean id="comment16" class="domain.Comment">
@@ -1601,7 +1850,7 @@
 		<property name="actor" ref="organiser3" />
 		<property name="stars" value="8" />
 	</bean>
-	
+
 	<bean id="comment22" class="domain.Comment">
 		<property name="title" value="Comentario 22" />
 		<property name="moment" value="09/08/2013 16:00" />
@@ -1610,7 +1859,7 @@
 		<property name="actor" ref="customer1" />
 		<property name="stars" value="9" />
 	</bean>
-	
+
 	<bean id="comment23" class="domain.Comment">
 		<property name="title" value="Comentario 23" />
 		<property name="moment" value="09/08/2014 16:00" />
@@ -1619,7 +1868,7 @@
 		<property name="actor" ref="customer2" />
 		<property name="stars" value="1" />
 	</bean>
-	
+
 	<bean id="comment24" class="domain.Comment">
 		<property name="title" value="Comentario 24" />
 		<property name="moment" value="09/10/2015 16:00" />

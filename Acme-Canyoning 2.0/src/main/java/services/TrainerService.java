@@ -144,7 +144,8 @@ public class TrainerService {
 		res = create();
 		Assert.isTrue(trainerForm.getPassword().equals(
 				trainerForm.getConfirmPassword()));
-
+		res.setName(trainerForm.getName());
+		res.setSurname(trainerForm.getSurname());
 		res.setPhone(trainerForm.getPhone());
 		res.setEmail(trainerForm.getEmail());
 

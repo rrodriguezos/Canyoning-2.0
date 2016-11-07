@@ -32,9 +32,9 @@ public class Trainer extends Actor {
 	public void setTrainerComment(TrainerComment trainerComment) {
 		this.trainerComment = trainerComment;
 	}
-	
+
 	private Collection<Course> courses;
-	
+
 	@Valid
 	@NotNull
 	@OneToMany(mappedBy = "trainer")
@@ -44,6 +44,19 @@ public class Trainer extends Actor {
 
 	public void setCourses(Collection<Course> courses) {
 		this.courses = courses;
+	}
+
+	private Collection<Curriculum> curriculums;
+
+	@Valid
+	@NotNull
+	@OneToMany(mappedBy = "trainer")
+	public Collection<Curriculum> getCurriculums() {
+		return curriculums;
+	}
+
+	public void setCurriculums(Collection<Curriculum> curriculums) {
+		this.curriculums = curriculums;
 	}
 
 }

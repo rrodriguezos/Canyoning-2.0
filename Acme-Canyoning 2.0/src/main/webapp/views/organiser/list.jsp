@@ -18,6 +18,12 @@
 <display:table name="organisers" id="row" class="displaytag"
 	requestURI="${requestURI}" pagesize="5" keepStatus="true">
 
+	<spring:message code="organiser.name" var="name" />
+	<display:column title="${name}" property="name" />
+
+	<spring:message code="organiser.surname" var="surname" />
+	<display:column title="${surname}" property="surname" />
+
 	<spring:message code="organiser.email" var="email" />
 	<display:column property="email" title="${email}" sortable="true" />
 
@@ -37,11 +43,12 @@
 				onclick="javascript: window.location.assign('comment/list.do?id=${row.organiserComment.id}')" />
 		</display:column>
 	</security:authorize>
-	
+
 	<spring:message code="organiser.display" var="display" />
 	<display:column title="${display}">
-			<input type="button" value="<spring:message code="organiser.display" />" 
-					onclick="javascript: window.location.assign('organiser/display.do?organiserId=${row.id}')" />
+		<input type="button"
+			value="<spring:message code="organiser.display" />"
+			onclick="javascript: window.location.assign('organiser/display.do?organiserId=${row.id}')" />
 	</display:column>
 
 

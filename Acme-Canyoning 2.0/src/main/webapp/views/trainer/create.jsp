@@ -49,6 +49,10 @@
 
 		<acme:password code="trainer.password" path="password" />
 		<acme:password code="trainer.confirmPassword" path="confirmPassword" />
+		
+		<acme:textbox code="trainer.name" path="name" />
+
+		<acme:textbox code="trainer.surname" path="surname" />
 
 		<acme:textbox code="trainer.email" path="email" />
 

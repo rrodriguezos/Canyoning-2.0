@@ -17,6 +17,12 @@
 
 <display:table name="trainers" id="row" class="displaytag"
 	requestURI="${requestURI}" pagesize="5" keepStatus="true">
+	
+	<spring:message code="trainer.name" var="name" />
+	<display:column title="${name}" property="name" />
+
+	<spring:message code="trainer.surname" var="surname" />
+	<display:column title="${surname}" property="surname" />
 
 	<spring:message code="trainer.email" var="email" />
 	<display:column property="email" title="${email}" sortable="true" />

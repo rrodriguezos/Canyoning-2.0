@@ -20,8 +20,10 @@
 		<value>/views/search/messages</value>
 		<value>/views/administrator/messages</value>
 		<value>/views/customer/messages</value>
-		<value>/views/cord/messages</value>		
+		<value>/views/cord/messages</value>
 		<value>/views/kayak/messages</value>
+		<value>/views/curriculum/messages</value>
+		<value>/views/section/messages</value>
 		<value>/views/wetsuit/messages</value>
 		<value>/views/trainer/messages</value>
 		<value>/views/course/messages</value>
@@ -30,7 +32,7 @@
 		<value>/views/about/messages</value>
 		<value>/views/request/messages</value>
 		<value>/views/organiser/messages</value>
-		<value>/views/profile/messages</value>		
+		<value>/views/profile/messages</value>
 		<value>/views/activity/messages</value>
 		<value>/views/comment/messages</value>
 		<value>/views/canyon/messages</value>

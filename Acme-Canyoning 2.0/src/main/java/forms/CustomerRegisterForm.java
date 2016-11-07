@@ -17,6 +17,8 @@ public class CustomerRegisterForm {
 	private String passwordPast;
 	private String confirmPassword;
 	private String username;
+	private String name;
+	private String surname;
 	private String phone;
 	private String email;
 	private Boolean accept;
@@ -30,6 +32,26 @@ public class CustomerRegisterForm {
 	}
 
 	// Getters and Setters........
+	
+	@SafeHtml(whitelistType=WhiteListType.NONE)
+	@NotBlank
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@SafeHtml(whitelistType=WhiteListType.NONE)
+	@NotBlank
+	public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
 
 	@SafeHtml(whitelistType = WhiteListType.NONE)
 	@NotBlank

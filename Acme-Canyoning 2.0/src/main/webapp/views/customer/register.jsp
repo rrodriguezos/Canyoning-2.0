@@ -33,11 +33,11 @@
 
 <script>
 	function myFunction(str) {
-     var patt = new RegExp("^([+][0-9]{1,2})?([0-9]{3})?(?:[0-9]{4,})");
-     if(patt.test(str)==false){
-    	 window.confirm("<spring:message code="customer.phone.confirm"/>");
-     }	  
- 	}
+		var patt = new RegExp("^([+][0-9]{1,2})?([0-9]{3})?(?:[0-9]{4,})");
+		if (patt.test(str) == false) {
+			window.confirm("<spring:message code="customer.phone.confirm"/>");
+		}
+	}
 </script>
 
 <security:authorize access="isAnonymous()">
@@ -51,6 +51,10 @@
 		<acme:password code="customer.password" path="password" />
 		<acme:password code="customer.confirmPassword" path="confirmPassword" />
 
+		<acme:textbox code="customer.name" path="name" />
+
+		<acme:textbox code="customer.surname" path="surname" />
+
 
 		<acme:textbox code="customer.email" path="email" />
 
@@ -60,7 +64,9 @@
 			url="welcome/conditions.do" />
 
 		<!--<acme:submit name="save" code="customer.save" />-->
-			<input type="submit" name="save" value="<spring:message code="customer.save"/>" onclick="javascript: myFunction(this.form.phone.value) " />
+		<input type="submit" name="save"
+			value="<spring:message code="customer.save"/>"
+			onclick="javascript: myFunction(this.form.phone.value) " />
 		<acme:cancel url="welcome/index.do" code="customer.cancel" />
 
 	</form:form>

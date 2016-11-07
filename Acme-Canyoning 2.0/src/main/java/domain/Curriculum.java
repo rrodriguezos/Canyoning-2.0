@@ -6,8 +6,10 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.Index;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
@@ -16,24 +18,23 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
-import security.UserAccount;
-
 @Entity
 @Access(AccessType.PROPERTY)
-public abstract class Actor extends DomainEntity {
+@Table(indexes = { @Index(columnList = ("name")) })
+public class Curriculum extends DomainEntity {
 
-	private String name;
-	private String surname;
-	private String phone;
-	private String email;
-
-	// Constructors...................
-
-	public Actor() {
+	public Curriculum() {
 		super();
 	}
 
-	// Getters and Setters........
+	// Attributes -------------------------------------------------------------
+
+	private String name;
+	private String email;
+	private String phone;
+	private Boolean isActive;
+
+	// Getters Setters----------------------------------------------------
 
 	@NotBlank
 	@SafeHtml(whitelistType = WhiteListType.NONE)
@@ -45,16 +46,6 @@ public abstract class Actor extends DomainEntity {
 		this.name = name;
 	}
 
-	@NotBlank
-	@SafeHtml(whitelistType = WhiteListType.NONE)
-	public String getSurname() {
-		return surname;
-	}
-
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
-
 	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getPhone() {
 		return phone;
@@ -62,6 +53,15 @@ public abstract class Actor extends DomainEntity {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	@NotNull
+	public Boolean getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
 	}
 
 	@SafeHtml(whitelistType = WhiteListType.NONE)
@@ -76,31 +76,31 @@ public abstract class Actor extends DomainEntity {
 	}
 
 	// Relationships ----------------------------------------------------------
-	
-	private UserAccount userAccount;
-	private Collection<Comment> comments;
 
+	private Collection<Section> sections;
 
-	@OneToOne(optional = false, cascade = CascadeType.ALL)
 	@NotNull
-	@Valid
-	public UserAccount getUserAccount() {
-		return userAccount;
+	@OneToMany(cascade = { CascadeType.REMOVE, CascadeType.DETACH,
+			CascadeType.MERGE, CascadeType.REFRESH }, mappedBy = "curriculum")
+	public Collection<Section> getSections() {
+		return sections;
 	}
 
-	public void setUserAccount(UserAccount userAccount) {
-		this.userAccount = userAccount;
+	public void setSections(Collection<Section> sections) {
+		this.sections = sections;
 	}
+
+	private Trainer trainer;
 
 	@Valid
 	@NotNull
-	@OneToMany(mappedBy = "actor")
-	public Collection<Comment> getComments() {
-		return comments;
+	@ManyToOne(optional = false)
+	public Trainer getTrainer() {
+		return trainer;
 	}
 
-	public void setComments(Collection<Comment> comments) {
-		this.comments = comments;
+	public void setTrainer(Trainer trainer) {
+		this.trainer = trainer;
 	}
 
 }
