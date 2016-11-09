@@ -15,21 +15,29 @@ import domain.Trainer;
 @Transactional
 public class SectionService {
 
-	// Constructor --------------------------------------------------
+	// Managed repository -------------------
+	@Autowired
+	private SectionRepository sectionRepository;
+
+	// Supporting Services ------------------
+	@Autowired
+	private TrainerService trainerService;
+
+	// COnstructors -------------------------
 	public SectionService() {
 		super();
 	}
 
-	// Managed Repository -------------------------------------------
-	@Autowired
-	private SectionRepository sectionRepository;
+	// Simple CRUD methods--------------------
 
-	// Supported Services -------------------------------------------
+	public Section create() {
+		Section result;
 
-	@Autowired
-	private TrainerService trainerService;
+		result = new Section();
 
-	// CRUD methods -------------------------------------------------
+		return result;
+	}
+
 	public Collection<Section> findAll() {
 		Collection<Section> result;
 
@@ -41,32 +49,16 @@ public class SectionService {
 	public Section findOne(int sectionId) {
 		Section result;
 
-		Assert.isTrue(sectionId != 0);
-
 		result = sectionRepository.findOne(sectionId);
-		Assert.notNull(result);
-
-		return result;
-	}
-
-	public Section create() {
-		Section result;
-
-		result = new Section();
 
 		return result;
 	}
 
 	public void save(Section section) {
 		Assert.notNull(section);
+		checkPrincipal(section.getCurriculum().getTrainer());
+
 		sectionRepository.saveAndFlush(section);
-	}
-
-	public Collection<Section> sectionsByCurriculum(int curriculumrId) {
-		Collection<Section> result;
-		result = sectionRepository.sectionsByCurriculum(curriculumrId);
-
-		return result;
 	}
 
 	public void delete(Section section) {
@@ -75,7 +67,7 @@ public class SectionService {
 		sectionRepository.delete(section);
 	}
 
-	// Other Business Methods ---------------------------------------
+	// Other Methods--------------------
 
 	private void checkPrincipal(Trainer u) {
 		Trainer trainer;
@@ -85,4 +77,12 @@ public class SectionService {
 
 		Assert.isTrue(trainer.equals(u));
 	}
+
+	public Collection<Section> findSectionsByCurriculumId(int tripId) {
+		Collection<Section> result;
+
+		result = sectionRepository.sectionsByCurriculum(tripId);
+		return result;
+	}
+
 }

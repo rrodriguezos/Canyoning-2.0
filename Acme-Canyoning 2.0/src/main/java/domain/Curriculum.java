@@ -79,7 +79,7 @@ public class Curriculum extends DomainEntity {
 
 	private Collection<Section> sections;
 
-	@NotNull
+	@Valid
 	@OneToMany(cascade = { CascadeType.REMOVE, CascadeType.DETACH,
 			CascadeType.MERGE, CascadeType.REFRESH }, mappedBy = "curriculum")
 	public Collection<Section> getSections() {

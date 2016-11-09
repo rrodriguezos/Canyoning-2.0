@@ -25,33 +25,35 @@
 		modelAttribute="curriculum">
 		<form:hidden path="id" />
 		<form:hidden path="version" />
-		<form:hidden path="sections" />
+		<form:hidden path="trainer" />
+		<form:hidden path="isActive" />
 
 		<jstl:if test="${curriculum.id == 0}">
+		
+		<spring:message code="curriculum.explanation" />
+<br/>
+			<acme:textbox  code="curriculum.name" path="name"
+				value="${trainer.name}" />
+				
 
-			<acme:textbox code="curriculum.name" path="${trainer.name }"
-				readonly="true" />
+			<acme:textbox code="curriculum.email" path="email"
+				 value="${trainer.email}" />
 
-			<acme:date code="curriculum.email" path="${trainer.email }"
-				readonly="true" />
-
-			<acme:date code="curriculum.phone" path="${trainer.phone }"
-				readonly="true" />
+			<acme:textbox code="curriculum.phone" path="phone"
+				value="${trainer.phone}" />
 
 			<input type="submit" name="save"
-				value="<spring:message code="curriculum.save" />" />
+				value="<spring:message code="curriculum.save" />" 
+				onclick="javascript: window.location.assign('section/trainer/create.do?curriculumId=${curriculumId}')" />
 		</jstl:if>
 
 		<jstl:if test="${curriculum.id != 0}">
 		
-		<acme:textbox code="curriculum.name" path="name"
-				readonly="true" />
+		<acme:textbox code="curriculum.name" path="name"/>
 
-			<acme:date code="curriculum.email" path="email"
-				readonly="true" />
+			<acme:date code="curriculum.email" path="email"/>
 
-			<acme:date code="curriculum.phone" path="phone"
-				readonly="true" />
+			<acme:date code="curriculum.phone" path="phone" />
 		
 			<input type="submit" name="saveEdit"
 				value="<spring:message code="curriculum.save" />">

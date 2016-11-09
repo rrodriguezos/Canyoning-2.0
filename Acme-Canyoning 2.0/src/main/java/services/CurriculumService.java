@@ -1,7 +1,7 @@
 package services;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,9 +24,6 @@ public class CurriculumService {
 	@Autowired
 	private TrainerService trainerService;
 
-	@Autowired
-	private SectionService sectionService;
-
 	// COnstructors -------------------------------------------------------
 	public CurriculumService() {
 		super();
@@ -42,8 +39,10 @@ public class CurriculumService {
 
 		result = new Curriculum();
 
-		sections = new ArrayList<Section>();
+		sections = new LinkedList<Section>();
 		result.setSections(sections);
+
+		result.setIsActive(false);
 
 		trainer = trainerService.findByPrincipal();
 		result.setTrainer(trainer);
@@ -74,9 +73,6 @@ public class CurriculumService {
 		checkPrincipal(trainer);
 
 		curriculum.setIsActive(false);
-		curriculum.setName(curriculum.getTrainer().getName());
-		curriculum.setEmail(curriculum.getTrainer().getEmail());
-		curriculum.setPhone(curriculum.getTrainer().getPhone());
 
 		curriculumRepository.saveAndFlush(curriculum);
 	}
@@ -131,6 +127,15 @@ public class CurriculumService {
 
 		}
 		cv.setIsActive(true);
+
+	}
+
+	public Curriculum curriculumActiveByTrainer(Integer trainerId) {
+		Curriculum result;
+
+		result = curriculumRepository.curriculumActiveByTrainer(trainerId);
+
+		return result;
 
 	}
 

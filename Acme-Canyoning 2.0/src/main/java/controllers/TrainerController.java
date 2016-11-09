@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.CourseService;
+import services.CurriculumService;
 import services.TrainerService;
 import domain.Course;
+import domain.Curriculum;
 import domain.Trainer;
 
 @Controller
@@ -22,6 +24,8 @@ public class TrainerController extends AbstractController {
 	private TrainerService trainerService;
 	@Autowired
 	private CourseService courseService;
+	@Autowired
+	private CurriculumService curriculumService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -52,29 +56,34 @@ public class TrainerController extends AbstractController {
 		ModelAndView result;
 		Trainer trainer;
 		Collection<Course> courses;
+		Curriculum curriculums;
+		
 
 		trainer = trainerService.findOne(trainerId);
 		courses = courseService.coursesByTrainer(trainerId);
-
+		curriculums = curriculumService.curriculumActiveByTrainer(trainerId);
+		
+		
 		result = new ModelAndView("trainer/display");
 		result.addObject("trainer", trainer);
 		result.addObject("courses", courses);
+		result.addObject("curriculums", curriculums);
 
 		return result;
 	}
-	
-	// Listing by navigate from Trainer
-			// ---------------------------------------------------
-			@RequestMapping(value = "/listByCourse", method = RequestMethod.GET)
-			public ModelAndView navigateByCourse(@RequestParam int courseId) {
-				ModelAndView result;
-				Trainer trainer;
-				trainer = trainerService.findTrainerByCourse(courseId);
 
-				result = new ModelAndView("trainer/list");
-				result.addObject("trainers", trainer);
-				result.addObject("requestURI", "trainer/listByCourse.do");
-				return result;
-			}
+	// Listing by navigate from Trainer
+	// ---------------------------------------------------
+	@RequestMapping(value = "/listByCourse", method = RequestMethod.GET)
+	public ModelAndView navigateByCourse(@RequestParam int courseId) {
+		ModelAndView result;
+		Trainer trainer;
+		trainer = trainerService.findTrainerByCourse(courseId);
+
+		result = new ModelAndView("trainer/list");
+		result.addObject("trainers", trainer);
+		result.addObject("requestURI", "trainer/listByCourse.do");
+		return result;
+	}
 
 }

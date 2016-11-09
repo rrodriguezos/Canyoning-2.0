@@ -20,100 +20,137 @@ import domain.Section;
 @Controller
 @RequestMapping("/section/trainer")
 public class SectionTrainerController extends AbstractController {
-	
+
 	// Supporting services -------------------------------
 
-		@Autowired
-		private SectionService sectionService;
-		@Autowired
-		private CurriculumService curriculumService;
+	@Autowired
+	private SectionService sectionService;
+	@Autowired
+	private CurriculumService curriculumService;
 
-		// Constructors
-		// ----------------------------------------------------------------
+	// Constructors
+	// ----------------------------------------------------------------
 
-		public SectionTrainerController() {
-			super();
-		}
+	public SectionTrainerController() {
+		super();
+	}
 
-		// Create-----------------------------------------------------------------------------
+	// Create-----------------------------------------------------------------------------
 
-		@RequestMapping(value = "/create", method = RequestMethod.GET)
-		public ModelAndView edit(@RequestParam int curriculumId) {
-			ModelAndView result;
-			Section section;
-			Curriculum curriculum;
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam int curriculumId) {
+		ModelAndView result;
+		Section section;
+		Curriculum curriculum;
 
-			section = sectionService.create();
-			curriculum = curriculumService.findOne(curriculumId);
-			section.setCurriculum(curriculum);
+		section = sectionService.create();
+		curriculum = curriculumService.findOne(curriculumId);
+		section.setCurriculum(curriculum);
 
+		result = createEditModelAndView(section);
+
+		return result;
+	}
+
+	// Save-------------------------------------------------------------------------
+	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid Section section, BindingResult binding,
+			RedirectAttributes redir) {
+		ModelAndView result;
+
+		if (binding.hasErrors()) {
 			result = createEditModelAndView(section);
 
-			return result;
-		}
+		} else {
+			try {
+				sectionService.save(section);
+				result = new ModelAndView(
+						"redirect:/section/list.do?curriculumId="
+								+ section.getCurriculum().getId());
+				redir.addFlashAttribute("message", "section.commit.ok");
 
-		// Save-------------------------------------------------------------------------
-		@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
-		public ModelAndView save(@Valid Section section, BindingResult binding,
-				RedirectAttributes redir) {
-			ModelAndView result;
-			
-
-			if (binding.hasErrors() ) {
+			} catch (Throwable oops) {
 				result = createEditModelAndView(section);
 
-			} else {
-				try {
-					sectionService.save(section);
-					result = new ModelAndView("redirect:/section/list.do?curriculumId="
-							+ section.getCurriculum().getId());
-					redir.addFlashAttribute("message", "section.commit.ok");
-
-				} catch (Throwable oops) {
-					result = createEditModelAndView(section);
-
-					result.addObject("message", "section.commit.error");
-				}
+				result.addObject("message", "section.commit.error");
 			}
-
-			return result;
 		}
 
-		// Delete-----------------------------------------------------------------------
-		@RequestMapping(value = "/delete", method = RequestMethod.GET)
-		public ModelAndView save(@RequestParam int sectionId) {
-			ModelAndView result;
+		return result;
+	}
 
-			Section section = sectionService.findOne(sectionId);
+	// Edit -----------------------------------------------------------------
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView editSave(@RequestParam int sectionId) {
+		ModelAndView result;
+		Section section;
+		section = sectionService.findOne(sectionId);
 
-			sectionService.delete(section);
+		result = createEditModelAndView(section);
+		result.addObject("section", section);
+		return result;
+	}
 
-			result = new ModelAndView("redirect:/curriculum/trainer/mylist.do");
-			result.addObject("requestUri", "/curriculum/trainer/mylist.do");
+	// Save --------------------------------------------------------------
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "saveEdit")
+	public ModelAndView saveEdit(@Valid Section section, BindingResult binding,
+			RedirectAttributes redir) {
+		ModelAndView result;
 
-			return result;
+		if (binding.hasErrors()) {
+			result = createEditModelAndView(section);
+
+		} else {
+			try {
+				sectionService.save(section);
+				result = new ModelAndView(
+						"redirect:/curriculum/trainer/mylist.do");
+				result.addObject("requestUri", "/curriculum/trainer/mylist.do");
+				redir.addFlashAttribute("message", "section.commit.ok");
+
+			} catch (Throwable oops) {
+				result = createEditModelAndView(section, "section.commit.error");
+			}
 		}
 
-		// Ancillary methods--------------------------------------------------------
+		return result;
+	}
 
-		protected ModelAndView createEditModelAndView(Section section) {
-			ModelAndView result;
+	// Delete-----------------------------------------------------------------------
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView save(@RequestParam int sectionId) {
+		ModelAndView result;
 
-			result = createEditModelAndView(section, null);
+		Section desccription = sectionService.findOne(sectionId);
 
-			return result;
-		}
+		sectionService.delete(desccription);
 
-		protected ModelAndView createEditModelAndView(Section section,
-				String message) {
-			ModelAndView result;
+		result = new ModelAndView("redirect:/curriculum/trainer/mylist.do");
+		result.addObject("requestUri", "/curriculum/trainer/mylist.do");
 
-			result = new ModelAndView("section/create");
+		return result;
+	}
 
-			result.addObject("section", section);
-			result.addObject("message", message);
+	// Ancillary methods--------------------------------------------------------
 
-			return result;
-		}
+	protected ModelAndView createEditModelAndView(Section section) {
+		ModelAndView result;
+
+		result = createEditModelAndView(section, null);
+
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndView(Section section,
+			String message) {
+		ModelAndView result;
+
+		result = new ModelAndView("section/create");
+
+		result.addObject("section", section);
+		result.addObject("message", message);
+
+		return result;
+	}
 
 }

@@ -6,29 +6,44 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.SafeHtml;
-import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
 @Entity
 @Access(AccessType.PROPERTY)
+@Table(indexes = { @Index(columnList = "title"), @Index(columnList = "content") })
 public class Section extends DomainEntity {
 
-	// Constructor--------------------
+	// Constructors -----------------------------------------------------------
+
 	public Section() {
 		super();
+
 	}
 
-	// Attributes---------------------
-	private String title, content;
+	// Attributes -------------------------------------------------------------
+
+	private String title;
+
+	private String content;
+
 	private Collection<String> attachments;
 
 	@NotBlank
-	@SafeHtml(whitelistType = WhiteListType.NONE)
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	@NotBlank
 	public String getTitle() {
 		return title;
 	}
@@ -37,16 +52,6 @@ public class Section extends DomainEntity {
 		this.title = title;
 	}
 
-	@NotBlank
-	@SafeHtml(whitelistType = WhiteListType.NONE)
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-	
 	@ElementCollection
 	public Collection<String> getAttachments() {
 		return attachments;
@@ -56,11 +61,11 @@ public class Section extends DomainEntity {
 		this.attachments = attachments;
 	}
 
-	// Relationships----------------------
+	// Relationships ----------------------------------------------------------
 	private Curriculum curriculum;
 
-	@Valid
 	@NotNull
+	@Valid
 	@ManyToOne(optional = false)
 	public Curriculum getCurriculum() {
 		return curriculum;
@@ -69,5 +74,4 @@ public class Section extends DomainEntity {
 	public void setCurriculum(Curriculum curriculum) {
 		this.curriculum = curriculum;
 	}
-
 }

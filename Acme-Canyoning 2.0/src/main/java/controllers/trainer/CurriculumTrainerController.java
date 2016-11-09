@@ -17,77 +17,81 @@ import services.CurriculumService;
 import services.TrainerService;
 import controllers.AbstractController;
 import domain.Curriculum;
+import domain.Trainer;
 
 @Controller
 @RequestMapping("/curriculum/trainer")
 public class CurriculumTrainerController extends AbstractController {
 	// Supporting services -------------------------------
 
-		@Autowired
-		private CurriculumService curriculumService;
+	@Autowired
+	private CurriculumService curriculumService;
 
-		@Autowired
-		private TrainerService trainerService;
+	@Autowired
+	private TrainerService trainerService;
 
-		
+	// Constructors --------------------------------------
 
-		// Constructors --------------------------------------
+	public CurriculumTrainerController() {
+		super();
+	}
 
-		public CurriculumTrainerController() {
-			super();
-		}
+	// List ----------------------------------------------
 
-		// List ----------------------------------------------
+	@RequestMapping(value = "/mylist")
+	public ModelAndView list() {
 
-		@RequestMapping(value = "/mylist")
-		public ModelAndView list() {
+		ModelAndView result;
+		Collection<Curriculum> curriculums;
 
-			ModelAndView result;
-			Collection<Curriculum> curriculums;
+		curriculums = curriculumService.curriculumByTrainerLogged();
 
-			curriculums = curriculumService.curriculumByTrainerLogged();
+		result = new ModelAndView("curriculum/trainer/mylist");
+		result.addObject("curriculums", curriculums);
+		result.addObject("requestUri", "/curriculum/trainer/mylist.do");
 
-			result = new ModelAndView("curriculum/trainer/mylist");
-			result.addObject("curriculums", curriculums);
-			result.addObject("requestUri", "/curriculum/trainer/mylist.do");
-			
-			return result;
-		}
+		return result;
+	}
 
-		// Create --------------------------------------------------------------
+	// Create --------------------------------------------------------------
 
-		@RequestMapping(value = "/create", method = RequestMethod.GET)
-		public ModelAndView create() {
-			ModelAndView result;
-			Curriculum curriculum;
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create() {
+		ModelAndView result;
+		Curriculum curriculum;
+		Trainer trainer;
+		trainer = trainerService.findByPrincipal();
 
-			curriculum = curriculumService.create();
+		curriculum = curriculumService.create();
+		curriculum.setTrainer(trainer);
+		curriculum.setIsActive(false);
 
-			result = createEditModelAndView(curriculum);
+		result = createEditModelAndView(curriculum);
+		result.addObject("trainer", trainer);
 
-			return result;
-		}
+		return result;
+	}
 
-		// Edit -----------------------------------------------------------------
-		@RequestMapping(value = "/edit", method = RequestMethod.GET)
-		public ModelAndView edit(@RequestParam int curriculumId) {
-			ModelAndView result;
-			Curriculum curriculum;
-			curriculum = curriculumService.findOne(curriculumId);
+	// Edit -----------------------------------------------------------------
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam int curriculumId) {
+		ModelAndView result;
+		Curriculum curriculum;
 
-			result = createEditModelAndView(curriculum);
-			result.addObject("curriculum", curriculum);
-			return result;
-		}
+		curriculum = curriculumService.findOne(curriculumId);
 
-		// Save --------------------------------------------------------------
+		result = createEditModelAndView(curriculum);
+		result.addObject("curriculum", curriculum);
+		return result;
+	}
+
+	// Save --------------------------------------------------------------
 		@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 		public ModelAndView save(@Valid Curriculum curriculum, BindingResult binding,
 				RedirectAttributes redir) {
 			ModelAndView result;
 
-
-			if (binding.hasErrors()) {
+			if (binding.hasErrors() ) {
 				result = createEditModelAndView(curriculum);
 			} else {
 				try {
@@ -104,48 +108,97 @@ public class CurriculumTrainerController extends AbstractController {
 			return result;
 		}
 
-		// Delete --------------------------------------------------------------
-		@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-		public ModelAndView delete(@Valid Curriculum curriculum, BindingResult binding) {
-			ModelAndView result;
+		// SaveEdit --------------------------------------------------------------
+				@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "saveEdit")
+				public ModelAndView saveEdit(@Valid Curriculum curriculum, BindingResult binding,
+						RedirectAttributes redir) {
+					ModelAndView result;
 
-			if (binding.hasErrors()) {
-				result = createEditModelAndView(curriculum, binding.toString());
-			} else {
-				try {
-					curriculumService.delete(curriculum);
-					result = new ModelAndView("redirect:/curriculum/trainer/mylist.do");
-					result.addObject("requestUri", "/curriculum/trainer/mylist.do");
-				} catch (Throwable oops) {
-					result = createEditModelAndView(curriculum, "curriculum.commit.error");
+					if (binding.hasErrors() ) {
+						result = createEditModelAndView(curriculum);
+					} else {
+						try {
+							curriculumService.saveEdit(curriculum);
+							result = new ModelAndView("redirect:/curriculum/trainer/mylist.do");
+							result.addObject("requestUri", "/curriculum/trainer/mylist.do");
+							redir.addFlashAttribute("message", "curriculum.commit.ok");
+
+						} catch (Throwable oops) {
+							result = createEditModelAndView(curriculum, "curriculum.commit.error");
+						}
+					}
+
+					return result;
 				}
+
+
+	// Delete --------------------------------------------------------------
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(@Valid Curriculum curriculum,
+			BindingResult binding) {
+		ModelAndView result;
+
+		if (binding.hasErrors()) {
+			result = createEditModelAndView(curriculum, binding.toString());
+		} else {
+			try {
+				curriculumService.delete(curriculum);
+				result = new ModelAndView(
+						"redirect:/curriculum/trainer/mylist.do");
+				result.addObject("requestUri", "/curriculum/trainer/mylist.do");
+			} catch (Throwable oops) {
+				result = createEditModelAndView(curriculum,
+						"curriculum.commit.error");
 			}
-			return result;
 		}
+		return result;
+	}
+	
+	// ChangeState
+	// Curriculum------------------------------------------------------------------
+		@RequestMapping(value = "/changeStateCV", method = RequestMethod.GET)
+		public ModelAndView joinCurriculum(@RequestParam int curriculumId) {
 
-
-		
-
-		// Ancillary methods
-		// --------------------------------------------------------
-
-		protected ModelAndView createEditModelAndView(Curriculum curriculum) {
 			ModelAndView result;
+			Curriculum curriculum;
+			Collection<Curriculum> curriculums;
 
-			result = createEditModelAndView(curriculum, null);
+			curriculums = curriculumService.curriculumByTrainerLogged();
+
+
+			curriculum = curriculumService.findOne(curriculumId);
+			curriculumService.changeStateCVtoActive(curriculum);
+
+
+			result = new ModelAndView("curriculum/list");
+
+			result.addObject("curriculums", curriculums);
+			result.addObject("requestURI", "curriculum/trainer/mylist.do");
 
 			return result;
+
 		}
 
-		protected ModelAndView createEditModelAndView(Curriculum curriculum, String message) {
-			ModelAndView result;
+	// Ancillary methods
+	// --------------------------------------------------------
 
-			result = new ModelAndView("curriculum/trainer/edit");
-			result.addObject("curriculum", curriculum);
-			result.addObject("message", message);
+	protected ModelAndView createEditModelAndView(Curriculum curriculum) {
+		ModelAndView result;
 
-			return result;
-		}
+		result = createEditModelAndView(curriculum, null);
 
+		return result;
 	}
 
+	protected ModelAndView createEditModelAndView(Curriculum curriculum,
+			String message) {
+		ModelAndView result;
+
+		result = new ModelAndView("curriculum/trainer/edit");
+		result.addObject("curriculum", curriculum);
+		result.addObject("message", message);
+
+		return result;
+	}
+
+}

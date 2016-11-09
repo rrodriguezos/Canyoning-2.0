@@ -15,4 +15,7 @@ public interface CurriculumRepository extends
 	@Query("select c from Curriculum c where c.trainer.id = ?1")
 	Collection<Curriculum> findCurriculumsByTrainer(int id);
 
+	@Query("select c from Curriculum c where c.trainer.id=?1 and c.isActive = true ")
+	Curriculum curriculumActiveByTrainer(Integer trainerId);
+
 }

@@ -9,9 +9,10 @@ import org.springframework.stereotype.Repository;
 import domain.Section;
 
 @Repository
-public interface SectionRepository extends JpaRepository<Section, Integer> {
+public interface SectionRepository extends
+		JpaRepository<Section, Integer> {
 
-	@Query("select c.sections from Curriculum c where c.id=?1")
-	Collection<Section> sectionsByCurriculum(int curriculumrId);
+	@Query("select d from Section d where d.curriculum.id = ?1")
+	Collection<Section> sectionsByCurriculum(int curriculumId);
 
 }

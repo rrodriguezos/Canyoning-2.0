@@ -17,7 +17,7 @@
 
 <display:table name="trainers" id="row" class="displaytag"
 	requestURI="${requestURI}" pagesize="5" keepStatus="true">
-	
+
 	<spring:message code="trainer.name" var="name" />
 	<display:column title="${name}" property="name" />
 
@@ -30,6 +30,21 @@
 	<spring:message code="trainer.phone" var="phone" />
 	<display:column property="phone" title="${phone}" sortable="true" />
 
+	<display:column title="Curriculum">
+		<jstl:forEach var="curr" items="${row.curriculums}">
+
+			<jstl:if test="${curr.isActive == true}">
+
+				<input type="button"
+					value="<spring:message code="trainer.curriculum" />"
+					onclick="javascript: window.location.assign('curriculum/listActive.do?trainerId=${row.id}')" />
+
+			</jstl:if>
+
+			<jstl:if test="${curr.isActive == false}">
+			</jstl:if>
+		</jstl:forEach>
+	</display:column>
 
 
 	<security:authorize access="isAuthenticated()">
@@ -40,11 +55,11 @@
 				onclick="javascript: window.location.assign('comment/list.do?id=${row.trainerComment.id}')" />
 		</display:column>
 	</security:authorize>
-	
+
 	<spring:message code="trainer.display" var="display" />
 	<display:column title="${display}">
-			<input type="button" value="<spring:message code="trainer.display" />" 
-					onclick="javascript: window.location.assign('trainer/display.do?trainerId=${row.id}')" />
+		<input type="button" value="<spring:message code="trainer.display" />"
+			onclick="javascript: window.location.assign('trainer/display.do?trainerId=${row.id}')" />
 	</display:column>
 
 

@@ -16,6 +16,7 @@ import security.UserAccount;
 import domain.Administrator;
 import domain.Comment;
 import domain.Course;
+import domain.Curriculum;
 import domain.Trainer;
 import forms.TrainerForm;
 
@@ -53,7 +54,7 @@ public class TrainerService {
 		Trainer result;
 		Collection<Comment> comments;
 		Collection<Course> courses;
-
+		Collection<Curriculum> curriculums;
 		Authority aut = new Authority();
 
 		aut.setAuthority("TRAINER");
@@ -66,6 +67,9 @@ public class TrainerService {
 
 		courses = new LinkedList<Course>();
 		result.setCourses(courses);
+
+		curriculums = new LinkedList<Curriculum>();
+		result.setCurriculums(curriculums);
 
 		comments = new LinkedList<Comment>();
 		result.setComments(comments);
@@ -171,23 +175,23 @@ public class TrainerService {
 	}
 
 	public Collection<Trainer> findTrainersLeastTenAverage() {
-//		Collection<Trainer> result;
-		 Double media = courseService.averageOfCoursesByTrainer();
-		 Collection<Trainer> trainers = findAll();
-		 Collection<Trainer> result = new LinkedList<Trainer>();
-		
-		 Double tenPercent = media * 0.10;
-		 Double tenPercentAbove = media + tenPercent;
-		 Double tenPercentBelow = media - tenPercent;
-		
-		 for (Trainer t : trainers) {
-		 int tam;
-		 tam = t.getCourses().size();
-		 if (tam > tenPercentBelow && tam < tenPercentAbove) {
-		 result.add(t);
-		 }
-		 }
-//		result = trainerRepository.courses10percAboveBelowAvg();
+		// Collection<Trainer> result;
+		Double media = courseService.averageOfCoursesByTrainer();
+		Collection<Trainer> trainers = findAll();
+		Collection<Trainer> result = new LinkedList<Trainer>();
+
+		Double tenPercent = media * 0.10;
+		Double tenPercentAbove = media + tenPercent;
+		Double tenPercentBelow = media - tenPercent;
+
+		for (Trainer t : trainers) {
+			int tam;
+			tam = t.getCourses().size();
+			if (tam > tenPercentBelow && tam < tenPercentAbove) {
+				result.add(t);
+			}
+		}
+		// result = trainerRepository.courses10percAboveBelowAvg();
 		return result;
 	}
 

@@ -112,7 +112,11 @@
 										code="master.page.organiser.courses" /></a></li>
 
 							<li><a href="course/trainer/create.do"><spring:message
-										code="master.page.organiser.createCourse" /></a></li>
+										code="master.page.organiser.createCourse" /></a></li>										
+										<li><a href="curriculum/trainer/create.do"><spring:message
+										code="master.page.organiser.createCurriculum" /></a></li>
+										<li><a href="curriculum/trainer/mylist.do"><spring:message
+										code="master.page.organiser.curriculums" /></a></li>
 
 						</security:authorize>
 

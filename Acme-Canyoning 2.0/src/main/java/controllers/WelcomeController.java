@@ -27,6 +27,7 @@ import security.UserAccount;
 import services.AdministratorService;
 import services.CustomerService;
 import services.OrganiserService;
+import services.TrainerService;
 import domain.Actor;
 
 @Controller
@@ -40,6 +41,9 @@ public class WelcomeController extends AbstractController {
 	private OrganiserService organiserService;
 	@Autowired
 	private CustomerService customerService;
+	
+	@Autowired
+	private TrainerService trainerService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -72,10 +76,13 @@ public class WelcomeController extends AbstractController {
 				if (actor == null) {
 					actor = customerService.findByUserAccount(ua);
 				}
+				if (actor == null) {
+					actor = trainerService.findByUserAccount(ua);
+				}
 			}
 		}
-		name = actor == null ? name : actor.getUserAccount().getUsername() + " "
-				+ actor.getEmail();
+		name = actor == null ? name : actor.getName() + " "
+				+ actor.getSurname();
 		name = name.equals("") ? name : ", " + name;
 
 		formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");

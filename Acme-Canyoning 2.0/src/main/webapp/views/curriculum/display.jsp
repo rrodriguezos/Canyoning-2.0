@@ -21,11 +21,11 @@
 <acme:jstlOut code="curriculum.email" value="${curriculum.email }"/>
 <acme:jstlOut code="curriculum.phone" value="${curriculum.phone }"/>
 
-<jstl:if test="${mycurriculum == true}">
+<jstl:if test="${mycurriculum == true && active == false}">
 	
 		<input type="button" value="<spring:message code="curriculum.changeStateCV" />" 
 			onclick="javascript: window.location.assign('curriculum/trainer/changeStateCV.do?curriculumId=${curriculum.id}')" />
-		
+
 	</jstl:if>
 
 
