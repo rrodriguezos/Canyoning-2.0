@@ -19,7 +19,6 @@ import domain.Trainer;
 @Controller
 @RequestMapping("/section")
 public class SectionController extends AbstractController {
-
 	// Supporting services ----------------------------------------------------
 	@Autowired
 	private SectionService sectionService;
@@ -67,37 +66,12 @@ public class SectionController extends AbstractController {
 	public ModelAndView display(int sectionId) {
 		ModelAndView result;
 		Section section;
-		Curriculum curriculum;
-		Boolean mycurriculum;
-		Boolean logeado;
-		Trainer trainer;
-		logeado = false;
-
-		section = sectionService.findOne(sectionId);
-		curriculum = curriculumService.findOne(section.getCurriculum().getId());
-		mycurriculum = false;
-
-		try {
-			trainer = trainerService.findByPrincipal();
-			if (trainer != null) {
-				logeado = true;
-			}
-			if (trainer.equals(curriculum.getTrainer())) {
-				mycurriculum = true;
-			}
-		} catch (Throwable oops) {
-			mycurriculum = false;
-			logeado = false;
-		}
 
 		section = sectionService.findOne(sectionId);
 
 		result = new ModelAndView("section/display");
 		result.addObject("section", section);
-		result.addObject("mycurriculum", mycurriculum);
-		result.addObject("logeado", logeado);
 
 		return result;
 	}
-
 }

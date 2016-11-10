@@ -92,7 +92,7 @@ public class CurriculumTrainerController extends AbstractController {
 			ModelAndView result;
 
 			if (binding.hasErrors() ) {
-				result = createEditModelAndView(curriculum);
+				result = createEditModelAndView(curriculum,"curriculum.commit.error");
 			} else {
 				try {
 					curriculumService.save(curriculum);

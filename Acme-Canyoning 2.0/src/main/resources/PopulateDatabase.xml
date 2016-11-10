@@ -466,6 +466,7 @@
 		<property name="email" value="trainer1@gmail.com" />
 		<property name="phone" value="+34(788)159" />
 		<property name="isActive" value="true" />
+		<property name="lastUpdate" value="08/11/2016 16:00" />
 		<property name="trainer" ref="trainer1" />
 		<property name="sections">
 			<list>
@@ -481,6 +482,7 @@
 		<property name="email" value="trainer1@gmail.com" />
 		<property name="phone" value="+34(788)159" />
 		<property name="isActive" value="false" />
+		<property name="lastUpdate" value="08/04/2016 16:00" />
 		<property name="trainer" ref="trainer1" />
 		<property name="sections">
 			<list>
@@ -495,6 +497,7 @@
 		<property name="email" value="trainer2@gmail.com" />
 		<property name="phone" value="+34(788)100" />
 		<property name="isActive" value="true" />
+		<property name="lastUpdate" value="08/10/2016 16:00" />
 		<property name="trainer" ref="trainer2" />
 		<property name="sections">
 			<list>
@@ -509,6 +512,7 @@
 		<property name="email" value="trainer2@gmail.com" />
 		<property name="phone" value="+34(788)100" />
 		<property name="isActive" value="false" />
+		<property name="lastUpdate" value="08/04/2015 16:00" />
 		<property name="trainer" ref="trainer2" />
 		<property name="sections">
 			<list>
@@ -524,6 +528,7 @@
 		<property name="email" value="trainer3@gmail.com" />
 		<property name="phone" value="+34(789)100" />
 		<property name="isActive" value="true" />
+		<property name="lastUpdate" value="08/10/2016 16:00" />
 		<property name="trainer" ref="trainer3" />
 		<property name="sections">
 			<list>
@@ -538,6 +543,7 @@
 		<property name="email" value="trainer3@gmail.com" />
 		<property name="phone" value="+34(789)100" />
 		<property name="isActive" value="false" />
+		<property name="lastUpdate" value="08/04/2015 16:00" />
 		<property name="trainer" ref="trainer3" />
 		<property name="sections">
 			<list>

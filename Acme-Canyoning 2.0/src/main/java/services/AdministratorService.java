@@ -1,22 +1,17 @@
 package services;
 
 import java.util.Collection;
-import java.util.LinkedList;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-
-import domain.Administrator;
-import domain.Comment;
-import forms.AdministratorForm;
 
 import repositories.AdministratorRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Administrator;
 
 @Service
 @Transactional
@@ -26,11 +21,6 @@ public class AdministratorService {
 
 	@Autowired
 	private AdministratorRepository administratorRepository;
-
-	// Supporting Services -------------------------
-
-	@Autowired
-	private UserAccountService userAccountService;
 
 	// Constructors -------------------------------
 	public AdministratorService() {
@@ -54,10 +44,8 @@ public class AdministratorService {
 		return result;
 	}
 
-
 	// Other bussiness
 	// methods-----------------------------------------------------
-
 
 	public Administrator findByPrincipal() {
 		Administrator result;
@@ -96,12 +84,13 @@ public class AdministratorService {
 	}
 
 	public void isAdmin(UserAccount account) {
-			Collection<Authority> authorities= account.getAuthorities();
-			Boolean res=false;
-			for(Authority a:authorities){
-				if(a.getAuthority().equals("ADMINISTRATOR")) res=true;
-			}
-			Assert.isTrue(res);
+		Collection<Authority> authorities = account.getAuthorities();
+		Boolean res = false;
+		for (Authority a : authorities) {
+			if (a.getAuthority().equals("ADMINISTRATOR"))
+				res = true;
 		}
+		Assert.isTrue(res);
+	}
 
 }

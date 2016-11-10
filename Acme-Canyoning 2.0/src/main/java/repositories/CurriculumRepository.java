@@ -18,4 +18,7 @@ public interface CurriculumRepository extends
 	@Query("select c from Curriculum c where c.trainer.id=?1 and c.isActive = true ")
 	Curriculum curriculumActiveByTrainer(Integer trainerId);
 
+	@Query("select avg(t.curriculums.size) from Trainer t")
+	Double averageCurriculumsByTrainer();
+
 }

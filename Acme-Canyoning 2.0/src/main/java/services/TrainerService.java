@@ -1,6 +1,8 @@
 package services;
 
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.LinkedList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,12 +98,9 @@ public class TrainerService {
 
 	public void save(Trainer trainer) {
 
-		Boolean create;
-		create = false;
 		if (trainer.getId() == 0) {
 			Md5PasswordEncoder encoder;
 
-			create = true;
 			encoder = new Md5PasswordEncoder();
 
 			trainer.getUserAccount().setPassword(
@@ -192,6 +191,33 @@ public class TrainerService {
 			}
 		}
 		// result = trainerRepository.courses10percAboveBelowAvg();
+		return result;
+	}
+
+	public Collection<Trainer> trainersNameNotMatchCurriculumName() {
+		Collection<Trainer> result;
+
+		result = trainerRepository.trainersNameNotMatchCurriculumName();
+
+		return result;
+	}
+
+	public Collection<Trainer> trainersNoCurriculum() {
+		Collection<Trainer> result;
+		result = trainerRepository.trainersNoCurriculum();
+
+		return result;
+	}
+
+	public Collection<Trainer> trainersNoUpdateCurriculumThree() {
+		Collection<Trainer> result;
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTimeInMillis(System.currentTimeMillis());
+		calendar.add(Calendar.MONTH, -3);
+		Date upToDateCriteria = calendar.getTime();
+
+		result = trainerRepository
+				.trainersNoUpdateCurriculumThree(upToDateCriteria);
 		return result;
 	}
 

@@ -25,8 +25,6 @@ public class CommentService {
 	private CommentableService commentableService;
 	@Autowired
 	private ActorService actorService;
-	@Autowired
-	private AdministratorService administratorService;
 
 	// Constructors --------------------------------
 	public CommentService() {

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActivityService;
-import services.OrganiserService;
 import services.RequestService;
 import controllers.AbstractController;
 import domain.Activity;
@@ -20,9 +19,6 @@ import domain.Request;
 @Controller
 @RequestMapping("/request/organiser")
 public class OrganiserRequestController extends AbstractController {
-	// Supporting services ----------------------------------------------------
-	@Autowired
-	private OrganiserService organiserService;
 	@Autowired
 	private ActivityService activityService;
 	@Autowired
@@ -54,46 +50,48 @@ public class OrganiserRequestController extends AbstractController {
 
 		return result;
 	}
-	
-	// Accept Request------------------------------------------------------------------
-		@RequestMapping(value = "/accept", method = RequestMethod.GET)
-		public ModelAndView accept(@RequestParam int requestId) {
 
-			ModelAndView result;
-			Request request;
-			boolean accept; 
+	// Accept
+	// Request------------------------------------------------------------------
+	@RequestMapping(value = "/accept", method = RequestMethod.GET)
+	public ModelAndView accept(@RequestParam int requestId) {
 
-			request = requestService.findOne(requestId);
-			accept = requestService.acceptRequest(request.getId());
+		ModelAndView result;
+		Request request;
+		boolean accept;
 
-			result = new ModelAndView("request/organiser/list");
+		request = requestService.findOne(requestId);
+		accept = requestService.acceptRequest(request.getId());
 
-			result.addObject("request", request);
-			result.addObject("accept", accept);
-			result.addObject("requestURI", "request/organiser/list.do");
+		result = new ModelAndView("request/organiser/list");
 
-			return result;
+		result.addObject("request", request);
+		result.addObject("accept", accept);
+		result.addObject("requestURI", "request/organiser/list.do");
 
-		}
-		
-		// Accept Request------------------------------------------------------------------
-				@RequestMapping(value = "/reject", method = RequestMethod.GET)
-				public ModelAndView reject(@RequestParam int requestId) {
+		return result;
 
-					ModelAndView result;
-					Request request;
-					boolean accept; 
+	}
 
-					request = requestService.findOne(requestId);
-					accept = requestService.rejectRequest(request.getId());
+	// Accept
+	// Request------------------------------------------------------------------
+	@RequestMapping(value = "/reject", method = RequestMethod.GET)
+	public ModelAndView reject(@RequestParam int requestId) {
 
-					result = new ModelAndView("request/organiser/list");
+		ModelAndView result;
+		Request request;
+		boolean accept;
 
-					result.addObject("request", request);
-					result.addObject("accept", accept);
-					result.addObject("requestURI", "request/organiser/list.do");
+		request = requestService.findOne(requestId);
+		accept = requestService.rejectRequest(request.getId());
 
-					return result;
+		result = new ModelAndView("request/organiser/list");
 
-				}
+		result.addObject("request", request);
+		result.addObject("accept", accept);
+		result.addObject("requestURI", "request/organiser/list.do");
+
+		return result;
+
+	}
 }

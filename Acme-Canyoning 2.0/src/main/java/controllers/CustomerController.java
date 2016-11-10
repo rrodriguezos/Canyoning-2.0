@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.ActivityService;
 import services.CustomerService;
 import domain.Customer;
 import forms.CustomerRegisterForm;
@@ -34,8 +33,7 @@ public class CustomerController extends AbstractController {
 	// Services ---------------------------------------------------------------
 	@Autowired
 	private CustomerService customerService;
-	@Autowired
-	private ActivityService activityService;
+
 
 	// Constructors -----------------------------------------------------------
 

@@ -13,9 +13,7 @@ import domain.Activity;
 import domain.Administrator;
 import domain.Canyon;
 import domain.Comment;
-import domain.Customer;
 import domain.GPSCoordinates;
-import domain.Request;
 import forms.CanyonEditForm;
 import forms.CanyonRegisterForm;
 
@@ -29,9 +27,6 @@ public class CanyonService {
 	// Supporting Services ------------------
 	@Autowired
 	private AdministratorService administratorService;
-
-	@Autowired
-	private ActivityService activityService;
 
 	// COnstructors -------------------------------------------------------
 	public CanyonService() {
@@ -122,8 +117,8 @@ public class CanyonService {
 				.getId());
 		return result;
 	}
-	
-	public Canyon reconstructRegister(CanyonRegisterForm canyonRegisterForm){
+
+	public Canyon reconstructRegister(CanyonRegisterForm canyonRegisterForm) {
 		Canyon result = create();
 		result.setName(canyonRegisterForm.getName());
 		result.setDescription(canyonRegisterForm.getDescription());
@@ -137,9 +132,9 @@ public class CanyonService {
 		result.setGpsCoordinates(gps);
 		return result;
 	}
-	
-	public CanyonEditForm constructCanyonEdit(Canyon canyon){
-		CanyonEditForm result  = new CanyonEditForm();
+
+	public CanyonEditForm constructCanyonEdit(Canyon canyon) {
+		CanyonEditForm result = new CanyonEditForm();
 		result.setCanyonId(canyon.getId());
 		result.setName(canyon.getName());
 		result.setDescription(canyon.getDescription());
@@ -150,15 +145,15 @@ public class CanyonService {
 		result.setAltitude(canyon.getGpsCoordinates().getAltitude());
 		return result;
 	}
-	
+
 	public Canyon reconstructCanyonEdit(CanyonEditForm canyonEditForm) {
-		Canyon result= findOne(canyonEditForm.getCanyonId());
-		
+		Canyon result = findOne(canyonEditForm.getCanyonId());
+
 		GPSCoordinates gps = new GPSCoordinates();
 		gps.setAltitude(canyonEditForm.getAltitude());
 		gps.setLatitude(canyonEditForm.getLatitude());
 		gps.setLongitude(canyonEditForm.getLongitude());
-		
+
 		result.setGpsCoordinates(gps);
 		result.setName(canyonEditForm.getName());
 		result.setDescription(canyonEditForm.getDescription());

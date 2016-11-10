@@ -1,7 +1,8 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,14 +34,11 @@ public class CurriculumService {
 
 	public Curriculum create() {
 		Curriculum result;
-		Collection<Section> sections;
 
 		Trainer trainer;
 
 		result = new Curriculum();
-
-		sections = new LinkedList<Section>();
-		result.setSections(sections);
+		result.setSections(new ArrayList<Section>());
 
 		result.setIsActive(false);
 
@@ -71,8 +69,9 @@ public class CurriculumService {
 		Trainer trainer;
 		trainer = curriculum.getTrainer();
 		checkPrincipal(trainer);
-
+		curriculum.setLastUpdate(new Date(System.currentTimeMillis() - 1000));
 		curriculum.setIsActive(false);
+		
 
 		curriculumRepository.saveAndFlush(curriculum);
 	}
@@ -82,7 +81,7 @@ public class CurriculumService {
 		Trainer trainer;
 		trainer = curriculum.getTrainer();
 		checkPrincipal(trainer);
-
+		curriculum.setLastUpdate(new Date(System.currentTimeMillis() - 1000));
 		curriculumRepository.saveAndFlush(curriculum);
 	}
 
@@ -137,6 +136,12 @@ public class CurriculumService {
 
 		return result;
 
+	}
+
+	public Double averageCurriculumsByTrainer() {
+		Double result;
+		result = curriculumRepository.averageCurriculumsByTrainer();
+		return result;
 	}
 
 }

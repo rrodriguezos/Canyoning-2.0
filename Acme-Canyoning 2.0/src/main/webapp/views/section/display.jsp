@@ -20,28 +20,12 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
+
 <acme:jstlOut code="section.title" value="${section.title }" />
 <acme:jstlOut code="section.content" value="${section.content }" />
-
-<b><spring:message code="section.attachments" />: </b>
-<br>
-<jstl:forEach var="photo" items="${trip.getAttachments() }">
-	<acme:jstlOut code="section.attachments" value="attachment"/>
-</jstl:forEach>
-<br>
-
-<br>
-<security:authorize access="hasRole('TRAINER')">
-	<jstl:if test="${logeado == true}">
-		<jstl:if test="${mycurriculum == true}">
-
-			<input type="button"
-				value="<spring:message code="section.edit" />"
-				onclick="javascript: window.location.assign('section/trainer/edit.do?sectionId=${section.id}')" />
-
-		</jstl:if>
-	</jstl:if>
-</security:authorize>
+<acme:jstlOut code="section.attachments" value="${section.attachments }" />
 
 
-
+<input type="button" name="cancel"
+	value="<spring:message code="section.cancel"/>"
+	onclick="javascript: window.history.back()" />

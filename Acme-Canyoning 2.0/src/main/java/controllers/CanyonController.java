@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.AdministratorService;
 import services.CanyonService;
 import services.CommentService;
 import domain.Canyon;
@@ -25,9 +24,6 @@ public class CanyonController extends AbstractController {
 
 	@Autowired
 	private CommentService commentService;
-
-	@Autowired
-	private AdministratorService administratorService;
 
 	// Constructors -----------------------------------------------------------
 	public CanyonController() {

@@ -9,11 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.CourseRepository;
-import repositories.CourseRepository;
-import domain.Activity;
 import domain.Administrator;
-import domain.Trainer;
-import domain.Course;
 import domain.Comment;
 import domain.Course;
 import domain.Module;
@@ -30,8 +26,6 @@ public class CourseService {
 	@Autowired
 	private TrainerService trainerService;
 
-	@Autowired
-	private ModuleService moduleService;
 	@Autowired
 	private AdministratorService administratorService;
 
@@ -119,6 +113,7 @@ public class CourseService {
 		result = courseRepository.findCourseByTrainer(trainer.getId());
 		return result;
 	}
+
 	public Collection<Course> coursesByTrainerLogged() {
 		Collection<Course> result;
 		Trainer trainer;
@@ -133,8 +128,8 @@ public class CourseService {
 	public Double averageOfCoursesByTrainer() {
 		Administrator admin;
 		admin = administratorService.findByPrincipal();
-		Assert.notNull(admin); 
-		Double res =  courseRepository.averageOfCoursesByTrainer();
+		Assert.notNull(admin);
+		Double res = courseRepository.averageOfCoursesByTrainer();
 		return res;
 	}
 }

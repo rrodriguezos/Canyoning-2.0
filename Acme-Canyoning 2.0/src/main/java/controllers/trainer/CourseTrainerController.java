@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import services.CourseService;
-import services.TrainerService;
 import controllers.AbstractController;
 import domain.Course;
 
@@ -26,9 +25,6 @@ public class CourseTrainerController extends AbstractController {
 
 	@Autowired
 	private CourseService courseService;
-
-	@Autowired
-	private TrainerService trainerService;
 
 	// Constructors --------------------------------------
 
@@ -86,7 +82,7 @@ public class CourseTrainerController extends AbstractController {
 		ModelAndView result;
 
 		if (binding.hasErrors()) {
-			result = createEditModelAndView(course);
+			result = createEditModelAndView(course,"course.commit.error");
 
 			result.addObject("message", "course.commit.error");
 

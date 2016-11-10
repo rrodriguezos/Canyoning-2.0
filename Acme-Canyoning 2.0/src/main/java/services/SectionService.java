@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.SectionRepository;
+import domain.Curriculum;
 import domain.Section;
 import domain.Trainer;
 
@@ -31,9 +32,7 @@ public class SectionService {
 	// Simple CRUD methods--------------------
 
 	public Section create() {
-		Section result;
-
-		result = new Section();
+		Section result = new Section();
 
 		return result;
 	}
@@ -56,13 +55,17 @@ public class SectionService {
 
 	public void save(Section section) {
 		Assert.notNull(section);
-		checkPrincipal(section.getCurriculum().getTrainer());
+		Trainer trainer;
+		trainer = trainerService.findByPrincipal();
+		checkPrincipal(trainer);
 
 		sectionRepository.saveAndFlush(section);
 	}
 
 	public void delete(Section section) {
-		checkPrincipal(section.getCurriculum().getTrainer());
+		Trainer trainer;
+		trainer = trainerService.findByPrincipal();
+		checkPrincipal(trainer);
 
 		sectionRepository.delete(section);
 	}
@@ -85,4 +88,11 @@ public class SectionService {
 		return result;
 	}
 
+	public Double averageSectionsByCurriculums() {
+		Double result;
+		
+		result = sectionRepository.averageSectionsByCurriculums();
+		
+		return result;
+	}
 }

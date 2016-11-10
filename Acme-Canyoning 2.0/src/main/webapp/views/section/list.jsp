@@ -20,7 +20,6 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
-
 <display:table name="sections" id="row" pagesize="5"
 	requestURI="section/list.do" class="displaytag">
 	<form:hidden path="curriculumId" />
@@ -33,8 +32,6 @@
 	
 	<spring:message code="section.attachments" var="attachmentsHeader" />
 	<display:column property="attachments" title="${attachmentsHeader}" />
-	
-	
 	
 	
 	<spring:message code="section.display" var="display" />
@@ -55,6 +52,7 @@
 		</display:column>
 		</jstl:if>
 	</security:authorize>
+
 
 </display:table>
 

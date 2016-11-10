@@ -11,13 +11,13 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ActivityService;
 import services.CordService;
 import services.CourseService;
+import services.CurriculumService;
 import services.CustomerService;
 import services.KayakService;
 import services.LearningMaterialService;
 import services.ModuleService;
-import services.OrganiserService;
 import services.PieceEquipmentService;
-import services.RequestService;
+import services.SectionService;
 import services.TrainerService;
 import services.WetsuitService;
 import controllers.AbstractController;
@@ -32,12 +32,7 @@ public class DashboardAdministratorController extends AbstractController {
 	@Autowired
 	private CustomerService customerService;
 	@Autowired
-	private OrganiserService organiserService;
-	@Autowired
 	private ActivityService activityService;
-	@Autowired
-	private RequestService requestService;
-
 	@Autowired
 	private TrainerService trainerService;
 
@@ -60,6 +55,12 @@ public class DashboardAdministratorController extends AbstractController {
 
 	@Autowired
 	private PieceEquipmentService pieceEquipmentService;
+
+	@Autowired
+	private CurriculumService curriculumService;
+
+	@Autowired
+	private SectionService sectionService;
 
 	// Constructor --------------------
 	public DashboardAdministratorController() {
@@ -115,6 +116,31 @@ public class DashboardAdministratorController extends AbstractController {
 		Double averageWetsuitsByActivity = wetsuitService
 				.averageWetsuitsByActivity();
 
+		// --------2.0 B-------------
+
+		// The average number of curricula per trainer.
+		Double averageCurriculumsByTrainer = curriculumService
+				.averageCurriculumsByTrainer();
+
+		// The average number of sections per curriculum.
+		Double averageSectionsByCurriculums = sectionService
+				.averageSectionsByCurriculums();
+
+		// The trainers who have registered at least a curriculum
+		// in which his or her full name does not coincide with the full name
+		// in his or her user account.
+		Collection<Trainer> trainersNameNotMatchCurriculumName = trainerService
+				.trainersNameNotMatchCurriculumName();
+
+		// The trainers who havent registered any curricula.
+		Collection<Trainer> trainersNoCurriculum = trainerService
+				.trainersNoCurriculum();
+
+		// The trainers who havent updated their curricula for more than three
+		// months.
+		Collection<Trainer> trainersNoUpdateCurriculumThree = trainerService
+				.trainersNoUpdateCurriculumThree();
+
 		result = new ModelAndView("administrator/dashboard");
 		result.addObject("averageActivitiesPerOrganiser",
 				averageActivitiesPerOrganiser);
@@ -135,6 +161,16 @@ public class DashboardAdministratorController extends AbstractController {
 		result.addObject("averageKayaksByActivity", averageKayaksByActivity);
 		result.addObject("averageCordsByActivity", averageCordsByActivity);
 		result.addObject("averageWetsuitsByActivity", averageWetsuitsByActivity);
+
+		result.addObject("averageCurriculumsByTrainer",
+				averageCurriculumsByTrainer);
+		result.addObject("averageSectionsByCurriculums",
+				averageSectionsByCurriculums);
+		result.addObject("trainersNameNotMatchCurriculumName",
+				trainersNameNotMatchCurriculumName);
+		result.addObject("trainersNoCurriculum", trainersNoCurriculum);
+		result.addObject("trainersNoUpdateCurriculumThree",
+				trainersNoUpdateCurriculumThree);
 
 		return result;
 	}

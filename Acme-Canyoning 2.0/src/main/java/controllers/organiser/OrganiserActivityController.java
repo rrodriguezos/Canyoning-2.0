@@ -65,11 +65,10 @@ public class OrganiserActivityController extends AbstractController {
 
 		ActivityForm af = new ActivityForm();
 		ModelAndView result = createEditModelAndViewForm(af);
-		Activity activity;
 		Collection<Canyon> canyons;
 		Collection<PieceEquipment> pieceEquipments;
 
-		activity = activityService.create();
+		activityService.create();
 
 		canyons = canyonService.findAll();
 		pieceEquipments = pieceEquipmentService.findAll();
@@ -111,10 +110,6 @@ public class OrganiserActivityController extends AbstractController {
 		canyons = canyonService.findAll();
 		pieceEquipments = pieceEquipmentService.findAll();
 		if (binding.hasErrors()) {
-			System.out.print(binding.getObjectName());
-			System.out.print(binding.getClass());
-			System.out.print(binding.getFieldError());
-			System.out.print(binding.getGlobalError());
 			canyons = canyonService.findAll();
 
 			result = createEditModelAndViewForm(af);

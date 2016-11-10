@@ -9,7 +9,6 @@ import org.springframework.util.Assert;
 
 import repositories.LearningMaterialRepository;
 import domain.Administrator;
-import domain.Course;
 import domain.LearningMaterial;
 import domain.Trainer;
 

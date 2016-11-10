@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActivityService;
-import services.AdministratorService;
-import services.CommentService;
 import services.CustomerService;
 import services.RequestService;
 import controllers.AbstractController;
@@ -82,7 +80,8 @@ public class CustomerActivityController extends AbstractController {
 		return result;
 	}
 
-	// AllListing -----------------------------------------------------------------
+	// AllListing
+	// -----------------------------------------------------------------
 	@RequestMapping(value = "/mylistPending", method = RequestMethod.GET)
 	public ModelAndView listAllPending() {
 		ModelAndView result;
@@ -96,31 +95,31 @@ public class CustomerActivityController extends AbstractController {
 		result.addObject("requestURI", "activity/customer/mylistPending.do");
 		return result;
 	}
-	
-	
+
 	// Request an
-		// Activity------------------------------------------------------------------
-		@RequestMapping(value = "/requestActivity", method = RequestMethod.GET)
-		public ModelAndView requestActivity(@RequestParam int activityId) {
+	// Activity------------------------------------------------------------------
+	@RequestMapping(value = "/requestActivity", method = RequestMethod.GET)
+	public ModelAndView requestActivity(@RequestParam int activityId) {
 
-			ModelAndView result;
-			Customer customer;
-			Request request;
-			customer = customerSService.findByPrincipal();
-			Collection<Activity> activities;	
-			
-			request = requestService.requestActivityByCustomer(activityId,customer);	
-			requestService.save(request);
-			activities = activityService.activitiesPendingByRequestCustomer(customer.getId());
+		ModelAndView result;
+		Customer customer;
+		Request request;
+		customer = customerSService.findByPrincipal();
+		Collection<Activity> activities;
 
-			result = new ModelAndView("redirect:/activity/customer/mylistPending.do");
-			result.addObject("activities", activities);
-			result.addObject("requestURI", "activity/customer/mylist.do");
+		request = requestService
+				.requestActivityByCustomer(activityId, customer);
+		requestService.save(request);
+		activities = activityService
+				.activitiesPendingByRequestCustomer(customer.getId());
 
-			return result;
+		result = new ModelAndView(
+				"redirect:/activity/customer/mylistPending.do");
+		result.addObject("activities", activities);
+		result.addObject("requestURI", "activity/customer/mylist.do");
 
-		}
+		return result;
 
-	
+	}
 
 }

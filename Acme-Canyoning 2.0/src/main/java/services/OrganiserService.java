@@ -94,12 +94,9 @@ public class OrganiserService {
 
 	public void save(Organiser organiser) {
 
-		Boolean create;
-		create = false;
 		if (organiser.getId() == 0) {
 			Md5PasswordEncoder encoder;
 
-			create = true;
 			encoder = new Md5PasswordEncoder();
 
 			organiser.getUserAccount().setPassword(

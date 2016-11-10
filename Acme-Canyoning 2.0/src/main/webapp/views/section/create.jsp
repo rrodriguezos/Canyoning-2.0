@@ -26,24 +26,17 @@
 		<form:hidden path="version" />
 		<form:hidden path="curriculum"/>
 
-
 		<acme:textbox code="section.title" path="title" />
+
 		<acme:textarea code="section.content" path="content" />
+
 		<acme:textarea code="section.attachments" path="attachments" />
 
-		<br>
 
-		<jstl:if test="${section.id == 0}">
-			<input type="submit" name="save"
-				value="<spring:message code="section.save" />" />
-				<acme:cancel url="curriculum/trainer/mylist.do" code="section.cancel" />
-		</jstl:if>
-		<jstl:if test="${section.id != 0}">
-			<input type="submit" name="save"
-				value="<spring:message code="section.save" />"/>
-				<acme:cancel url="curriculum/trainer/mylist.do" code="section.cancel" />
-		</jstl:if>
 
+		<input type="submit" name="save"
+			value="<spring:message code="section.save" />" />
+		<acme:cancel url="curriculum/trainer/mylist.do" code="section.cancel" />
 
 	</form:form>
 

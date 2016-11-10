@@ -1,6 +1,5 @@
 package controllers;
 
-
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -16,13 +15,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ActivityService;
 import domain.Activity;
-import domain.Canyon;
 import forms.SearchForm;
 
 @Controller
 @RequestMapping("/search")
-public class SearchController extends AbstractController  {
-	
+public class SearchController extends AbstractController {
+
 	@Autowired
 	private ActivityService activityService;
 
@@ -36,25 +34,25 @@ public class SearchController extends AbstractController  {
 
 		return result;
 	}
-	
+
 	@RequestMapping(value = "/buscar", method = RequestMethod.POST, params = "search")
-	public ModelAndView list(@Valid SearchForm searchForm,BindingResult binding) {
+	public ModelAndView list(@Valid SearchForm searchForm, BindingResult binding) {
 		ModelAndView result;
 		if (binding.hasErrors()) {
 			result = new ModelAndView("search/buscando");
 			result.addObject("searchForm", searchForm);
-		}else{
-			try{
-		
-		Assert.notNull(searchForm);
-		String text = searchForm.getText();
-		Collection<Activity> activities = new HashSet<Activity>();
-		activities = activityService.findActivityByKeyword(text);
+		} else {
+			try {
 
-		result = new ModelAndView("search/buscando");
-		result.addObject("activities", activities);
-		result.addObject("searchForm", searchForm);
-		result.addObject("requestUri", "search/buscando.do");
+				Assert.notNull(searchForm);
+				String text = searchForm.getText();
+				Collection<Activity> activities = new HashSet<Activity>();
+				activities = activityService.findActivityByKeyword(text);
+
+				result = new ModelAndView("search/buscando");
+				result.addObject("activities", activities);
+				result.addObject("searchForm", searchForm);
+				result.addObject("requestUri", "search/buscando.do");
 			} catch (Throwable oops) {
 
 				result = new ModelAndView("search/buscando");
@@ -64,7 +62,7 @@ public class SearchController extends AbstractController  {
 		}
 		return result;
 	}
-	
+
 	@RequestMapping(value = "/buscando", method = RequestMethod.GET)
 	public ModelAndView lista(@Valid SearchForm searchForm) {
 		ModelAndView result;
@@ -81,8 +79,5 @@ public class SearchController extends AbstractController  {
 
 		return result;
 	}
-
-
-
 
 }

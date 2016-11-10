@@ -15,4 +15,7 @@ public interface SectionRepository extends
 	@Query("select d from Section d where d.curriculum.id = ?1")
 	Collection<Section> sectionsByCurriculum(int curriculumId);
 
+	@Query("select avg(c.sections.size) from Curriculum c")
+	Double averageSectionsByCurriculums();
+
 }
