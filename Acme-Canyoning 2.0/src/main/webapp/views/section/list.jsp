@@ -23,6 +23,7 @@
 <display:table name="sections" id="row" pagesize="5"
 	requestURI="section/list.do" class="displaytag">
 	<form:hidden path="curriculumId" />
+	<form:hidden path="curriculum" />
 
 	<spring:message code="section.title" var="titleHeader" />
 	<display:column property="title" title="${titleHeader}" />

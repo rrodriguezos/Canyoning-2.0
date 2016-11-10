@@ -39,6 +39,7 @@ public class CurriculumService {
 
 		result = new Curriculum();
 		result.setSections(new ArrayList<Section>());
+		result.setLastUpdate(new Date(System.currentTimeMillis() - 1000));
 
 		result.setIsActive(false);
 
@@ -71,7 +72,6 @@ public class CurriculumService {
 		checkPrincipal(trainer);
 		curriculum.setLastUpdate(new Date(System.currentTimeMillis() - 1000));
 		curriculum.setIsActive(false);
-		
 
 		curriculumRepository.saveAndFlush(curriculum);
 	}

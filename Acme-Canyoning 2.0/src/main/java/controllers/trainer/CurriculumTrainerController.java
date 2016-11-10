@@ -92,6 +92,8 @@ public class CurriculumTrainerController extends AbstractController {
 			ModelAndView result;
 
 			if (binding.hasErrors() ) {
+				System.out.print(binding.getFieldError());
+				System.out.print(binding.getObjectName());
 				result = createEditModelAndView(curriculum,"curriculum.commit.error");
 			} else {
 				try {

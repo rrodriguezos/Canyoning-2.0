@@ -26,7 +26,10 @@
 		<form:hidden path="id" />
 		<form:hidden path="version" />
 		<form:hidden path="trainer" />
+		<form:hidden path="sections" />
 		<form:hidden path="isActive" />
+		<form:hidden path="lastUpdate" />
+		
 
 		<jstl:if test="${curriculum.id == 0}">
 		
@@ -51,9 +54,9 @@
 		
 		<acme:textbox code="curriculum.name" path="name"/>
 
-			<acme:date code="curriculum.email" path="email"/>
+			<acme:textbox code="curriculum.email" path="email"/>
 
-			<acme:date code="curriculum.phone" path="phone" />
+			<acme:textbox code="curriculum.phone" path="phone" />
 		
 			<input type="submit" name="saveEdit"
 				value="<spring:message code="curriculum.save" />">

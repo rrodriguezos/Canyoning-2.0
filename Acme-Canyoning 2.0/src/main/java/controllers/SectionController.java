@@ -39,14 +39,11 @@ public class SectionController extends AbstractController {
 
 		ModelAndView result;
 		Collection<Section> sections;
-		Curriculum curriculum;
+		Curriculum curriculum = curriculumService.findOne(curriculumId);
 		Trainer trainer;
 		Boolean mycurriculum;
-		sections = sectionService.findSectionsByCurriculumId(curriculumId);
-		result = new ModelAndView("section/list");
-		result.addObject("sections", sections);
-		result.addObject("curriculumId", curriculumId);
 		mycurriculum = false;
+		sections = sectionService.findSectionsByCurriculumId(curriculumId);
 		try {
 			trainer = trainerService.findByPrincipal();
 			curriculum = curriculumService.findOne(curriculumId);
@@ -56,7 +53,12 @@ public class SectionController extends AbstractController {
 		} catch (Throwable oops) {
 
 		}
+		result = new ModelAndView("section/list");
+
 		result.addObject("mycurriculum", mycurriculum);
+		result.addObject("sections", sections);
+		result.addObject("curriculumId", curriculumId);
+		result.addObject("curriculum", curriculum);
 
 		return result;
 	}

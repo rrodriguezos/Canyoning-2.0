@@ -21,12 +21,12 @@ public interface TrainerRepository extends JpaRepository<Trainer, Integer> {
 			+ "0.90*((select count(c) from Course c)/(select count(t) from Trainer t)))")
 	Collection<Trainer> courses10percAboveBelowAvg();
 
-	@Query("select t from Trainer t where t.curriculum.name = t.name ")
+	@Query("select distinct c.trainer from Curriculum c where c.name != c.trainer.name ")
 	Collection<Trainer> trainersNameNotMatchCurriculumName();
 
-	@Query("select t from Trainer t where t.curriculums is null group by c")
+	@Query("select t from Trainer t where t.curriculums is empty")
 	Collection<Trainer> trainersNoCurriculum();
 
-	@Query("select t from Trainer t where t.curriculum.lastUpdate < ?1")
+	@Query("select distinct c.trainer from Curriculum c where c.lastUpdate < ?1")
 	Collection<Trainer> trainersNoUpdateCurriculumThree(Date upToDateCriteria);
 }

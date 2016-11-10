@@ -116,30 +116,7 @@ public class DashboardAdministratorController extends AbstractController {
 		Double averageWetsuitsByActivity = wetsuitService
 				.averageWetsuitsByActivity();
 
-		// --------2.0 B-------------
-
-		// The average number of curricula per trainer.
-		Double averageCurriculumsByTrainer = curriculumService
-				.averageCurriculumsByTrainer();
-
-		// The average number of sections per curriculum.
-		Double averageSectionsByCurriculums = sectionService
-				.averageSectionsByCurriculums();
-
-		// The trainers who have registered at least a curriculum
-		// in which his or her full name does not coincide with the full name
-		// in his or her user account.
-		Collection<Trainer> trainersNameNotMatchCurriculumName = trainerService
-				.trainersNameNotMatchCurriculumName();
-
-		// The trainers who havent registered any curricula.
-		Collection<Trainer> trainersNoCurriculum = trainerService
-				.trainersNoCurriculum();
-
-		// The trainers who havent updated their curricula for more than three
-		// months.
-		Collection<Trainer> trainersNoUpdateCurriculumThree = trainerService
-				.trainersNoUpdateCurriculumThree();
+	
 
 		result = new ModelAndView("administrator/dashboard");
 		result.addObject("averageActivitiesPerOrganiser",
@@ -162,15 +139,7 @@ public class DashboardAdministratorController extends AbstractController {
 		result.addObject("averageCordsByActivity", averageCordsByActivity);
 		result.addObject("averageWetsuitsByActivity", averageWetsuitsByActivity);
 
-		result.addObject("averageCurriculumsByTrainer",
-				averageCurriculumsByTrainer);
-		result.addObject("averageSectionsByCurriculums",
-				averageSectionsByCurriculums);
-		result.addObject("trainersNameNotMatchCurriculumName",
-				trainersNameNotMatchCurriculumName);
-		result.addObject("trainersNoCurriculum", trainersNoCurriculum);
-		result.addObject("trainersNoUpdateCurriculumThree",
-				trainersNoUpdateCurriculumThree);
+
 
 		return result;
 	}
@@ -193,6 +162,31 @@ public class DashboardAdministratorController extends AbstractController {
 		// The average number of learning materials per course.
 		Double averageOfLearningMaterialByCourse = learningMaterialService
 				.averageOfLearningMaterialByCourse();
+		
+		// --------2.0 B-------------
+
+				// The average number of curricula per trainer.
+				Double averageCurriculumsByTrainer = curriculumService
+						.averageCurriculumsByTrainer();
+
+				// The average number of sections per curriculum.
+				Double averageSectionsByCurriculums = sectionService
+						.averageSectionsByCurriculums();
+
+				// The trainers who have registered at least a curriculum
+				// in which his or her full name does not coincide with the full name
+				// in his or her user account.
+				Collection<Trainer> trainersNameNotMatchCurriculumName = trainerService
+						.trainersNameNotMatchCurriculumName();
+
+				// The trainers who havent registered any curricula.
+				Collection<Trainer> trainersNoCurriculum = trainerService
+						.trainersNoCurriculum();
+
+				// The trainers who havent updated their curricula for more than three
+				// months.
+				Collection<Trainer> trainersNoUpdateCurriculumThree = trainerService
+						.trainersNoUpdateCurriculumThree();
 
 		result = new ModelAndView("administrator/dashboard-2");
 		result.addObject("averageOfCoursesByTrainer", averageOfCoursesByTrainer);
@@ -201,6 +195,16 @@ public class DashboardAdministratorController extends AbstractController {
 		result.addObject("averageOfModulesByCourse", averageOfModulesByCourse);
 		result.addObject("averageOfLearningMaterialByCourse",
 				averageOfLearningMaterialByCourse);
+		
+		result.addObject("averageCurriculumsByTrainer",
+				averageCurriculumsByTrainer);
+		result.addObject("averageSectionsByCurriculums",
+				averageSectionsByCurriculums);
+		result.addObject("trainersNameNotMatchCurriculumName",
+				trainersNameNotMatchCurriculumName);
+		result.addObject("trainersNoCurriculum", trainersNoCurriculum);
+		result.addObject("trainersNoUpdateCurriculumThree",
+				trainersNoUpdateCurriculumThree);
 
 		return result;
 	}

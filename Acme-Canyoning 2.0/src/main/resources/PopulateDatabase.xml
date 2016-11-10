@@ -131,6 +131,17 @@
 			</list>
 		</property>
 	</bean>
+	<bean id="userAccount11" class="security.UserAccount">
+		<property name="username" value="trainer4" />
+		<property name="password" value="06de2cced0f700b155d4d04d2ef3245c" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="TRAINER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
 
 	<!-- Administrators -->
 
@@ -406,6 +417,29 @@
 			</list>
 		</property>
 		<property name="trainerComment" ref="trainerComment3" />
+	</bean>
+	
+	<bean class="domain.Trainer" id="trainer4">
+		<property value="Rafael" name="name" />
+		<property value="Rodriguez" name="surname" />
+		<property value="tengoQueAprobrarYa@gmail.com" name="email" />
+		<property name="userAccount" ref="userAccount11" />
+		<property value="+34(789)99" name="phone" />
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+		<property name="courses">
+			<list>
+
+			</list>
+		</property>
+		<property name="curriculums">
+			<list>
+
+			</list>
+		</property>
+		<property name="trainerComment" ref="trainerComment4" />
 	</bean>
 
 
@@ -1795,6 +1829,14 @@
 		<property name="comments">
 			<list>
 				<ref bean="comment24" />
+			</list>
+		</property>
+	</bean>
+	<bean id="trainerComment4" class="domain.TrainerComment">
+		<property name="trainer" ref="trainer4" />
+		<property name="comments">
+			<list>
+
 			</list>
 		</property>
 	</bean>
