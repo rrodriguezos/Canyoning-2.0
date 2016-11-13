@@ -96,6 +96,7 @@ public class ActivityService {
 	}
 
 	public void save(Activity activity) {
+checkPrincipalOrganiser();
 		Assert.notNull(activity);
 		activity.setSeatsAvailable(activity.getNumberSeats());
 		activityRepository.saveAndFlush(activity);

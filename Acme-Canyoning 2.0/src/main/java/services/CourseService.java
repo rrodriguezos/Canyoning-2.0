@@ -75,6 +75,7 @@ public class CourseService {
 	}
 
 	public void save(Course course) {
+		checkPrincipal(trainerService.findByPrincipal());
 		Assert.notNull(course);
 
 		courseRepository.saveAndFlush(course);

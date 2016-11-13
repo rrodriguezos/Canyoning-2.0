@@ -38,7 +38,7 @@ public class CordService {
 
 	public Cord create() {
 		Cord result;
-
+checkPrincipal(organiserService.findByPrincipal());
 		Organiser organiser;
 
 		result = new Cord();

@@ -64,6 +64,7 @@ public class SectionService {
 
 	public void delete(Section section) {
 		Trainer trainer;
+		Assert.notNull(section);
 		trainer = trainerService.findByPrincipal();
 		checkPrincipal(trainer);
 

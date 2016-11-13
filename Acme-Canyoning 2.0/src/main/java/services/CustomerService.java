@@ -119,6 +119,8 @@ public class CustomerService {
 		Assert.isTrue(customerForm.getAccept());
 		res.setComments(new ArrayList<Comment>());
 		res.setRequests(new ArrayList<Request>());
+		res.setName(customerForm.getName());
+		res.setSurname(customerForm.getSurname());
 		res.setPhone(customerForm.getPhone());
 		res.setEmail(customerForm.getEmail());
 		res.getUserAccount().setUsername(customerForm.getUsername());

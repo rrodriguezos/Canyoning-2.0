@@ -1,5 +1,7 @@
 package services;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,12 +51,12 @@ public class AboutService {
 	public About create() {
 		About result;
 		Organiser organiser;
-		
+
 		organiser = organiserService.findByPrincipal();
 		result = new About();
 		result.setOrganiser(organiser);
 		checkPrincipalOrganiser();
-		
+
 		return result;
 	}
 
@@ -63,9 +65,9 @@ public class AboutService {
 		Organiser organiser;
 		organiser = organiserService.findByPrincipal();
 		checkPrincipalOrganiser();
-		
-		result = aboutRepository.findAboutByOrganiser(organiser.getId());		
-		
+
+		result = aboutRepository.findAboutByOrganiser(organiser.getId());
+
 		return result;
 	}
 
@@ -81,6 +83,12 @@ public class AboutService {
 
 		Assert.isTrue(actor.getUserAccount().getAuthorities()
 				.contains(authority));
+	}
+
+	public Collection<About> findAll() {
+		Collection<About> result;
+		result = aboutRepository.findAll();
+		return result;
 	}
 
 }

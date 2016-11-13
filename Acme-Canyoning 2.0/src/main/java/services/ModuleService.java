@@ -57,8 +57,8 @@ public class ModuleService {
 
 	public void save(Module module) {
 		Assert.notNull(module);
-		Trainer admin = trainerService.findByPrincipal();
-		Assert.notNull(admin);
+		Trainer trainer = trainerService.findByPrincipal();
+		Assert.notNull(trainer);
 		moduleRepository.saveAndFlush(module);
 	}
 

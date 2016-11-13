@@ -60,4 +60,10 @@ public class CommentService {
 		return result;
 	}
 
+	public Collection<Comment> findAll() {
+		Collection<Comment> result;
+		result = commentRepository.findAll();
+		return result;
+	}
+
 }

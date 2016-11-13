@@ -174,4 +174,11 @@ public class RequestService {
 		return result;
 	}
 
+	public Collection<Request> findAll() {
+		Collection<Request> result;
+
+		result = requestRepository.findAll();
+		return result;
+	}
+
 }
