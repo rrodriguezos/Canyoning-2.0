@@ -14,6 +14,7 @@ import domain.Administrator;
 import domain.Canyon;
 import domain.Comment;
 import domain.GPSCoordinates;
+import domain.Story;
 import forms.CanyonEditForm;
 import forms.CanyonRegisterForm;
 
@@ -38,6 +39,7 @@ public class CanyonService {
 	public Canyon create() {
 		Canyon result;
 		Collection<Activity> activity;
+		Collection<Story> stories;
 		Collection<String> pictures;
 
 		Collection<Comment> comments;
@@ -51,6 +53,9 @@ public class CanyonService {
 
 		pictures = new ArrayList<String>();
 		result.setPictures(pictures);
+
+		stories = new ArrayList<Story>();
+		result.setStories(stories);
 
 		administrator = administratorService.findByPrincipal();
 		result.setAdministrator(administrator);
@@ -160,6 +165,22 @@ public class CanyonService {
 		result.setDescription(canyonEditForm.getDescription());
 		result.setDifficultyLevel(canyonEditForm.getDifficultyLevel());
 		result.setRoute(canyonEditForm.getRoute());
+
+		return result;
+	}
+
+	public Canyon canyonByStory(int storyId) {
+		Canyon result;
+
+		result = canyonRepository.canyonByStory(storyId);
+
+		return result;
+	}
+
+	public Collection<Canyon> canyonsSortedStories() {
+		Collection<Canyon> result;
+
+		result = canyonRepository.canyonsSortedStories();
 
 		return result;
 	}

@@ -32,4 +32,16 @@ public class Administrator extends Actor {
 	public void setCanyons(Collection<Canyon> canyons) {
 		this.canyons = canyons;
 	}
+private Collection<Story> stories;
+
+	@Valid
+	@NotNull
+	@OneToMany(mappedBy = "administrator")
+	public Collection<Story> getStories() {
+		return stories;
+	}
+
+	public void setStories(Collection<Story> stories) {
+		this.stories = stories;
+	}
 }

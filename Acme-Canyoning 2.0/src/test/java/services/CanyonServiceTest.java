@@ -37,6 +37,7 @@ public class CanyonServiceTest extends AbstractTest {
 	@Test
 	public void testCreateCanyonAsAdministrator() {
 		authenticate("admin");
+		int actual = canyonService.findAll().size();
 		Canyon canyon = canyonService.create();
 		canyon.setName("titulo 1");
 		canyon.setRoute("https://www.google.es/maps/place/Can%C3%B3n+do+Sil,+27460,+Lugo/@42.4096622,-7.6321641,18z/data=!4m2!3m1!1s0xd30056b4a5bf867:0xc27f74853f84e20c");
@@ -53,6 +54,8 @@ public class CanyonServiceTest extends AbstractTest {
 		canyon.setGpsCoordinates(gpsCoordinates);
 		canyon.setDescription("Descripcion 1");
 		canyonService.save(canyon);
+		int expected = canyonService.findAll().size();
+		Assert.isTrue(expected == actual + 1);
 		unauthenticate();
 	}
 
@@ -113,7 +116,10 @@ public class CanyonServiceTest extends AbstractTest {
 	@Test
 	public void deletCanyon() {
 		authenticate("admin");
+		int actual = canyonService.findAll().size();
 		canyonService.delete(canyonService.findOne(97));
+		int expected = canyonService.findAll().size();
+		Assert.isTrue(expected == actual - 1);
 		unauthenticate();
 	}
 
@@ -151,6 +157,8 @@ public class CanyonServiceTest extends AbstractTest {
 		Canyon canyon = canyonService.findOne(97);
 		canyon.setName("title edit");
 		canyon.setDescription("Description edit");
+		Assert.isTrue(canyon.getName().equals("title edit"));
+		Assert.isTrue(canyon.getDescription().equals("Description edit"));
 
 		canyonService.save(canyon);
 
@@ -212,6 +220,7 @@ public class CanyonServiceTest extends AbstractTest {
 		canyon.setDifficultyLevel(9);
 
 		canyonService.save(canyon);
+		Assert.isTrue(canyon.getDifficultyLevel().equals(9));
 
 		unauthenticate();
 	}
@@ -229,6 +238,8 @@ public class CanyonServiceTest extends AbstractTest {
 		canyon.setDescription("Description edition 2");
 
 		canyonService.save(canyon);
+		Assert.isTrue(canyon.getName().equals("title edition 2"));
+		Assert.isTrue(canyon.getDescription().equals("Description edition 2"));
 
 		unauthenticate();
 	}

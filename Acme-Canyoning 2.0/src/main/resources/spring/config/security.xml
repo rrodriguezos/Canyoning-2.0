@@ -51,6 +51,7 @@
 		<security:intercept-url pattern="/activity/list.do" access="permitAll" /> 
 		<security:intercept-url pattern="/activity/display.do" access="permitAll" />
 		<security:intercept-url pattern="/activity/listByCanyon.do" access="permitAll" />
+		<security:intercept-url pattern="/comment/display.do" access="permitAll" />
 			
 		<security:intercept-url pattern="/kayak/display.do" access="permitAll" />
 		<security:intercept-url pattern="/cord/display.do" access="permitAll" />
@@ -72,11 +73,15 @@
 		<security:intercept-url pattern="/trainer/administrator/display.do" access="hasRole('ADMINISTRATOR')" /> 
 		
 		<security:intercept-url pattern="/dashboard/administrator/list.do" access="hasRole('ADMINISTRATOR')" /> 
+		<security:intercept-url pattern="/story/display.do" access="permitAll" />  
+		<security:intercept-url pattern="/story/list.do" access="hasRole('ADMINISTRATOR')" />
+						<security:intercept-url pattern="/story/administrator/mylist.do" access="hasRole('ADMINISTRATOR')" />
 		
-		
-		
+			<security:intercept-url pattern="/canyon/listByStory.do" access="permitAll" />
+		<security:intercept-url pattern="/story/listByCanyon.do" access="permitAll" />
 		
 		<security:intercept-url pattern="/canyon/administrator/mylist.do" access="hasRole('ADMINISTRATOR')" /> 
+		<security:intercept-url pattern="/story/administrator/create.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/canyon/administrator/edit.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/canyon/administrator/create.do" access="hasRole('ADMINISTRATOR')" />
 
@@ -128,7 +133,6 @@
 		<security:intercept-url pattern="/comment/list.do" access="isAuthenticated()" />
 		<security:intercept-url pattern="/comment/edit.do" access="isAuthenticated()" />
 		<security:intercept-url pattern="/comment/create.do" access="isAuthenticated()" />
-		<security:intercept-url pattern="/comment/display.do" access="isAuthenticated()" />
 		<security:intercept-url pattern="/comment/actor.do" access="isAuthenticated()" />
 		<security:intercept-url pattern="/customer/list.do" access="isAuthenticated()" />
 		<security:intercept-url pattern="/organiser/list.do" access="isAuthenticated()" />

@@ -35,6 +35,7 @@ public class AboutServiceTest extends AbstractTest {
 		authenticate("organiser1");
 		About about = aboutService.findOne(15);
 		about.setMessage("About Test");
+		Assert.isTrue(about.getMessage().equals("About Test"));
 		aboutService.save(about);
 		unauthenticate();
 
@@ -80,6 +81,7 @@ public class AboutServiceTest extends AbstractTest {
 		About about = aboutService.findOne(15);
 		about.setMessage("About Test Editing");
 		aboutService.save(about);
+		Assert.isTrue(about.getMessage().equals("About Test Editing"));
 		unauthenticate();
 
 	}

@@ -131,6 +131,42 @@
 <br>
 <br>
 
+<!-- A -->
+
+<!-- The average, the minimum, and the maximum number of stories per can-yon, grouped by the author of the story. -->
+<spring:message code="administrator.dashboard.12" />
+<br>
+<spring:message code="administrator.dashboard.avgStories" />
+<p>
+	<jstl:out value="${avgStoriesPerCanyon}"></jstl:out>
+</p>
+<br>
+<spring:message code="administrator.dashboard.minStories" />
+<p>
+	<jstl:out value="${minStoriesPerCanyon}"></jstl:out>
+</p>
+<br>
+<spring:message code="administrator.dashboard.maxStories" />
+<p>
+	<jstl:out value="${maxStoriesPerCanyon}"></jstl:out>
+</p>
+<br>
+<br>
+<spring:message code="administrator.dashboard.13" />
+<!-- A listing of canyons sorted according to the number of stories that have been written about them. -->
+<display:table name="canyonsSortedStories" id="row13"
+	requestURI="dashboard/administrator/list.do" pagesize="5"
+	class="displaytag" keepStatus="true">
+	<spring:message code="canyon.name" var="name" />
+	<display:column property="name" title="${title}" />
+
+	<spring:message code="canyon.description" var="description" />
+	<display:column property="description" title="${description}" />
+
+</display:table>
+<br>
+
+
 
 
 

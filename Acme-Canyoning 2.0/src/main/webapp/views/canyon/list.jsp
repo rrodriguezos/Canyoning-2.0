@@ -61,6 +61,13 @@
 			value="<spring:message code="canyon.activities" />"
 			onclick="javascript: window.location.assign('activity/listByCanyon.do?canyonId=${row.id}')" />
 	</display:column>
+	
+	<spring:message code="canyon.stories" var="storiesHeader" />
+	<display:column title="${storiesHeader}">
+			<input type="button" value="<spring:message code="canyon.stories" />" 
+					onclick="javascript: window.location.assign('story/listByCanyon.do?canyonId=${row.id}')" />
+	</display:column>
+	
 	<security:authorize access="isAuthenticated()">
 		<spring:message code="canyon.comment" var="commentHeader" />
 		<display:column title="${commentHeader}">

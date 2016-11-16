@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActivityService;
+import services.CanyonService;
 import services.CordService;
 import services.CourseService;
 import services.CurriculumService;
@@ -18,10 +19,12 @@ import services.LearningMaterialService;
 import services.ModuleService;
 import services.PieceEquipmentService;
 import services.SectionService;
+import services.StoryService;
 import services.TrainerService;
 import services.WetsuitService;
 import controllers.AbstractController;
 import domain.Activity;
+import domain.Canyon;
 import domain.Trainer;
 
 @Controller
@@ -61,6 +64,12 @@ public class DashboardAdministratorController extends AbstractController {
 
 	@Autowired
 	private SectionService sectionService;
+
+	@Autowired
+	private CanyonService canyonService;
+
+	@Autowired
+	private StoryService storyService;
 
 	// Constructor --------------------
 	public DashboardAdministratorController() {
@@ -116,7 +125,22 @@ public class DashboardAdministratorController extends AbstractController {
 		Double averageWetsuitsByActivity = wetsuitService
 				.averageWetsuitsByActivity();
 
-	
+		// --------A-------------
+
+		// The average number of stories per canyon.
+		Double avgStoriesPerCanyon = storyService.avgStoriesPerCanyon();
+
+		// The min number of stories per canyon.
+		Double minStoriesPerCanyon = storyService.minStoriesPerCanyon();
+
+		// The max number of stories per canyon.
+		Double maxStoriesPerCanyon = storyService.maxStoriesPerCanyon();
+
+		// A listing of canyons sorted according to the number of stories that
+		// have been written about them
+
+		Collection<Canyon> canyonsSortedStories = canyonService
+				.canyonsSortedStories();
 
 		result = new ModelAndView("administrator/dashboard");
 		result.addObject("averageActivitiesPerOrganiser",
@@ -139,7 +163,10 @@ public class DashboardAdministratorController extends AbstractController {
 		result.addObject("averageCordsByActivity", averageCordsByActivity);
 		result.addObject("averageWetsuitsByActivity", averageWetsuitsByActivity);
 
-
+		result.addObject("avgStoriesPerCanyon", avgStoriesPerCanyon);
+		result.addObject("minStoriesPerCanyon", minStoriesPerCanyon);
+		result.addObject("maxStoriesPerCanyon", maxStoriesPerCanyon);
+		result.addObject("canyonsSortedStories", canyonsSortedStories);
 
 		return result;
 	}
@@ -162,31 +189,31 @@ public class DashboardAdministratorController extends AbstractController {
 		// The average number of learning materials per course.
 		Double averageOfLearningMaterialByCourse = learningMaterialService
 				.averageOfLearningMaterialByCourse();
-		
+
 		// --------2.0 B-------------
 
-				// The average number of curricula per trainer.
-				Double averageCurriculumsByTrainer = curriculumService
-						.averageCurriculumsByTrainer();
+		// The average number of curricula per trainer.
+		Double averageCurriculumsByTrainer = curriculumService
+				.averageCurriculumsByTrainer();
 
-				// The average number of sections per curriculum.
-				Double averageSectionsByCurriculums = sectionService
-						.averageSectionsByCurriculums();
+		// The average number of sections per curriculum.
+		Double averageSectionsByCurriculums = sectionService
+				.averageSectionsByCurriculums();
 
-				// The trainers who have registered at least a curriculum
-				// in which his or her full name does not coincide with the full name
-				// in his or her user account.
-				Collection<Trainer> trainersNameNotMatchCurriculumName = trainerService
-						.trainersNameNotMatchCurriculumName();
+		// The trainers who have registered at least a curriculum
+		// in which his or her full name does not coincide with the full name
+		// in his or her user account.
+		Collection<Trainer> trainersNameNotMatchCurriculumName = trainerService
+				.trainersNameNotMatchCurriculumName();
 
-				// The trainers who havent registered any curricula.
-				Collection<Trainer> trainersNoCurriculum = trainerService
-						.trainersNoCurriculum();
+		// The trainers who havent registered any curricula.
+		Collection<Trainer> trainersNoCurriculum = trainerService
+				.trainersNoCurriculum();
 
-				// The trainers who havent updated their curricula for more than three
-				// months.
-				Collection<Trainer> trainersNoUpdateCurriculumThree = trainerService
-						.trainersNoUpdateCurriculumThree();
+		// The trainers who havent updated their curricula for more than three
+		// months.
+		Collection<Trainer> trainersNoUpdateCurriculumThree = trainerService
+				.trainersNoUpdateCurriculumThree();
 
 		result = new ModelAndView("administrator/dashboard-2");
 		result.addObject("averageOfCoursesByTrainer", averageOfCoursesByTrainer);
@@ -195,7 +222,7 @@ public class DashboardAdministratorController extends AbstractController {
 		result.addObject("averageOfModulesByCourse", averageOfModulesByCourse);
 		result.addObject("averageOfLearningMaterialByCourse",
 				averageOfLearningMaterialByCourse);
-		
+
 		result.addObject("averageCurriculumsByTrainer",
 				averageCurriculumsByTrainer);
 		result.addObject("averageSectionsByCurriculums",

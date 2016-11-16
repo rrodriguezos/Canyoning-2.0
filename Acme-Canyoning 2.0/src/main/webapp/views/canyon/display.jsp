@@ -63,7 +63,7 @@
 
 	<spring:message code="comment.actor" var="actor" />
 	<display:column title="${actor}">
-		<jstl:out value="${row.getActor().getEmail()}" />
+		<jstl:out value="${row.getActor().getName()}" />
 	</display:column>
 
 	<spring:message code="comment.display" var="display" />

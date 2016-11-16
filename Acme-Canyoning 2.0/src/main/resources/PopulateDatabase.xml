@@ -165,6 +165,14 @@
 				<ref bean="canyon6" />
 			</list>
 		</property>
+		<property name="stories">
+			<list>
+				<ref bean="story1" />
+				<ref bean="story2" />
+				<ref bean="story3" />
+				<ref bean="story4" />
+			</list>
+		</property>
 	</bean>
 
 	<!-- Organisers -->
@@ -1224,7 +1232,7 @@
 		<property name="name" value="name1" />
 		<property name="difficultyLevel" value="2" />
 		<property name="route"
-			value="https://www.google.es/maps/place/Can%C3%B3n+do+Sil,+27460,+Lugo/@42.4096622,-7.6321641,18z/data=!4m2!3m1!1s0xd30056b4a5bf867:0xc27f74853f84e20c" />
+			value="https://goo.gl/7uZ4xk"/>
 		<property name="description" value="description1" />
 		<property name="gpsCoordinates" ref="gps1" />
 		<property name="administrator" ref="administrator" />
@@ -1248,13 +1256,17 @@
 				<ref bean="comment8" />
 			</list>
 		</property>
+		<property name="stories">
+			<list>
+			</list>
+		</property>
 	</bean>
 
 	<bean class="domain.Canyon" id="canyon2">
 		<property name="name" value="name2" />
 		<property name="difficultyLevel" value="4" />
 		<property name="route"
-			value="https://www.google.es/maps/place/Grand+Canyon,+Arizona+86444,+EE.+UU./@36.1574057,-113.9734103,12z/data=!4m2!3m1!1s0x80cc0654bd27e08d:0xb1c2554442d42e8d" />
+			value="https://goo.gl/mUVhF5" />
 		<property name="description" value="description2" />
 		<property name="gpsCoordinates" ref="gps2" />
 		<property name="administrator" ref="administrator" />
@@ -1278,13 +1290,19 @@
 				<ref bean="comment10" />
 			</list>
 		</property>
+		<property name="stories">
+			<list>
+			<ref bean="story1" />
+				<ref bean="story2" />
+			</list>
+		</property>
 	</bean>
 
 	<bean class="domain.Canyon" id="canyon3">
 		<property name="name" value="name3" />
 		<property name="difficultyLevel" value="5" />
 		<property name="route"
-			value="https://www.google.es/maps/place/Canyon+Lake,+Texas,+EE.+UU./@29.8729421,-98.2588144,12z/data=!4m2!3m1!1s0x865c9bbea40ad011:0xba6571b88cb898b1" />
+			value="https://goo.gl/8qMh9K" />
 		<property name="description" value="description1" />
 		<property name="gpsCoordinates" ref="gps3" />
 		<property name="administrator" ref="administrator" />
@@ -1308,14 +1326,18 @@
 				<ref bean="comment12" />
 			</list>
 		</property>
+		<property name="stories">
+			<list>
+				<ref bean="story3" />
+			</list>
+		</property>
 	</bean>
-
 
 	<bean class="domain.Canyon" id="canyon4">
 		<property name="name" value="Baza Saliente Alto" />
 		<property name="difficultyLevel" value="8" />
 		<property name="route"
-			value="https://www.google.es/maps/place/Urr%C3%A1cal,+04879,+Almer%C3%ADa/@37.3949469,-2.3270171,19z/data=!3m1!1e3!4m2!3m1!1s0xd655105b9ba29ff:0x403d278a575e380" />
+			value="https://goo.gl/9vpdsE" />
 		<property name="description" value="Ruta en Almeria" />
 		<property name="gpsCoordinates" ref="gps4" />
 		<property name="administrator" ref="administrator" />
@@ -1333,6 +1355,11 @@
 			<list>
 			</list>
 		</property>
+		<property name="stories">
+			<list>
+				<ref bean="story4" />
+			</list>
+		</property>
 	</bean>
 
 
@@ -1340,7 +1367,7 @@
 		<property name="name" value="Yecla" />
 		<property name="difficultyLevel" value="9" />
 		<property name="route"
-			value="https://www.google.es/maps/place/Desfiladero+de+La+Yecla,+BU-910,+09610+Santo+Domingo+de+Silos,+Burgos/@41.950824,-3.442638,20z/data=!3m1!1e3!4m2!3m1!1s0xd45c98ba4d75369:0xe1f6f2becd597abc" />
+			value="https://goo.gl/wCsnW0" />
 		<property name="description" value="Desfiladero del Yecla" />
 		<property name="gpsCoordinates" ref="gps5" />
 		<property name="administrator" ref="administrator" />
@@ -1360,12 +1387,16 @@
 			<list>
 			</list>
 		</property>
+		<property name="stories">
+			<list>
+			</list>
+		</property>
 	</bean>
 	<bean class="domain.Canyon" id="canyon6">
 		<property name="name" value="Bustelin" />
 		<property name="difficultyLevel" value="4" />
 		<property name="route"
-			value="https://www.google.es/maps/place/33810+Bustel%C3%ADn,+Asturias/@43.0655603,-6.9361315,19z/data=!3m1!1e3!4m2!3m1!1s0xd3104c6b080822b:0x9e3a051e5fcec1db" />
+			value="https://goo.gl/9gfQHy" />
 		<property name="description" value="Desfiladero del Bustelin" />
 		<property name="gpsCoordinates" ref="gps6" />
 		<property name="administrator" ref="administrator" />
@@ -1383,6 +1414,66 @@
 		</property>
 		<property name="comments">
 			<list>
+			</list>
+		</property>
+		<property name="stories">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Stories -->
+	<bean class="domain.Story" id="story1">
+		<property name="title" value="Historia del desfiladero 1" />
+		<property name="authorName" value="Rafael" />
+		<property name="text" value="Nos lo pasamos muy bien" />
+		<property name="canyon" ref="canyon2" />
+		<property name="administrator" ref="administrator" />
+		<property name="resourcesList">
+			<list>
+				<value>http://data.whicdn.com/images/49250042/large.jpg
+				</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean class="domain.Story" id="story2">
+		<property name="title" value="Historia del desfiladero 2" />
+		<property name="authorName" value="Ruben" />
+		<property name="text" value="Nos lo pasamos muy regular" />
+		<property name="canyon" ref="canyon2" />
+		<property name="administrator" ref="administrator" />
+		<property name="resourcesList">
+			<list>
+				<value>http://data.whicdn.com/images/49250042/large.jpg
+				</value>
+			</list>
+		</property>
+	</bean>
+	<bean class="domain.Story" id="story3">
+		<property name="title" value="Historia del desfiladero 3" />
+		<property name="authorName" value="Ruben" />
+		<property name="text" value="Nos lo pasamos muy regular" />
+		<property name="canyon" ref="canyon3" />
+		<property name="administrator" ref="administrator" />
+		<property name="resourcesList">
+			<list>
+				<value>http://data.whicdn.com/images/49250042/large.jpg
+				</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean class="domain.Story" id="story4">
+		<property name="title" value="Historia del desfiladero 4" />
+		<property name="authorName" value="Ruben" />
+		<property name="text" value="Textp 4" />
+		<property name="canyon" ref="canyon4" />
+		<property name="administrator" ref="administrator" />
+		<property name="resourcesList">
+			<list>
+				<value>http://data.whicdn.com/images/49250042/large.jpg
+				</value>
 			</list>
 		</property>
 	</bean>

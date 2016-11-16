@@ -78,4 +78,17 @@ public class CanyonController extends AbstractController {
 		result.addObject("requestURI", "canyon/listByActivity.do");
 		return result;
 	}
+
+		// Listing by navigate from Story
+		// ---------------------------------------------------
+		@RequestMapping(value = "/listByStory", method = RequestMethod.GET)
+		public ModelAndView navigateByStory(@RequestParam int storyId) {
+			ModelAndView result;
+			Canyon canyon = canyonService.canyonByStory(storyId);
+
+			result = new ModelAndView("canyon/listAll");
+			result.addObject("canyon", canyon);
+			result.addObject("requestURI", "canyon/listByStory.do");
+			return result;
+		}
 }

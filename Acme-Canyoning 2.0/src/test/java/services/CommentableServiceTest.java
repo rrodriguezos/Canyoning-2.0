@@ -58,11 +58,11 @@ public class CommentableServiceTest extends AbstractTest {
 	}
 
 	/**
-	 * Comentable devuelve una Organiser cuando se busca un Commentable por el id
+	 * Comentable devuelve una Activity cuando se busca un Commentable por el id
 	 * de un Service
 	 */
 	@Test
-	public void testFindOneByOrganiserId() {
+	public void testFindOneByTrainerId() {
 		OrganiserComment organiserComment = organiserCommentService.findAll()
 				.iterator().next();
 		Commentable commentable = commentableService.findOne(organiserComment

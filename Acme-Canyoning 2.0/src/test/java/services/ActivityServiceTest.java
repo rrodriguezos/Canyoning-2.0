@@ -68,7 +68,7 @@ public class ActivityServiceTest extends AbstractTest {
 		activity.setTitle("titulo 1");
 		activity.setDescription("Description 1");
 		activity.setNumberSeats(5);
-		String momentString = "2016/12/30 12:00";
+		String momentString = "2016/12/92 12:00";
 
 		Date moment = helpService.formatFromStringToDate(momentString);
 
@@ -139,9 +139,10 @@ public class ActivityServiceTest extends AbstractTest {
 		Activity activity = activityService.findOne(98);
 
 		activity.setTitle("title edit");
-		Canyon canyon = canyonService.findOne(101);
-		activity.setCanyon(canyon);
 		activity.setDescription("Description edit");
+
+		Assert.isTrue(activity.getTitle().equals("title edit"));
+		Assert.isTrue(activity.getDescription().equals("Description edit"));
 
 		activityService.save(activity);
 
@@ -157,7 +158,7 @@ public class ActivityServiceTest extends AbstractTest {
 
 		authenticate("organiser1");
 
-		Activity activity = activityService.findOne(108);
+		Activity activity = activityService.findOne(98);
 		Canyon canyon = canyonService.findOne(98);
 		activity.setCanyon(canyon);
 
@@ -178,7 +179,7 @@ public class ActivityServiceTest extends AbstractTest {
 		Activity activity = activityService.findOne(87);
 
 		activity.setTitle("title edit");
-		Canyon canyon = canyonService.findOne(85);
+		Canyon canyon = canyonService.findOne(88);
 		activity.setCanyon(canyon);
 		activity.setDescription("Description edit");
 
@@ -201,7 +202,7 @@ public class ActivityServiceTest extends AbstractTest {
 
 		authenticate("organiser1");
 
-		Activity activity = activityService.findOne(108);
+		Activity activity = activityService.findOne(98);
 
 		activity.setTitle("title edition");
 		Canyon canyon = canyonService.findOne(97);
@@ -236,10 +237,10 @@ public class ActivityServiceTest extends AbstractTest {
 	// in its title,
 	// its description, the name of the corresponding canyon or its description.
 	@Test
-	public void testSearchCanyon() {
+	public void testSearchActivity() {
 		List<Activity> activities = (List<Activity>) activityService
-				.findActivityByKeyword("Puenting");
-		Assert.isTrue(activities.size() == 1);
+				.findActivityByKeyword("en");
+		Assert.isTrue(activities.size() == 5);
 	}
 
 	// 6. A user who is not authenticated must be able to:
@@ -313,8 +314,8 @@ public class ActivityServiceTest extends AbstractTest {
 		Activity activity;
 		Request request;
 
-		activity = activityService.findOne(108);
-		request = requestService.findOne(109);
+		activity = activityService.findOne(110);
+		request = requestService.findOne(111);
 
 		activityService.acceptRequestByActivity(activity, request);
 
@@ -332,7 +333,7 @@ public class ActivityServiceTest extends AbstractTest {
 		Request request;
 
 		activity = activityService.findOne(98);
-		request = requestService.findOne(99);
+		request = requestService.findOne(42);
 
 		activityService.acceptRequestByActivity(activity, request);
 
@@ -346,7 +347,7 @@ public class ActivityServiceTest extends AbstractTest {
 		Activity activity;
 		Request request;
 
-		activity = activityService.findOne(108);
+		activity = activityService.findOne(98);
 		request = requestService.findOne(38);
 
 		activityService.acceptRequestByActivity(activity, request);
@@ -372,7 +373,7 @@ public class ActivityServiceTest extends AbstractTest {
 		Customer customer;
 		customer = customerService.findByPrincipal();
 
-		activity = activityService.findOne(102);
+		activity = activityService.findOne(110);
 
 		requestService.requestActivityByCustomer(activity.getId(), customer);
 		int expected = requestService.findAll().size();
@@ -391,7 +392,7 @@ public class ActivityServiceTest extends AbstractTest {
 		Customer customer;
 		customer = customerService.findByPrincipal();
 
-		activity = activityService.findOne(88898);
+		activity = activityService.findOne(88847);
 
 		requestService.requestActivityByCustomer(activity.getId(), customer);
 
@@ -442,7 +443,7 @@ public class ActivityServiceTest extends AbstractTest {
 		Cord cord;
 		Wetsuit wetsuit;
 
-		kayak = kayakService.findOne(85);
+		kayak = kayakService.findOne(88);
 		cord = cordService.findOne(96);
 		wetsuit = wetsuitService.findOne(92);
 
@@ -471,7 +472,7 @@ public class ActivityServiceTest extends AbstractTest {
 
 		kayak = kayakService.findOne(88);
 		cord = cordService.findOne(96);
-		wetsuit = wetsuitService.findOne(30);
+		wetsuit = wetsuitService.findOne(92);
 
 		activity.getPieceEquipments().add(kayak);
 		activity.getPieceEquipments().add(cord);

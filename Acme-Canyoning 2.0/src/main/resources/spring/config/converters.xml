@@ -17,6 +17,9 @@
 		<bean class="converters.StringToCanyonConverter" />
 		<bean class="converters.CanyonToStringConverter" />
 		
+		<bean class="converters.StringToStoryConverter" />
+		<bean class="converters.StoryToStringConverter" />
+		
 		<bean class="converters.StringToSectionConverter" />
 		<bean class="converters.SectionToStringConverter" />
 		

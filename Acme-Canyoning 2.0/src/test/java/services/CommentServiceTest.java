@@ -39,9 +39,6 @@ public class CommentServiceTest extends AbstractTest {
 	@Autowired
 	private CustomerCommentService customerCommentService;
 
-	@Autowired
-	private CourseService courseService;
-
 	// ----------------------------------------------------
 	// POSITIVE TEST CASES CREATE CANYON
 	// ----------------------------------------------------
@@ -207,65 +204,6 @@ public class CommentServiceTest extends AbstractTest {
 	public void testFindComments() {
 		Collection<Comment> comments = commentService.findAll();
 		Assert.isTrue(comments.size() == 26);
-	}
-
-	// ----------------------------------------------------
-	// POSITIVE TEST CASES CREATE Courses
-	// ----------------------------------------------------
-	// 3. Actors can comment on courses.
-	// creado exitosamente
-	@Test
-	public void testCreateCommentCourses1() {
-		authenticate("organiser1");
-		int sizeBefore = commentService.findAll().size();
-		Comment comment = new Comment();
-		comment.setActor(actorService.findByPrincipal());
-		comment.setCommentable(courseService.findAll().iterator().next());
-		comment.setStars(3);
-		comment.setMoment(new Date(System.currentTimeMillis() - 1000));
-		comment.setTitle("Create comment course");
-		comment.setBody("Comment on Courses");
-		commentService.save(comment);
-		int sizeAfter = commentService.findAll().size();
-		Assert.isTrue(sizeAfter == sizeBefore + 1);
-		unauthenticate();
-	}
-
-	// ----------------------------------------------------
-	// NEGATIVE TEST CASES CREATE CANYON
-	// ----------------------------------------------------
-	// comment campos en blanco
-	@Test(expected = ConstraintViolationException.class)
-	public void testCreateCommentCourses2() {
-		authenticate("organiser1");
-
-		Comment comment = new Comment();
-		comment.setActor(actorService.findByPrincipal());
-		comment.setCommentable(courseService.findAll().iterator().next());
-		comment.setStars(3);
-		comment.setMoment(new Date(System.currentTimeMillis() - 1000));
-		comment.setTitle("");
-		comment.setBody("");
-		commentService.save(comment);
-
-		unauthenticate();
-	}
-
-	// actor inexistente
-	@Test(expected = IllegalArgumentException.class)
-	public void testCreateCommentCourses3() {
-		authenticate("none");
-
-		Comment comment = new Comment();
-		comment.setActor(actorService.findByPrincipal());
-		comment.setCommentable(courseService.findAll().iterator().next());
-		comment.setStars(3);
-		comment.setMoment(new Date(System.currentTimeMillis() - 1000));
-		comment.setTitle("Create comment course");
-		comment.setBody("Comment on Courses");
-		commentService.save(comment);
-
-		unauthenticate();
 	}
 
 }
