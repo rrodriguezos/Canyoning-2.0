@@ -43,11 +43,14 @@ public class CurriculumTrainerController extends AbstractController {
 
 		ModelAndView result;
 		Collection<Curriculum> curriculums;
+		Boolean mycurriculum;
+		mycurriculum = true;
 
 		curriculums = curriculumService.curriculumByTrainerLogged();
 
 		result = new ModelAndView("curriculum/trainer/mylist");
 		result.addObject("curriculums", curriculums);
+		result.addObject("mycurriculum", mycurriculum);
 		result.addObject("requestUri", "/curriculum/trainer/mylist.do");
 
 		return result;

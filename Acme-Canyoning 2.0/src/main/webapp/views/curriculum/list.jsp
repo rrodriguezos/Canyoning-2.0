@@ -31,10 +31,11 @@
 	<spring:message code="curriculum.phone" var="phoneHeader" />
 	<display:column property="phone" title="${phoneHeader}" />
 
+
 	<jstl:if test="${mycurriculum == true}">
 
 		<spring:message code="curriculum.isActive" var="isActiveHeader" />
-		<display:column property="isActive" title="${isActiveHeader}" />
+		<display:column property="isActive" title="${isActiveHeader}" value=""/>
 
 	</jstl:if>
 
@@ -45,10 +46,11 @@
 			onclick="javascript: window.location.assign('curriculum/display.do?curriculumId=${row.id}')" />
 	</display:column>
 
-<spring:message code="curriculum.sections" var="sectionsHeader" />
+	<spring:message code="curriculum.sections" var="sectionsHeader" />
 	<display:column title="${sectionsHeader}">
-			<input type="button" value="<spring:message code="curriculum.sections" />" 
-					onclick="javascript: window.location.assign('section/list.do?curriculumId=${row.id}')" />
+		<input type="button"
+			value="<spring:message code="curriculum.sections" />"
+			onclick="javascript: window.location.assign('section/list.do?curriculumId=${row.id}')" />
 	</display:column>
 
 
