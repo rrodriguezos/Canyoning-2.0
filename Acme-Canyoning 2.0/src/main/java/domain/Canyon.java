@@ -135,7 +135,6 @@ private Collection<Story> stories;
 	}
 
 	@Valid
-	@NotNull
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "canyon")
 	public Collection<Story> getStories() {
 		return stories;

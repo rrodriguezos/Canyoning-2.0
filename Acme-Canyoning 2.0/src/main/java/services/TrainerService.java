@@ -179,17 +179,23 @@ public class TrainerService {
 		Collection<Trainer> trainers = findAll();
 		Collection<Trainer> result = new LinkedList<Trainer>();
 
-		Double tenPercent = media * 0.10;
-		Double tenPercentAbove = media + tenPercent;
-		Double tenPercentBelow = media - tenPercent;
+		try {
+			Double tenPercent = media * 0.10;
+			Double tenPercentAbove = media + tenPercent;
+			Double tenPercentBelow = media - tenPercent;
 
-		for (Trainer t : trainers) {
-			int tam;
-			tam = t.getCourses().size();
-			if (tam > tenPercentBelow && tam < tenPercentAbove) {
-				result.add(t);
+			for (Trainer t : trainers) {
+				int tam;
+				tam = t.getCourses().size();
+				if (tam > tenPercentBelow && tam < tenPercentAbove) {
+					result.add(t);
+				}
 			}
+
+		} catch (Throwable oops) {
+			return result;
 		}
+
 		// result = trainerRepository.courses10percAboveBelowAvg();
 		return result;
 	}
