@@ -33,7 +33,7 @@
 	value="${canyon.gpsCoordinates.altitude }" />
 
 
-<b><spring:message code="canyon.pictures" />: </b>
+<b><spring:message code="canyon.picturesDisplay" />: </b>
 <br>
 <jstl:forEach var="picture" items="${canyon.getPictures() }">
 	<img width="200px" height="200x" src="${picture}"

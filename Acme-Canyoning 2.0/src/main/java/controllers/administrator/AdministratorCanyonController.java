@@ -80,8 +80,6 @@ public class AdministratorCanyonController extends AbstractController {
 		ModelAndView result;
 
 		if (binding.hasErrors()) {
-			System.out.print(binding.getFieldError());
-			System.out.print(binding.getAllErrors());
 
 			result = new ModelAndView("canyon/edit");
 			result.addObject("canyon", canyon);
