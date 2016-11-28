@@ -17,6 +17,7 @@ import domain.Activity;
 import domain.Administrator;
 import domain.Comment;
 import domain.Organiser;
+import domain.OrganiserComment;
 import domain.PieceEquipment;
 import forms.OrganiserForm;
 
@@ -52,6 +53,8 @@ public class OrganiserService {
 		Collection<Comment> comments;
 		Collection<Activity> activities;
 		Collection<PieceEquipment> pieceEquipments;
+		OrganiserComment orgaComment = new OrganiserComment();
+		Collection<Comment> commentsOrganiserComment = new LinkedList<Comment>();
 
 		Authority aut = new Authority();
 
@@ -59,12 +62,14 @@ public class OrganiserService {
 		useraccount = userAccountService.create();
 
 		result = new Organiser();
-
+		orgaComment.setComments(commentsOrganiserComment);
+		orgaComment.setOrganiser(result);
 		useraccount.addAuthority(aut);
 		result.setUserAccount(useraccount);
 
 		activities = new LinkedList<Activity>();
 		result.setActivities(activities);
+		result.setOrganiserComment(orgaComment);
 
 		pieceEquipments = new LinkedList<PieceEquipment>();
 		result.setPieceEquipments(pieceEquipments);

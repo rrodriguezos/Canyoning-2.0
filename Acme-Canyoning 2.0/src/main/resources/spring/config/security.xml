@@ -121,13 +121,21 @@
 		<security:intercept-url pattern="/learningMaterial/trainer/**" access="hasRole('TRAINER')" />
 		
 			<security:intercept-url pattern="/curriculum/trainer/**" access="hasRole('TRAINER')" />		
-		<security:intercept-url pattern="/section/trainer/**" access="hasRole('TRAINER')" />
-		<security:intercept-url pattern="/curriculum/**" access="hasRole('TRAINER')" />		
-		<security:intercept-url pattern="/section/**" access="hasRole('TRAINER')" />
+		<security:intercept-url pattern="/section/trainer/**" access="hasRole('TRAINER')" />	
 
 		
 		
 		<security:intercept-url pattern="/customer/register.do" access="isAnonymous()" />
+		
+		<security:intercept-url pattern="/curriculum/display.do" access="isAuthenticated()" />
+		<security:intercept-url pattern="/curriculum/list.do" access="isAuthenticated()" />
+		<security:intercept-url pattern="/curriculum/listActive.do" access="isAuthenticated()" />
+		
+		<security:intercept-url pattern="/section/display.do" access="isAuthenticated()" />
+		<security:intercept-url pattern="/section/list.do" access="isAuthenticated()" />
+		
+		
+		
 		<security:intercept-url pattern="/organiser/display.do" access="isAuthenticated()" />  
 		<security:intercept-url pattern="/comment/actor/**" access="isAuthenticated()" />
 		<security:intercept-url pattern="/comment/list.do" access="isAuthenticated()" />

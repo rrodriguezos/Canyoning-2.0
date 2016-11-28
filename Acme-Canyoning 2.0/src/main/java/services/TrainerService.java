@@ -20,6 +20,7 @@ import domain.Comment;
 import domain.Course;
 import domain.Curriculum;
 import domain.Trainer;
+import domain.TrainerComment;
 import forms.TrainerForm;
 
 @Service
@@ -57,6 +58,9 @@ public class TrainerService {
 		Collection<Comment> comments;
 		Collection<Course> courses;
 		Collection<Curriculum> curriculums;
+
+		TrainerComment trainerComment = new TrainerComment();
+		Collection<Comment> commentsTrainerComment = new LinkedList<Comment>();
 		Authority aut = new Authority();
 
 		aut.setAuthority("TRAINER");
@@ -64,8 +68,12 @@ public class TrainerService {
 
 		result = new Trainer();
 
+		trainerComment.setComments(commentsTrainerComment);
+		trainerComment.setTrainer(result);
+
 		useraccount.addAuthority(aut);
 		result.setUserAccount(useraccount);
+		result.setTrainerComment(trainerComment);
 
 		courses = new LinkedList<Course>();
 		result.setCourses(courses);

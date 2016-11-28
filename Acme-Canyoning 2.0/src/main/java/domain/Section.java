@@ -12,6 +12,8 @@ import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
@@ -53,6 +55,7 @@ public class Section extends DomainEntity {
 	}
 
 	@ElementCollection
+	@LazyCollection(LazyCollectionOption.FALSE)
 	public Collection<String> getAttachments() {
 		return attachments;
 	}

@@ -17,6 +17,7 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Comment;
 import domain.Customer;
+import domain.CustomerComment;
 import domain.Request;
 import forms.CustomerRegisterForm;
 
@@ -46,6 +47,8 @@ public class CustomerService {
 		Customer result;
 		Collection<Comment> comments;
 		Collection<Request> requests;
+		CustomerComment customerComment = new CustomerComment();
+		Collection<Comment> commentsCustomerComment = new LinkedList<Comment>();
 
 		Authority aut = new Authority();
 
@@ -53,10 +56,12 @@ public class CustomerService {
 		useraccount = userAccountService.create();
 
 		result = new Customer();
+		customerComment.setComments(commentsCustomerComment);
+		customerComment.setCustomer(result);
+		result.setCustomerComment(customerComment);
 
 		useraccount.addAuthority(aut);
 		result.setUserAccount(useraccount);
-		
 
 		requests = new LinkedList<Request>();
 		comments = new LinkedList<Comment>();
