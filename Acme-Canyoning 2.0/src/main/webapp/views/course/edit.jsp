@@ -44,7 +44,7 @@
 		
 		<jstl:if test="${course.id != 0}">
 			<input type="submit" name="save"
-			value="<spring:message code="course.save" />" onclick="return confirm('<spring:message code="course.confirm.delete.modules" />')" />
+			value="<spring:message code="course.save" />"  />
 			<input type="submit" name="delete" value="<spring:message code="course.delete"/>" onclick="return confirm('<spring:message code="course.confirm.delete.modules" />')"/>
 		</jstl:if>
 		
