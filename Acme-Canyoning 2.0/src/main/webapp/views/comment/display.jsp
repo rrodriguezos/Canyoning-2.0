@@ -30,8 +30,9 @@
 <legend><fmt:formatDate value="${comment.getMoment() }" pattern="dd/MM/yyyy HH:mm" /></legend>
 
 <jstl:out value="${comment.getBody() }" />
-<jstl:out value="${comment.getStars() }" />
 </fieldset>
+<br/>
+<acme:jstlOut code="comment.stars" value="${comment.getStars()  }"/>
 
 
 
